@@ -6,6 +6,8 @@ import { ThemeProvider } from '@components/theme-provider'
 import { Inter } from 'next/font/google'
 import type { Metadata } from 'next'
 
+import Navbar from '@components/navbar'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,13 +19,12 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang='en'>
+    <html lang='en' suppressHydrationWarning>
       <body className={cn(inter.className, 'min-h-screen min-w-full max-w-full flex flex-col')}>
-
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+          <Navbar />
           {children}
         </ThemeProvider>
-
       </body>
     </html>
   )
