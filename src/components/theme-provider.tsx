@@ -29,11 +29,7 @@ export const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
 
 /** Button to enable switching themes */
 export const ModeToggle = () => {
-  const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
-
-  // Handle mounting logic
-  useEffect(() => setMounted(true), [])
 
   return (
     <>
@@ -49,9 +45,9 @@ export const ModeToggle = () => {
 
         {/* Options */}
         <DropdownMenuContent align='end'>
-          <DropdownItem name='light' theme={theme} mounted={mounted} setTheme={setTheme} />
-          <DropdownItem name='dark' theme={theme} mounted={mounted} setTheme={setTheme} />
-          <DropdownItem name='system' theme={theme} mounted={mounted} setTheme={setTheme} />
+          <DropdownItem name='light' theme={theme} setTheme={setTheme} />
+          <DropdownItem name='dark' theme={theme} setTheme={setTheme} />
+          <DropdownItem name='system' theme={theme} setTheme={setTheme} />
         </DropdownMenuContent>
       </DropdownMenu>
     </>
@@ -62,7 +58,6 @@ export const ModeToggle = () => {
 interface DropdownItemProps {
   name: string
   theme?: string
-  mounted: boolean
   setTheme: (theme: string) => void
 }
 /**
@@ -70,14 +65,13 @@ interface DropdownItemProps {
  * @param {DropdownItemProps} props
  * @param props.name - Name of the theme
  * @param props.theme - Current theme
- * @param props.mounted - Whether the component is mounted
  * @param props.setTheme - Function to set the theme
  */
-const DropdownItem = ({ name, theme, mounted, setTheme }: DropdownItemProps) => {
+const DropdownItem = ({ name, theme, setTheme }: DropdownItemProps) => {
   return (
     <DropdownMenuItem
       onClick={() => setTheme(name)}
-      disabled={mounted && theme === name}
+      disabled={theme === name}
     >
       {titleCase(name)}
     </DropdownMenuItem>
