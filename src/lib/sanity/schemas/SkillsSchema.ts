@@ -16,6 +16,14 @@ export const SkillsSchema = {
       ]
     },
     {
+      name: 'start_time',
+      type: 'datetime',
+      title: 'Start Time',
+      description: 'Start time of the skill',
+      initialValue: () => (new Date()).toISOString(),
+      validation: (e: Rule) => e.required().error('Start time is required')
+    },
+    {
       name: 'icon_dark',
       type: 'url',
       title: 'Icon URL (Dark Mode)',
