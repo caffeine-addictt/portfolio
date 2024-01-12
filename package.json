@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:debug": "eslint ./src --debug",
-    "lint:fix": "eslint ./src --fix",
+    "lint:debug": "next lint --debug",
+    "lint:fix": "next lint --fix",
     "sanity": "sanity dev"
   },
   "dependencies": {
