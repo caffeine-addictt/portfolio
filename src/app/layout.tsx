@@ -1,7 +1,7 @@
 import '@styles/globals.css'
 
-import { cn } from '@utils/tailwind'
-import { Providers } from '@app/providers'
+import { cn } from '@utils'
+import { ThemeProvider } from '@components/theme-provider'
 
 import { Inter } from 'next/font/google'
 import type { Metadata } from 'next'
@@ -17,12 +17,12 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang='en'>
       <body className={cn(inter.className, 'min-h-screen min-w-full max-w-full flex flex-col')}>
 
-        <Providers>
+        <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           {children}
-        </Providers>
+        </ThemeProvider>
 
       </body>
     </html>
