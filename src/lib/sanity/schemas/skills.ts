@@ -24,18 +24,24 @@ export const SkillsSchema = {
       validation: (e: Rule) => e.required().error('Start time is required')
     },
     {
-      name: 'icon_dark',
-      type: 'url',
-      title: 'Icon URL (Dark Mode)',
+      name: 'icon',
+      type: 'object',
+      title: 'Icon URLs',
       description: 'Rendered as a small square image (e.g. https://www.google.com/someicon.png)',
-      validation: (e: Rule) => e.uri({ scheme: ['https'] }).error('Only HTTPS is allowed')
-    },
-    {
-      name: 'icon_light',
-      type: 'url',
-      title: 'Icon URL (Light Mode)',
-      description: 'Rendered as a small square image (e.g. https://www.google.com/someicon.png)',
-      validation: (e: Rule) => e.uri({ scheme: ['https'] }).error('Only HTTPS is allowed')
+      fields: [
+        {
+          name: 'dark',
+          type: 'url',
+          title: 'Dark Mode',
+          validation: (e: Rule) => e.uri({ scheme: ['https'] }).error('Only HTTPS is allowed')
+        },
+        {
+          name: 'light',
+          type: 'url',
+          title: 'Light Mode',
+          validation: (e: Rule) => e.uri({ scheme: ['https'] }).error('Only HTTPS is allowed')
+        }
+      ]
     },
     {
       name: 'href',
