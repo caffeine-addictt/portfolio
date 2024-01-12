@@ -1,3 +1,5 @@
-import { SkillsSchema } from './SkillsSchema'
+import { SkillsSchema } from './skills'
+import { ProjectsSchema } from './projects'
+import { TestimonialSchema } from './testimonials'
 
-export const schemaTypes = [SkillsSchema]
+export const schemaTypes = [SkillsSchema, ProjectsSchema, TestimonialSchema]
