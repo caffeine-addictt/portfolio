@@ -7,6 +7,7 @@ import { Inter } from 'next/font/google'
 import type { Metadata } from 'next'
 
 import Navbar from '@components/navbar'
+import Footer from '@components/footer'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -24,6 +25,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <Navbar />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
