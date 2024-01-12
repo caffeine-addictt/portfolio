@@ -1,6 +1,6 @@
 import '@styles/globals.css'
 
-import { cn } from '@utils'
+import { cn } from '@utils/tailwind'
 import { ThemeProvider } from '@components/theme-provider'
 
 import { Inter } from 'next/font/google'
