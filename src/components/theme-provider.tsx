@@ -1,7 +1,6 @@
 'use client'
 
 import * as React from 'react'
-import { useState, useEffect } from 'react'
 import { useTheme, ThemeProvider as NextThemeProvider } from 'next-themes'
 import { type ThemeProviderProps } from 'next-themes/dist/types'
 
@@ -32,25 +31,23 @@ export const ModeToggle = () => {
   const { theme, setTheme } = useTheme()
 
   return (
-    <>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant='outline' size='icon'>
-            <SunIcon className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
-            <MoonIcon className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
-            <span className='sr-only'>Toggle theme</span>
-          </Button>
-        </DropdownMenuTrigger>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant='outline' size='icon'>
+          <SunIcon className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
+          <MoonIcon className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
+          <span className='sr-only'>Toggle theme</span>
+        </Button>
+      </DropdownMenuTrigger>
 
 
-        {/* Options */}
-        <DropdownMenuContent align='end'>
-          <DropdownItem name='light' theme={theme} setTheme={setTheme} />
-          <DropdownItem name='dark' theme={theme} setTheme={setTheme} />
-          <DropdownItem name='system' theme={theme} setTheme={setTheme} />
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </>
+      {/* Options */}
+      <DropdownMenuContent align='end'>
+        <DropdownItem name='light' theme={theme} setTheme={setTheme} />
+        <DropdownItem name='dark' theme={theme} setTheme={setTheme} />
+        <DropdownItem name='system' theme={theme} setTheme={setTheme} />
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 
