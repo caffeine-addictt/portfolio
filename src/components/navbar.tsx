@@ -27,6 +27,7 @@ const Navbar = () => {
           <TooltipWrapper text='View my projects!' asChild>
             <InternalLink href='/projects' variant='link' className='my-auto text-sm font-normal'>
               Projects
+              aaa
             </InternalLink>
           </TooltipWrapper>
         </div>
