@@ -24,9 +24,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <body className={cn(inter.className, 'flex min-h-screen min-w-full max-w-full flex-col')}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <Navbar />
-          <div className='flex w-full max-w-full grow'>
+          <main className='flex w-full max-w-full grow'>
             {children}
-          </div>
+          </main>
           <Footer />
         </ThemeProvider>
       </body>
