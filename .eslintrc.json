@@ -9,8 +9,9 @@
   ],
   "settings": {
     "tailwindcss": {
-      "config": "tailwind.config.js",
-      "callees": ["className", "clsx", "cn", "twMerge"]
+      "config": "tailwind.config.ts",
+      "callees": ["className", "clsx", "cn", "cva", "twMerge"]
+      
     }
   }
 }
