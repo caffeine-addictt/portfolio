@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --text-light: #0a0712;
+  --primary-light: #8059c0;
+  --secondary-light: #b86191;
+  --accent-light: #c86f8a;
+  --neutral-light: #2d2935;
+  --background-light: #fcfbfe;
+
+  --text-dark: #f0edf8;
+  --primary-dark: #673fa6;
+  --secondary-dark: #9e4777;
+  --accent-dark: #903752;
+  --neutral-dark: #2d2935;
+  --background-dark: #020104;
+};
