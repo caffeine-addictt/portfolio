@@ -21,10 +21,12 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className={cn(inter.className, 'min-h-screen min-w-full max-w-full flex flex-col')}>
+      <body className={cn(inter.className, 'flex min-h-screen min-w-full max-w-full flex-col')}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <Navbar />
-          {children}
+          <div className='flex w-full max-w-full grow'>
+            {children}
+          </div>
           <Footer />
         </ThemeProvider>
       </body>
