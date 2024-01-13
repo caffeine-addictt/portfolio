@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
+import { ExternalLink } from '@components/ui/button'
 
 import { cn } from '@utils/tailwind'
 
@@ -21,15 +22,15 @@ import { CodeIcon, GitHubLogoIcon, LinkedInLogoIcon } from '@radix-ui/react-icon
 
 const Footer = () => {
   return (
-    <footer className='flex flex-col h-auto w-full pb-4 px-[5%] bg-white/60 backdrop-blur-sm dark:bg-black/60'>
-      <Separator className='absolute w-[95%] left-[2.5%]' />
+    <footer className='flex h-auto w-full flex-col bg-white/60 px-[5%] pb-4 backdrop-blur-sm dark:bg-black/60'>
+      <Separator className='absolute left-[2.5%] w-[95%]' />
 
       {/* Top */}
-      <div className='flex flex-col max-sm:gap-8 sm:flex-row sm:justify-between h-full w-full mb-4 pt-6'>
+      <div className='mb-4 flex h-full w-full flex-col pt-6 max-sm:gap-8 sm:flex-row sm:justify-between'>
         {/* Left */}
-        <div className='flex flex-col max-sm:self-center max-sm:items-center'>
+        <div className='flex flex-col max-sm:items-center max-sm:self-center'>
           <TooltipWrapper text='Home page' asChild>
-            <Link href='/' className={cn(buttonVariants({ variant: 'link' }), 'text-lg font-bold p-0 justify-start')}>
+            <Link href='/' className={cn(buttonVariants({ variant: 'link' }), 'justify-start p-0 text-lg font-bold')}>
               <CodeIcon className='mr-2 h-6 w-6 rotate-0 scale-100' />
               Technology
             </Link>
@@ -49,7 +50,7 @@ const Footer = () => {
 
 
         {/* Right */}
-        <div className='flex flex-row sm:flex-col max-sm:justify-center sm:max-w-[50%] gap-4 max-sm:self-center max-sm:items-center'>
+        <div className='flex flex-row gap-4 max-sm:items-center max-sm:justify-center max-sm:self-center sm:max-w-[50%] sm:flex-col'>
 
           {/* Left */}
           <div className='flex flex-col gap-4 max-sm:self-start'>
@@ -59,24 +60,24 @@ const Footer = () => {
               <TechnologyStackItem
                 href='https://github.com/caffeine-addictt'
                 text='GitHub'
-              ><GitHubLogoIcon className='w-6 h-6' /></TechnologyStackItem>
+              ><GitHubLogoIcon className='h-6 w-6' /></TechnologyStackItem>
 
               <TechnologyStackItem
                 href='https://linkedin.com/in/ngjx'
                 text='LinkedIn'
-              ><LinkedInLogoIcon className='w-6 h-6' /></TechnologyStackItem>
+              ><LinkedInLogoIcon className='h-6 w-6' /></TechnologyStackItem>
 
             </div>
           </div>
 
-          <Separator orientation='vertical' className='my-2 sm:hidden h-14' />
+          <Separator orientation='vertical' className='my-2 h-14 sm:hidden' />
 
           {/* Right */}
           <div className='break-before-auto max-sm:max-w-[60%]'>
             <p>Have an inqury or project idea?</p>
             Feel free to contact me anytime at&nbsp;
             <TooltipWrapper text='contact@ngjx.org' asChild>
-              <Link href='mailto:contact@ngjx.org' className='hover:underline text-blue-500'>
+              <Link href='mailto:contact@ngjx.org' className='text-blue-500 hover:underline'>
                 contact@ngjx.org
               </Link>
             </TooltipWrapper>.
@@ -95,7 +96,7 @@ const Footer = () => {
 
 
       {/* Bottom */}
-      <div className='flex flex-col sm:flex-row-reverse items-center sm:justify-between w-full h-full'>
+      <div className='flex h-full w-full flex-col items-center sm:flex-row-reverse sm:justify-between'>
         <div className='text-sm font-light opacity-80'>
           <TechnologyStackItem text='Vercel' href='https://vercel.com/' className='hover:underline'>Powered by Vercel</TechnologyStackItem>
         </div>
@@ -115,8 +116,9 @@ const TechnologyStackItem = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof TooltipWrapper> & { href: string, className?: string }
 >(({ children, href, className, ...props }, ref) => (
   <TooltipWrapper ref={ref} {...props} asChild>
-    <Link {...props} href={href} className={className} target='_blank' referrerPolicy='no-referrer-when-downgrade'>
+    <ExternalLink {...props} href={href} className={className}>
       {children}
-    </Link>
+    </ExternalLink>
   </TooltipWrapper>
 ))
+TechnologyStackItem.displayName = 'TechnologyStackItem'

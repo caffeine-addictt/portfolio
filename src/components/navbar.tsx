@@ -1,10 +1,8 @@
 'use client'
 
 import * as React from 'react'
-import Link from 'next/link'
+import { InternalLink, ExternalLink } from '@components/ui/button'
 
-import { cn } from '@utils/tailwind'
-import { buttonVariants } from '@components/ui/button'
 import { ModeToggle } from '@components/theme-provider'
 import { TooltipWrapper } from '@components/ui/tooltip'
 import { GitHubLogoIcon, FileTextIcon, CodeIcon } from '@radix-ui/react-icons'
@@ -19,17 +17,17 @@ const Navbar = () => {
         {/* Left */}
         <div className='flex flex-row gap-1 self-center'>
           <TooltipWrapper text='Home page' asChild>
-            <Link href='/' className={cn(buttonVariants({ variant: 'link' }), 'my-auto text-lg font-bold')}>
+            <InternalLink href='/' variant='link' className='my-auto text-lg font-bold'>
               <CodeIcon className='mr-2 h-6 w-6 rotate-0 scale-100' />
               Portfolio
-            </Link>
+            </InternalLink>
           </TooltipWrapper>
 
 
           <TooltipWrapper text='View my projects!' asChild>
-            <Link href='/projects' className={cn(buttonVariants({ variant: 'link' }), 'my-auto text-sm font-normal')}>
+            <InternalLink href='/projects' variant='link' className='my-auto text-sm font-normal'>
               Projects
-            </Link>
+            </InternalLink>
           </TooltipWrapper>
         </div>
 
@@ -37,22 +35,22 @@ const Navbar = () => {
         {/* Right */}
         <div className='flex flex-row gap-1 self-center'>
           <TooltipWrapper text='View my blog!' asChild>
-            <Link href='/blog' className={cn(buttonVariants({ variant: 'outline' }), 'my-auto')}>
+            <InternalLink href='/blog' variant='outline' className='my-auto'>
               <FileTextIcon className='mr-2 h-4 w-4 rotate-0 scale-100' />
               Blog
-            </Link>
+            </InternalLink>
           </TooltipWrapper>
 
 
           <TooltipWrapper text='Github' asChild>
-            <Link
+            <ExternalLink
               href='https://github.com/caffeine-addictt'
-              target='_blank'
-              referrerPolicy='no-referrer-when-downgrade'
-              className={cn(buttonVariants({ variant: 'outline', size: 'icon' }), 'my-auto')}
+              variant='outline'
+              size='icon'
+              className='my-auto'
             >
               <GitHubLogoIcon className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100' />
-            </Link>
+            </ExternalLink>
           </TooltipWrapper>
 
           <ModeToggle className='my-auto' />
