@@ -19,6 +19,11 @@ export const metadata: Metadata = {
   },
   description: 'Alex\'s Portfolio and Blog Site',
   keywords: ['portfolio', 'blog', 'nextjs', 'tailwindcss', 'vercel', 'react', 'typescript', 'programmer', 'coding', 'developer', 'full-stack', 'software', 'singapore', 'sg'],
+  applicationName: 'Alex\'s Portfolio',
+  authors: [{ name: 'Alex', url: 'https://ngjx.org' }],
+  creator: 'Alex Ng Jun Xiang',
+  publisher: 'Alex Ng Jun Xiang',
+  manifest: '/manifest.json',
   openGraph: {
     title: 'Alex\'s Portfolio and Blog Site',
     description: 'Alex\'s Portfolio and Blog Site',
