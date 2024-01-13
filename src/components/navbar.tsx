@@ -2,7 +2,6 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 
 import { cn } from '@utils/tailwind'
 import { buttonVariants } from '@components/ui/button'
