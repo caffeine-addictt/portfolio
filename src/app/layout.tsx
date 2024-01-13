@@ -13,8 +13,50 @@ import Footer from '@components/footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Alex\'s Portfolio',
+  title: {
+    default: 'Alex\'s Portfolio',
+    template: '%s | Alex\'s Portfolio',
+  },
   description: 'Alex\'s Portfolio and Blog Site',
+  keywords: ['portfolio', 'blog', 'nextjs', 'tailwindcss', 'vercel', 'react', 'typescript', 'programmer', 'coding', 'developer', 'full-stack', 'software', 'singapore', 'sg'],
+  openGraph: {
+    title: 'Alex\'s Portfolio and Blog Site',
+    description: 'Alex\'s Portfolio and Blog Site',
+    url: 'https://ngjx.org',
+    siteName: 'ngjx.org',
+    images: [
+      {
+        url: 'https://ngjx.org/images/siteScreenshot.png',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'en-US',
+    type: 'website',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  twitter: {
+    title: 'Alex\'s Portfolio and Blog Site',
+    description: 'Alex\'s Portfolio and Blog Site',
+    card: 'summary_large_image',
+    images: ['https://ngjx.org/images/siteScreenshot.png'],
+  },
+  appleWebApp: {
+    title: 'Alex\'s Portfolio and Blog Site',
+    capable: true,
+    statusBarStyle: 'default',
+  },
+  metadataBase: new URL('https://ngjx.org'),
   icons: {
     icon: [
       {
