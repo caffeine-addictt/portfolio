@@ -7,7 +7,6 @@ import { InternalLink, ExternalLink, ExternalLinkProps } from '@components/ui/bu
 import { cn } from '@utils/tailwind'
 
 import { Separator } from '@components/ui/separator'
-import { buttonVariants } from '@components/ui/button'
 import { TooltipWrapper } from '@components/ui/tooltip'
 
 import {
@@ -30,10 +29,6 @@ const Footer = () => {
         {/* Left */}
         <div className='flex flex-col max-sm:items-center max-sm:self-center'>
           <TooltipWrapper text='Home page' asChild>
-            {/* <Link href='/' className={cn(buttonVariants({ variant: 'link' }), 'justify-start p-0 text-lg font-bold')}>
-              <CodeIcon className='mr-2 h-6 w-6 rotate-0 scale-100' />
-              Technology
-            </Link> */}
             <InternalLink href='/' variant='link' className='justify-start p-0 text-lg font-bold'>
               <CodeIcon className='mr-2 h-6 w-6 rotate-0 scale-100' />
               Technology

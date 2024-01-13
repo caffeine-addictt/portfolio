@@ -17,11 +17,11 @@ const HomePage = () => {
         {/* Introduction and what I do */}
         <h1 className='mb-4 text-5xl font-bold'>Hi, I&apos;m Alex</h1>
         <p className='break-normal text-lg max-sm:max-w-xs'>
-          I&apos;m a <span className='text-black dark:text-white underline'>full-stack developer</span> and hobbist hacker based in Singapore.
+          I&apos;m a <span className='text-black underline dark:text-white'>full-stack developer</span> and hobbist hacker based in Singapore.
         </p>
 
         {/* Links */}
-        <div className='flex flex-wrap gap-4 mt-6 w-fit'>
+        <div className='mt-6 flex w-fit flex-wrap gap-4'>
           <Separator className='mb-0'/>
 
           <TooltipWrapper text='More about me!' asChild>

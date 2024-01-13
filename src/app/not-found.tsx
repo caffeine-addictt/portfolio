@@ -7,12 +7,12 @@ import { InternalLink, ExternalLink } from '@components/ui/button'
 import { Separator } from '@components/ui/separator'
 
 const NotFoundError = () => (
-  <div className='flex flex-col min-h-screen min-w-full max-w-full' style={{ minHeight: 'calc(100vh - 64px)' }}>
+  <div className='flex min-h-screen min-w-full max-w-full flex-col' style={{ minHeight: 'calc(100vh - 64px)' }}>
 
     {/* Error Message */}
-    <div className='flex flex-col flex-grow items-center justify-center'>
+    <div className='flex grow flex-col items-center justify-center'>
       {/* Error Code */}
-      <div className='flex flex-row items-center mb-10'>
+      <div className='mb-10 flex flex-row items-center'>
         <h1 className='text-5xl font-bold'>404</h1>
         <Separator className='mx-4' orientation='vertical' />
         <p className='text-2xl'>Page not found</p>
@@ -31,7 +31,7 @@ const NotFoundError = () => (
 
 
     {/* Report */}
-    <div className='flex flex-col gap-4 items-center self-center sm:self-end w-fit h-fit mb-8 sm:mr-[2.5%]'>
+    <div className='mb-8 flex h-fit w-fit flex-col items-center gap-4 self-center sm:mr-[2.5%] sm:self-end'>
       <ExternalLink variant='outline' href='https://github.com/caffeine-addictt/portfolio/issues/new'>
         Report an issue
         <ExternalLinkIcon className='ml-2'/>
