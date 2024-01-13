@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { ExternalLink } from '@components/ui/button'
+import { InternalLink, ExternalLink, ExternalLinkProps } from '@components/ui/button'
 
 import { cn } from '@utils/tailwind'
 
@@ -30,10 +30,14 @@ const Footer = () => {
         {/* Left */}
         <div className='flex flex-col max-sm:items-center max-sm:self-center'>
           <TooltipWrapper text='Home page' asChild>
-            <Link href='/' className={cn(buttonVariants({ variant: 'link' }), 'justify-start p-0 text-lg font-bold')}>
+            {/* <Link href='/' className={cn(buttonVariants({ variant: 'link' }), 'justify-start p-0 text-lg font-bold')}>
               <CodeIcon className='mr-2 h-6 w-6 rotate-0 scale-100' />
               Technology
-            </Link>
+            </Link> */}
+            <InternalLink href='/' variant='link' className='justify-start p-0 text-lg font-bold'>
+              <CodeIcon className='mr-2 h-6 w-6 rotate-0 scale-100' />
+              Technology
+            </InternalLink>
           </TooltipWrapper>
 
           <Separator className='mb-4' />
@@ -98,7 +102,7 @@ const Footer = () => {
       {/* Bottom */}
       <div className='flex h-full w-full flex-col items-center sm:flex-row-reverse sm:justify-between'>
         <div className='text-sm font-light opacity-80'>
-          <TechnologyStackItem text='Vercel' href='https://vercel.com/' className='hover:underline'>Powered by Vercel</TechnologyStackItem>
+          <TechnologyStackItem text='Vercel' href='https://vercel.com/' variant='link'>Powered by Vercel</TechnologyStackItem>
         </div>
 
         <p className='text-sm font-light opacity-80'>© Copyright {new Date().getFullYear()} Jun Xiang. All rights reserved.</p>
@@ -113,10 +117,10 @@ export default Footer
 
 const TechnologyStackItem = React.forwardRef<
   React.ElementRef<typeof TooltipWrapper>,
-  React.ComponentPropsWithoutRef<typeof TooltipWrapper> & { href: string, className?: string }
->(({ children, href, className, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof TooltipWrapper> & ExternalLinkProps
+>(({ children, href, variant, size, className, ...props }, ref) => (
   <TooltipWrapper ref={ref} {...props} asChild>
-    <ExternalLink {...props} href={href} className={className}>
+    <ExternalLink {...props} href={href} variant={variant || 'ghost'} size={size || 'default'} className={cn('m-0 p-0', className)}>
       {children}
     </ExternalLink>
   </TooltipWrapper>
