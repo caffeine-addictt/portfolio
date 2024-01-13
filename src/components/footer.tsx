@@ -21,9 +21,11 @@ import { CodeIcon, GitHubLogoIcon, LinkedInLogoIcon } from '@radix-ui/react-icon
 
 const Footer = () => {
   return (
-    <footer className='flex flex-col h-auto w-full py-4 px-[5%] shadow-sm bg-white/60 backdrop-blur-sm dark:bg-black/60'>
+    <footer className='flex flex-col h-auto w-full pb-4 px-[5%] bg-white/60 backdrop-blur-sm dark:bg-black/60'>
+      <Separator className='absolute w-[95%] left-[2.5%]' />
+
       {/* Top */}
-      <div className='flex flex-col max-sm:gap-8 sm:flex-row sm:justify-between h-full w-full mb-4 pt-2'>
+      <div className='flex flex-col max-sm:gap-8 sm:flex-row sm:justify-between h-full w-full mb-4 pt-6'>
         {/* Left */}
         <div className='flex flex-col max-sm:self-center max-sm:items-center'>
           <TooltipWrapper text='Home page' asChild>
