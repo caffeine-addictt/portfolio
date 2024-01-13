@@ -25,7 +25,7 @@ certain personal information or involves personal identifiable data, or you beli
 that the data that you might leak by exposing the way on how to attack the project
 could be considered as a data leak or could violate the privacy of any kind of
 data or sensible data, please do not post it here and directly email the developer:
-(jgracia9988@gmail.com). You should post the issue with the least amount of
+(contact@ngjx.org). You should post the issue with the least amount of
 sensible or private data as possible to help us manage the security issue, and
 with the extra data sent from your email to the developer (if any), we will deeply
 analyze and try to fix it as fast as possible.
@@ -45,7 +45,7 @@ The data that must NOT be posted here:
 
 # Security Report
 Your issue may already be reported!
-Please check out our [active issues](https://github.com/caffeine-addictt/FastAPI-ToDoApp/issues) before creating one.
+Please check out our [active issues](https://github.com/caffeine-addictt/portfolio/issues) before creating one.
 
 ## Describe the Security Issue
 <!--
@@ -80,6 +80,6 @@ Any other extra context or information
 Include as many relevant details about the environment you experienced the bug in
 -->
 * Version used:
-* Python version:
+* Node version:
 * Link to your project:
 * Operating System and version (desktop or mobile):

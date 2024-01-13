@@ -63,6 +63,6 @@ Please include screenshots and/or code snippets if applicable
 Include as many relevant details about the environment you experienced the bug in
 -->
 * Version used:
-* Python version:
+* Node version:
 * Link to your project:
 * Operating System and version (desktop or mobile):
