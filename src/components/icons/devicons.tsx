@@ -17,7 +17,7 @@ const VercelIcon = React.forwardRef<
   React.ComponentPropsWithoutRef<'div'>
 >(({ className, ...props }, ref) => (
   <div ref={ref} {...props} className={cn('w-6 h-6 fill-black dark:fill-white', className)}>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 528 528"><path fill-rule="evenodd" d="M256,48,496,464H16Z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 528 528"><path fillRule="evenodd" d="M256,48,496,464H16Z"/></svg>
   </div>
 ))
 
@@ -37,7 +37,7 @@ const ShadcnUIIcon = React.forwardRef<
   React.ComponentPropsWithoutRef<'div'>
 >(({ className, ...props }, ref) => (
   <div ref={ref} {...props} className='w-6 h-6'>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><line x1="208" y1="128" x2="128" y2="208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><line x1="192" y1="40" x2="40" y2="192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><line x1="208" y1="128" x2="128" y2="208" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"></line><line x1="192" y1="40" x2="40" y2="192" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"></line></svg>
   </div>
 ))
 
