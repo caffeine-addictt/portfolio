@@ -1,4 +1,5 @@
 import '@styles/globals.css'
+import { Analytics } from '@vercel/analytics/react'
 
 import { cn } from '@utils/tailwind'
 import { ThemeProvider } from '@components/theme-provider'
@@ -95,6 +96,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           </main>
           <Footer />
         </ThemeProvider>
+
+        <Analytics />
       </body>
     </html>
   )
