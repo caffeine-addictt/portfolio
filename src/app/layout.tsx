@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     default: 'Alex\'s Portfolio',
     template: '%s | Alex\'s Portfolio',
   },
-  description: 'Alex\'s Portfolio and Blog Site',
+  description: 'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
   keywords: ['portfolio', 'blog', 'nextjs', 'tailwindcss', 'vercel', 'react', 'typescript', 'programmer', 'coding', 'developer', 'full-stack', 'software', 'singapore', 'sg'],
   applicationName: 'Alex\'s Portfolio',
   authors: [{ name: 'Alex', url: 'https://ngjx.org' }],
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
   openGraph: {
     title: 'Alex\'s Portfolio and Blog Site',
-    description: 'Alex\'s Portfolio and Blog Site',
+    description: 'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
     url: 'https://ngjx.org',
     siteName: 'ngjx.org',
     images: [
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: 'Alex\'s Portfolio and Blog Site',
-    description: 'Alex\'s Portfolio and Blog Site',
+    description: 'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
     card: 'summary_large_image',
     images: ['https://ngjx.org/images/siteScreenshot.png'],
   },
