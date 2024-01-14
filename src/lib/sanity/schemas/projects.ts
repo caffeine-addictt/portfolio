@@ -6,6 +6,18 @@ export const ProjectsSchema = {
   type: 'document',
   fields: [
     {
+      name: 'slug',
+      type: 'slug',
+      title: 'Slug',
+      description: 'Slug of the project',
+      options: {
+        source: 'title',
+        maxLength: 40
+      },
+      validation: (e: Rule) => e.required().error('Slug is required')
+    },
+
+    {
       name: 'title',
       type: 'string',
       title: 'Title',
