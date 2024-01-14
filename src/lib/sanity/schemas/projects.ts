@@ -43,25 +43,85 @@ export const ProjectsSchema = {
 
 
     {
-      name: 'icon',
-      type: 'url',
-      title: 'Icon URL',
-      description: 'Rendered as a small square image (e.g. https://www.google.com/someicon.png)',
-      validation: (e: Rule) => e.uri({ scheme: ['https'] }).error('Only HTTPS is allowed')
+      name: 'images',
+      type: 'object',
+      title: 'Images',
+      description: 'The project LCP images (e.g. https://www.google.com/someimage.png)',
+      fields: [
+        {
+          name: 'icon',
+          type: 'image',
+          title: 'Icon',
+          description: 'Rendered as a small square image on /projects (e.g. https://www.google.com/someicon.png)',
+        },
+        {
+          name: 'image',
+          type: 'image',
+          title: 'Image',
+          description: 'Rendered as a large image header (e.g. https://www.google.com/someimage.png)',
+        },
+      ]
     },
+
+
     {
-      name: 'repository_link',
-      type: 'url',
-      title: 'Repository Link',
-      description: 'Link to the repository',
-      validation: (e: Rule) => e.uri({ scheme: ['https'] }).error('Only HTTPS is allowed')
+      name: 'links',
+      type: 'object',
+      title: 'Links',
+      description: 'Links for the project',
+      fields: [
+        {
+          name: 'repo',
+          type: 'url',
+          title: 'Repository',
+          description: 'Link to the repository',
+          validation: (e: Rule) => e.uri({ scheme: ['https'] }).error('Only HTTPS is allowed')
+        },
+        {
+          name: 'demo',
+          type: 'url',
+          title: 'Demo',
+          description: 'Link to the demo',
+          validation: (e: Rule) => e.uri({ scheme: ['https'] }).error('Only HTTPS is allowed')
+        },
+        {
+          name: 'extra',
+          type: 'array',
+          title: 'Extra',
+          description: 'Extra links',
+          of: [{
+            type: 'object',
+            fields: [
+              {
+                name: 'title',
+                type: 'string',
+                title: 'Title',
+                description: 'Title of the extra link',
+                validation: (e: Rule) => e.required().error('Title is required')
+              },
+              {
+                name: 'url',
+                type: 'url',
+                title: 'URL',
+                description: 'Link to the extra link',
+                validation: (e: Rule) => [
+                  e.required().error('URL is required'),
+                  e.uri({ scheme: ['https'] }).error('Only HTTPS is allowed')
+                ]
+              }
+            ]
+          }],
+        }
+      ]
     },
+
+
     {
-      name: 'demo_link',
-      type: 'url',
-      title: 'Demo Link',
-      description: 'Link to the demo',
-      validation: (e: Rule) => e.uri({ scheme: ['https'] }).error('Only HTTPS is allowed')
+      name: 'technologies',
+      type: 'array',
+      title: 'Technologies',
+      description: 'Technologies used in the project',
+      of: [{ type: 'reference', to: [{ type: 'skills' }] }]
     },
 
 
