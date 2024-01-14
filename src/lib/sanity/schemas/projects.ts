@@ -148,10 +148,7 @@ export const ProjectsSchema = {
           type: 'datetime',
           title: 'Start',
           initialValue: () => (new Date()).toISOString(),
-          validation: (e: Rule) => [
-            e.required().error('Start date is required'),
-            e.max(e.valueOfField('end')).error('Start date cannot be later than end date')
-          ]
+          validation: (e: Rule) => e.required().error('Start date is required')
         },
         {
           name: 'end',
