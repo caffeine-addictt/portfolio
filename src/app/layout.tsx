@@ -86,6 +86,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang='en' suppressHydrationWarning>
       <body className={cn(
         inter.className,
+        'scroll-smooth',
         'flex min-h-screen min-w-full max-w-full flex-col',
         'text-text-light dark:text-text-dark',
         'bg-background-light dark:bg-background-dark'
