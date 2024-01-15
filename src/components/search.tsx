@@ -33,19 +33,19 @@ const SearchUI = ({ uri, searchParams, skills }: PageParamProps) => {
   const [query, setQuery] = useState<string>(searchParams?.query || '')
   const [techList, setTechList] = useState<string[]>(searchParams?.tech || [])
 
-  const runSearch = useDebouncedCallback((q?: string) => {
+  const runSearch = (q?: string, t?: string[]) => {
     if (
       ((q || query) === searchParams?.query)
-      && ( techList === searchParams?.tech )
+      && ( (t || techList) === searchParams?.tech )
     ) return
 
     const newParams = new URLSearchParams()
     if (q || query) newParams.append('query', q || query)
     if (searchParams?.page) newParams.append('page', searchParams?.page)
-    if (!!techList.length) techList.forEach(tech => newParams.append('tech', tech))
+    if (!!(t || techList).length) (t || techList).forEach(tech => newParams.append('tech', tech))
 
     window.location.href = `${uri}?${newParams.toString()}`
-  }, 1000)
+  }
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,6 +62,16 @@ const SearchUI = ({ uri, searchParams, skills }: PageParamProps) => {
     runSearch(query)
   }
 
+  const debouncedSearch = useDebouncedCallback(runSearch, 1000)
+  const wrappedSetTechList = (tech: string[] | ((tech: string[]) => string[])) => {
+    setTechList(t => {
+      let a = Array.isArray(tech) ? tech : tech(t)
+      debouncedSearch(query, a)
+
+      return a
+    })
+  }
+
 
   return (
     <div className='my-8 max-w-2xl max-md:max-w-xl max-sm:max-w-[90%]'>
@@ -73,7 +83,7 @@ const SearchUI = ({ uri, searchParams, skills }: PageParamProps) => {
       </div>
 
       <div className='mt-2 flex flex-row justify-center gap-2'>
-        <TechStackCheckbox techList={techList} setTech={setTechList} skills={skills} />
+        <TechStackCheckbox techList={techList} setTech={wrappedSetTechList} skills={skills} />
       </div>
     </div>
   )
@@ -89,6 +99,8 @@ interface TechStackCheckboxProps {
   setTech: (tech: string[] | ((tech: string[]) => string[])) => void
 }
 const TechStackCheckbox = ({ skills, techList, setTech }: TechStackCheckboxProps) => {
+
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className='group flex flex-row'>
