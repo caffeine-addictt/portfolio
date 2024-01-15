@@ -19,6 +19,7 @@ interface PageParamProps { searchParams?: { query?: string; page?: string; tech?
 const ProjectsListPage = async ({ searchParams }: PageParamProps) => {
   const skills = await getAllSkills()
   const data = await queryProjects({
+    orderByRecency: true,
     offset: ((Number(searchParams?.page) || 1) - 1),
     tech: searchParams?.tech ?
       Array.from(Array.isArray(searchParams.tech) ?
