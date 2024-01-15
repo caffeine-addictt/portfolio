@@ -24,7 +24,6 @@ import { ArrowTopRightIcon } from '@radix-ui/react-icons'
 
 
 export const ImageRender = async ({ icon, className }: { icon: any, className?: string }) => {
-  await new Promise(resolve => setTimeout(resolve, 4000))
   if (!!icon) {
     try {
       return (
