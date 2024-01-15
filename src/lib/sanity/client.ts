@@ -61,29 +61,6 @@ const queryProjects = cache(async ({
   return Array.isArray(fetched) ? fetched : [fetched]
 })
 
-const getProject = cache(async (slug: string): Promise<ProjectItem> => {
-  const data = await client.fetch(`
-    *[_type == "projects" && slug.current == "${slug.toLowerCase()}"]{
-      ...,
-      "slug": slug.current,
-      title,
-      "description": {
-        "short": description.short,
-        "long": description.long
-      },
-      links,
-      technologies[]->{
-        ...,
-        name,
-        href,
-        start_time
-      },
-      timeframe
-    }[0]
-  `)
-  return data
-})
-
 
 
 
@@ -106,7 +83,6 @@ const getAllSkills = cache(async (): Promise<SkillsItem[]> => {
 export {
   client,
   urlFor,
-  getProject,
   getAllSkills,
   queryProjects
 }
