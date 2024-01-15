@@ -13,7 +13,7 @@ const BackToTopButton = () => {
   useEffect(() => {
     if (window) {
       window.addEventListener('scroll', () => {
-        if (window.scrollY > 10) {
+        if (window.scrollY > 50) {
           setShow(true)
         } else {
           setShow(false)
