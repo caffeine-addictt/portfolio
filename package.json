@@ -20,6 +20,7 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.24.1",
+    "@tailwindcss/typography": "^0.5.10",
     "@vercel/analytics": "^1.1.1",
     "@vercel/speed-insights": "^1.0.3",
     "class-variance-authority": "^0.7.0",
