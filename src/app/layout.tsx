@@ -105,5 +105,5 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     </html>
   )
 }
-
 export default RootLayout
+export const revalidate = 1800 // Revalidate cache every ~30mins
