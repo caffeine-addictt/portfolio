@@ -63,7 +63,7 @@ export const ProjectCards = async ({ data }: { data: ProjectItem[] }) => (
       const newEnd = project.timeframe.end && new Date(project.timeframe.end)
 
       return (
-        <Card key={key} className='relative h-fit w-64 overflow-hidden rounded-sm px-2 pt-2'>
+        <Card key={key} className='relative h-fit w-64 overflow-hidden rounded-sm'>
           <Suspense fallback={<Skeleton className='h-60 w-60'/>}>
             <ImageRender icon={project.images.icon} className='h-60 w-60' />
           </Suspense>
@@ -126,7 +126,7 @@ export const ProjectCardsSkeleton = ({ cardCount }: { cardCount: number }) => {
   return (
     <>
       {[...Array(cardCount)].map((_, key) => (
-        <Card key={key} className='h-fit w-64 overflow-hidden rounded-sm px-2 pt-2'>
+        <Card key={key} className='h-fit w-64 overflow-hidden rounded-sm'>
           <Skeleton className='h-60 w-60' />
 
           {/* Title */}
