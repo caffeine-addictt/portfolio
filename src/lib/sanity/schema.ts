@@ -18,9 +18,20 @@ export interface ProjectItem {
       url: string;
     };
   };
-  technologies: any[];
+  technologies: SkillsItem[];
   timeframe: {
     start: Date;
     end?: Date;
   };
+}
+
+
+export interface SkillsItem {
+  name: string;
+  href: string;
+  start_time: ReturnType<typeof Date.prototype.toISOString>;
+  icon: {
+    dark: any;
+    light: any;
+  }
 }
