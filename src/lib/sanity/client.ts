@@ -71,10 +71,26 @@ const getProject = (async (slug: string): Promise<ProjectItem> => {
 
 
 
+const getAllSkills = (async (): Promise<SkillsItem[]> => {
+  const data = await client.fetch(`
+    *[_type == "skills"]{
+      ...,
+      "slug": slug.current,
+      name,
+      href,
+      start_time
+    }
+  `)
+  return data
+})
+
+
+
 
 export {
   client,
   urlFor,
   getProject,
+  getAllSkills,
   getAllProjects
 }
