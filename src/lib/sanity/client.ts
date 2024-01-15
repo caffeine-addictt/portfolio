@@ -22,30 +22,46 @@ const urlFor = (source: any) => builder.image(source)
 
 
 // Fetch querys
-const getAllProjects = (async (offset: number = 0, limit: number = 10): Promise<ProjectItem[]> => {
-  const data = await client.fetch(`
-    *[_type == "projects"]{
-      ...,
-      "slug": slug.current,
-      title,
-      "description": {
-        "short": description.short,
-        "long": description.long
-      },
-      links,
-      technologies[]->{
-        ...,
-        name,
-        href,
-        start_time
-      },
-      timeframe
-    }[${offset}...${limit}]
+export interface ProjectQuery {
+  offset?: number
+  queryLength?: number
+  additionalConditionals?: string[],
+  slug?: string | string[]
+  tech?: string | string[],
+  lookingFor?: string[],
+  orderByRecency?: boolean
+}
+
+const queryProjects = cache(async ({
+  offset = 0,
+  queryLength = 10,
+  additionalConditionals = [],
+  slug,
+  tech,
+  lookingFor,
+  orderByRecency = false
+}: ProjectQuery): Promise<ProjectItem[]> => {
+  if (offset < 0) throw new Error('Offset cannot be negative')
+  if (queryLength < 0) throw new Error('Limit cannot be negative')
+
+  const req = ['_type=="projects"', ...additionalConditionals]
+  if (slug) Array.isArray(slug) ? req.push(`slug.current in ${JSON.stringify(slug)}`) : req.push(`slug.current == "${slug}"`)
+  if (tech) Array.isArray(tech) ? req.push(`technologies[]->.name in ${JSON.stringify(tech)}`) : req.push(`technologies[]->.name == "${tech}"`)
+
+  const params = lookingFor || [
+    '...',
+    '"slug": slug.current',
+    'technologies[]->',
+  ]
+
+  const orderingConditions = orderByRecency ? ' | order(start_time desc)' : ''
+  const fetched = await client.fetch(`
+    *[${req.join(' && ')}]${orderingConditions}{${params.join(',')}}[${offset}...${queryLength+offset}]
   `)
-  return data
+  return Array.isArray(fetched) ? fetched : [fetched]
 })
 
-const getProject = (async (slug: string): Promise<ProjectItem> => {
+const getProject = cache(async (slug: string): Promise<ProjectItem> => {
   const data = await client.fetch(`
     *[_type == "projects" && slug.current == "${slug.toLowerCase()}"]{
       ...,
@@ -71,7 +87,7 @@ const getProject = (async (slug: string): Promise<ProjectItem> => {
 
 
 
-const getAllSkills = (async (): Promise<SkillsItem[]> => {
+const getAllSkills = cache(async (): Promise<SkillsItem[]> => {
   const data = await client.fetch(`
     *[_type == "skills"]{
       ...,
@@ -92,5 +108,5 @@ export {
   urlFor,
   getProject,
   getAllSkills,
-  getAllProjects
+  queryProjects
 }

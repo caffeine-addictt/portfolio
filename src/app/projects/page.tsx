@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { Metadata } from 'next'
-import { getAllSkills, getAllProjects } from '@lib/sanity/client'
+import { getAllSkills, queryProjects } from '@lib/sanity/client'
 
 import SearchUI from './search'
 import { ProjectCards } from './projectcard'
+import { escapeQueryString } from '@utils/strings'
 
 
 
@@ -16,8 +17,14 @@ export const metadata: Metadata = {
 
 interface PageParamProps { searchParams?: { query?: string; page?: string; tech?: string[] | string } }
 const ProjectsListPage = async ({ searchParams }: PageParamProps) => {
-  const data = await getAllProjects()
   const skills = await getAllSkills()
+  const data = await queryProjects({
+    offset: ((Number(searchParams?.page) || 1) - 1),
+    tech: searchParams?.tech ?
+      Array.from(Array.isArray(searchParams.tech) ?
+        searchParams.tech.map((tech) => escapeQueryString(tech)) : [escapeQueryString(searchParams.tech)]) : undefined,
+    additionalConditionals: searchParams?.query ? [`[title, description.short] match "*${searchParams.query}*"`] : []
+  })
 
   return (
     <div className='flex min-h-screen min-w-full max-w-full flex-col items-center' style={{ minHeight: 'calc(100vh - 64px)' }}>
