@@ -14,6 +14,7 @@ import {
 } from '@components/ui/dropdown-menu'
 import { Input } from '@components/ui/input'
 import { Button } from '@components/ui/button'
+import { Skeleton } from '@components/ui/skeleton'
 
 import {
   CaretDownIcon,
@@ -125,3 +126,24 @@ const DropdownItem = ({ name, techList, setTech }: DropdownItemProps) => {
     </DropdownMenuCheckboxItem>
   )
 }
+
+
+
+
+export const SearchUISkeleton = ({ query }: { query: string }) => (
+  <div className='max-w-2xl max-sm:max-w-[90%] max-md:max-w-xl my-8'>
+    <div className='flex flex-row max-sm:justify-center gap-2'>
+      <Input value={query} onChange={() => {}} type='search' placeholder='Search projects' className='w-screen' />
+      <Button type='button' variant='outline' size='icon' className='px-2'>
+        <MagnifyingGlassIcon className='h-6 w-6' />
+      </Button>
+    </div>
+
+    <div className='flex flex-row gap-2 mt-2 justify-center'>
+      <div className='flex flex-row group'>
+        <CaretDownIcon className='h-6 w-6 transition-all mr-1 group-data-[state=open]:rotate-180'/>
+        Filter
+      </div>
+    </div>
+  </div>
+)
