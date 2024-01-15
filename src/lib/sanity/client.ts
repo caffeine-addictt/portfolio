@@ -22,9 +22,10 @@ export const urlFor = (source: any) => builder.image(source)
 
 
 // Fetch querys
-export const getAllProjects = cache(async (offset: number = 0, limit: number = 10): Promise<ProjectItem[]> => {
+export const getAllProjects = (async (offset: number = 0, limit: number = 10): Promise<ProjectItem[]> => {
   const data = await client.fetch(`
     *[_type == "projects"]{
+      ...,
       "slug": slug.current,
       title,
       "description": {
@@ -33,16 +34,16 @@ export const getAllProjects = cache(async (offset: number = 0, limit: number = 1
       },
       links,
       technologies,
-      timeframe,
-      ...
+      timeframe
     }[${offset}...${limit}]
   `)
   return data
 })
 
-export const getProject = cache(async (slug: string): Promise<ProjectItem> => {
+export const getProject = (async (slug: string): Promise<ProjectItem> => {
   const data = await client.fetch(`
     *[_type == "projects" && slug.current == "${slug.toLowerCase()}"]{
+      ...,
       "slug": slug.current,
       title,
       "description": {
@@ -51,8 +52,7 @@ export const getProject = cache(async (slug: string): Promise<ProjectItem> => {
       },
       links,
       technologies,
-      timeframe,
-      ...
+      timeframe
     }[0]
   `)
   return data
