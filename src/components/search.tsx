@@ -24,8 +24,12 @@ import { SkillsItem } from '@lib/sanity/schema'
 
 
 
-interface PageParamProps { skills: SkillsItem[]; searchParams?: { query?: string; page?: string; tech?: string[] } }
-const SearchUI = ({ searchParams, skills }: PageParamProps) => {
+interface PageParamProps {
+  uri: string;
+  skills: SkillsItem[];
+  searchParams?: { query?: string; page?: string; tech?: string[] }
+}
+const SearchUI = ({ uri, searchParams, skills }: PageParamProps) => {
   const [query, setQuery] = useState<string>(searchParams?.query || '')
   const [techList, setTechList] = useState<string[]>(searchParams?.tech || [])
 
@@ -40,7 +44,7 @@ const SearchUI = ({ searchParams, skills }: PageParamProps) => {
     if (searchParams?.page) newParams.append('page', searchParams?.page)
     if (!!techList.length) techList.forEach(tech => newParams.append('tech', tech))
 
-    window.location.href = `/projects?${newParams.toString()}`
+    window.location.href = `${uri}?${newParams.toString()}`
   }, 1000)
 
 

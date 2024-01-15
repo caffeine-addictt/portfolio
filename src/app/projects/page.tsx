@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Metadata } from 'next'
 import { getAllSkills, queryProjects } from '@lib/sanity/client'
 
-import SearchUI from './search'
+import SearchUI from '@components/search'
 import { ProjectCards } from './projectcard'
 import { escapeQueryString } from '@utils/strings'
 
@@ -31,6 +31,7 @@ const ProjectsListPage = async ({ searchParams }: PageParamProps) => {
 
       {/* Filtering */}
       <SearchUI
+        uri='/projects'
         skills={skills}
         searchParams={{
           ...searchParams,

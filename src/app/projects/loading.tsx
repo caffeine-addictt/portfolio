@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { useSearchParams } from 'next/navigation'
 
-import { SearchUISkeleton } from './search'
+import { SearchUISkeleton } from '@components/search'
 import { ProjectCardsSkeleton } from './projectcard'
 
 const FullPageSkeleton = () => {
