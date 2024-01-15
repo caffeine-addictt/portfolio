@@ -54,7 +54,11 @@ export const ImageRender = async ({ icon, className }: { icon: any, className?: 
 
 export const ProjectCards = async ({ data }: { data: ProjectItem[] }) => (
   <>
-    {data.map((project, key) => {
+    {!!!data?.length ? (
+      <p>
+        Looks like no projects were found, try a different search term!
+      </p>
+    ) : (data.map((project, key) => {
       const newStart = new Date(project.timeframe.start)
       const newEnd = project.timeframe.end && new Date(project.timeframe.end)
 
@@ -90,7 +94,7 @@ export const ProjectCards = async ({ data }: { data: ProjectItem[] }) => (
 
           <CardFooter className='flex flex-col items-start gap-2'>
             {/* Technologies */}
-            {!!project.technologies ? (
+            {!!project.technologies?.length ? (
               <p className='flex flex-wrap gap-1'>
                 {project.technologies.map((tech, key) => (
                   <span key={key} className='text-sm font-light bg-accent-light dark:bg-accent-dark p-1 px-2 block rounded'>
@@ -111,7 +115,7 @@ export const ProjectCards = async ({ data }: { data: ProjectItem[] }) => (
             </p>
           </CardFooter>
         </Card>
-    )})}
+    )}))}
   </>
 )
 

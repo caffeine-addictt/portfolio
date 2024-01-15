@@ -14,7 +14,6 @@ import {
 } from '@components/ui/dropdown-menu'
 import { Input } from '@components/ui/input'
 import { Button } from '@components/ui/button'
-import { Skeleton } from '@components/ui/skeleton'
 
 import {
   CaretDownIcon,
@@ -39,7 +38,7 @@ const SearchUI = ({ searchParams, skills }: PageParamProps) => {
     const newParams = new URLSearchParams()
     if (q || query) newParams.append('query', q || query)
     if (searchParams?.page) newParams.append('page', searchParams?.page)
-    if (!!techList) techList.forEach(tech => newParams.append('tech', tech))
+    if (!!techList.length) techList.forEach(tech => newParams.append('tech', tech))
 
     window.location.href = `/projects?${newParams.toString()}`
   }, 1000)
