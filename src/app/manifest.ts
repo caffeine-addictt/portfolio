@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 
-export default (): MetadataRoute.Manifest => ({
+const manifest = (): MetadataRoute.Manifest => ({
   name: 'Alex\'s portoflio and blog site',
   short_name: 'Portoflio and blog site',
   description: 'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
@@ -13,3 +13,4 @@ export default (): MetadataRoute.Manifest => ({
     }
   ]
 })
+export default manifest

@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 
-export default async (): Promise<MetadataRoute.Sitemap> => {
+const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
   // const projects = await sanityClient.fetch(`*[_type == "project"]`)
   // const blog = await sanityClient.fetch(`*[_type == "blog"]`)
 
@@ -14,3 +14,4 @@ export default async (): Promise<MetadataRoute.Sitemap> => {
     ...fetchedData
   ]
 }
+export default sitemap

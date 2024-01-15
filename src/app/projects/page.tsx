@@ -38,7 +38,7 @@ const ProjectsListPage = async ({ searchParams }: PageParamProps) => {
         }}
       />
 
-      <div className='flex flex-wrap gap-2 mb-4 w-[80%] max-sm:w-[97.5%] self-center justify-center'>
+      <div className='mb-4 flex w-[80%] flex-wrap justify-center gap-2 self-center max-sm:w-[97.5%]'>
         <ProjectCards data={data} />
       </div>
     </div>

@@ -60,15 +60,15 @@ const SearchUI = ({ searchParams, skills }: PageParamProps) => {
 
 
   return (
-    <div className='max-w-2xl max-sm:max-w-[90%] max-md:max-w-xl my-8'>
-      <div className='flex flex-row max-sm:justify-center gap-2'>
+    <div className='my-8 max-w-2xl max-md:max-w-xl max-sm:max-w-[90%]'>
+      <div className='flex flex-row gap-2 max-sm:justify-center'>
         <Input value={query} onKeyUp={handleEnter} type='search' placeholder='Search projects' className='w-screen' onChange={handleChange} />
         <Button type='button' onClick={handleClick} variant='outline' size='icon' className='px-2'>
           <MagnifyingGlassIcon className='h-6 w-6' />
         </Button>
       </div>
 
-      <div className='flex flex-row gap-2 mt-2 justify-center'>
+      <div className='mt-2 flex flex-row justify-center gap-2'>
         <TechStackCheckbox techList={techList} setTech={setTechList} skills={skills} />
       </div>
     </div>
@@ -87,8 +87,8 @@ interface TechStackCheckboxProps {
 const TechStackCheckbox = ({ skills, techList, setTech }: TechStackCheckboxProps) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className='flex flex-row group'>
-        <CaretDownIcon className='h-6 w-6 transition-all mr-1 group-data-[state=open]:rotate-180'/>
+      <DropdownMenuTrigger className='group flex flex-row'>
+        <CaretDownIcon className='mr-1 h-6 w-6 transition-all group-data-[state=open]:rotate-180'/>
         Filter
       </DropdownMenuTrigger>
 
@@ -130,17 +130,17 @@ const DropdownItem = ({ name, techList, setTech }: DropdownItemProps) => {
 
 
 export const SearchUISkeleton = ({ query }: { query: string }) => (
-  <div className='max-w-2xl max-sm:max-w-[90%] max-md:max-w-xl my-8'>
-    <div className='flex flex-row max-sm:justify-center gap-2'>
-      <Input value={query} onChange={() => {}} type='search' placeholder='Search projects' className='w-screen' />
+  <div className='my-8 max-w-2xl max-md:max-w-xl max-sm:max-w-[90%]'>
+    <div className='flex flex-row gap-2 max-sm:justify-center'>
+      <Input value={query} onChange={() => {return}} type='search' placeholder='Search projects' className='w-screen' />
       <Button type='button' variant='outline' size='icon' className='px-2'>
         <MagnifyingGlassIcon className='h-6 w-6' />
       </Button>
     </div>
 
-    <div className='flex flex-row gap-2 mt-2 justify-center'>
-      <div className='flex flex-row group'>
-        <CaretDownIcon className='h-6 w-6 transition-all mr-1 group-data-[state=open]:rotate-180'/>
+    <div className='mt-2 flex flex-row justify-center gap-2'>
+      <div className='group flex flex-row'>
+        <CaretDownIcon className='mr-1 h-6 w-6 transition-all group-data-[state=open]:rotate-180'/>
         Filter
       </div>
     </div>

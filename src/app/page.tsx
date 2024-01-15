@@ -37,7 +37,7 @@ const HomePage = () => {
       </div>
 
       {/* Filler to center */}
-      <div className='block invisible self-end h-16 w-full'>This is a filler block to center the main content</div>
+      <div className='invisible block h-16 w-full self-end'>This is a filler block to center the main content</div>
     </div>
   )
 }

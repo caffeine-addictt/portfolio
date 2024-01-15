@@ -32,7 +32,7 @@ export const ImageRender = async ({ icon, className }: { icon: any, className?: 
           alt='Project Image'
           width={500}
           height={500}
-          className={cn('w-full h-full', className)}
+          className={cn('h-full w-full', className)}
         />
       )
     } catch (err) {console.log(err)}
@@ -44,7 +44,7 @@ export const ImageRender = async ({ icon, className }: { icon: any, className?: 
       alt='Project Image'
       width={500}
       height={500}
-      className={cn('w-full h-full', className)}
+      className={cn('h-full w-full', className)}
     />
   )
 }
@@ -63,17 +63,17 @@ export const ProjectCards = async ({ data }: { data: ProjectItem[] }) => (
       const newEnd = project.timeframe.end && new Date(project.timeframe.end)
 
       return (
-        <Card key={key} className='relative w-64 pt-2 px-2 h-fit rounded-sm overflow-hidden'>
-          <Suspense fallback={<Skeleton className='w-60 h-60'/>}>
-            <ImageRender icon={project.images.icon} className='w-60 h-60' />
+        <Card key={key} className='relative h-fit w-64 overflow-hidden rounded-sm px-2 pt-2'>
+          <Suspense fallback={<Skeleton className='h-60 w-60'/>}>
+            <ImageRender icon={project.images.icon} className='h-60 w-60' />
           </Suspense>
 
           {/* Hover */}
-          <div className='absolute inset-0 h-full w-full flex flex-col gap-2 justify-center items-center opacity-0 duration-300 hover:opacity-100 transition-all hover:backdrop-blur-sm'>
-            <Link href={`/projects/${project.slug}`} className='w-full h-full absolute inset-0' />
+          <div className='absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-2 opacity-0 transition-all duration-300 hover:opacity-100 hover:backdrop-blur-sm'>
+            <Link href={`/projects/${project.slug}`} className='absolute inset-0 h-full w-full' />
             <div className={cn(buttonVariants({ variant: 'secondary' }))}>
               Learn more
-              <ArrowTopRightIcon className='h-4 w-4 ml-2' />
+              <ArrowTopRightIcon className='ml-2 h-4 w-4' />
             </div>
           </div>
 
@@ -97,13 +97,13 @@ export const ProjectCards = async ({ data }: { data: ProjectItem[] }) => (
             {!!project.technologies?.length ? (
               <p className='flex flex-wrap gap-1'>
                 {project.technologies.map((tech, key) => (
-                  <span key={key} className='text-sm font-light bg-accent-light dark:bg-accent-dark p-1 px-2 block rounded'>
+                  <span key={key} className='block rounded bg-accent-light p-1 px-2 text-sm font-light dark:bg-accent-dark'>
                     {tech.name}
                   </span>
                 ))}
               </p>
             ) : (
-              <p className='text-sm font-light bg-accent-light dark:bg-accent-dark p-1 px-2 block rounded'>Unspecified</p>
+              <p className='block rounded bg-accent-light p-1 px-2 text-sm font-light dark:bg-accent-dark'>Unspecified</p>
             )}
 
 
@@ -126,21 +126,21 @@ export const ProjectCardsSkeleton = ({ cardCount }: { cardCount: number }) => {
   return (
     <>
       {[...Array(cardCount)].map((_, key) => (
-        <Card key={key} className='w-64 h-fit pt-2 px-2 rounded-sm overflow-hidden'>
-          <Skeleton className='w-60 h-60' />
+        <Card key={key} className='h-fit w-64 overflow-hidden rounded-sm px-2 pt-2'>
+          <Skeleton className='h-60 w-60' />
 
           {/* Title */}
           <CardHeader>
             <CardTitle>
-              <Skeleton className='w-40 h-6' />
+              <Skeleton className='h-6 w-40' />
             </CardTitle>
           </CardHeader>
 
           {/* Desc */}
           <CardContent>
             <div className='text-sm text-neutral-500 dark:text-neutral-400'>
-              <Skeleton className='w-20 h-4 mb-1' />
-              <Skeleton className='w-24 h-4' />
+              <Skeleton className='mb-1 h-4 w-20' />
+              <Skeleton className='h-4 w-24' />
             </div>
           </CardContent>
 
@@ -148,12 +148,12 @@ export const ProjectCardsSkeleton = ({ cardCount }: { cardCount: number }) => {
             {/* Technologies */}
             <div className='flex flex-wrap gap-1'>
               {[...Array(3)].map((tech, key) => (
-                <Skeleton key={key} className='w-10 h-7' />
+                <Skeleton key={key} className='h-7 w-10' />
               ))}
             </div>
 
             {/* Date */}
-            <Skeleton className='w-14 h-5' />
+            <Skeleton className='h-5 w-14' />
           </CardFooter>
         </Card>
       ))}
