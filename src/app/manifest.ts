@@ -7,8 +7,8 @@ const manifest = (): MetadataRoute.Manifest => ({
   start_url: 'https://ngjx.org',
   icons: [
     {
-      'src': 'https://ngjx.org/siteScreenshot.png',
-      'sizes': '787x368',
+      'src': 'https://ngjx.org/images/siteImage.png',
+      'sizes': '709x288',
       'type': 'image/png'
     }
   ]

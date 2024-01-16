@@ -29,6 +29,9 @@ export const metadata: Metadata = {
   creator: 'Alex Ng Jun Xiang',
   publisher: 'Alex Ng Jun Xiang',
   manifest: '/manifest.json',
+  alternates: {
+    canonical: 'https://ngjx.org'
+  },
   openGraph: {
     title: 'Alex\'s Portfolio and Blog Site',
     description: 'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
@@ -36,7 +39,7 @@ export const metadata: Metadata = {
     siteName: 'ngjx.org',
     images: [
       {
-        url: 'https://ngjx.org/images/siteScreenshot.png',
+        url: 'https://ngjx.org/images/siteImage.png',
         width: 1200,
         height: 630,
       },
@@ -59,7 +62,7 @@ export const metadata: Metadata = {
     title: 'Alex\'s Portfolio and Blog Site',
     description: 'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
     card: 'summary_large_image',
-    images: ['https://ngjx.org/images/siteScreenshot.png'],
+    images: ['https://ngjx.org/images/siteImage.png'],
   },
   appleWebApp: {
     title: 'Alex\'s Portfolio and Blog Site',
