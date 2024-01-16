@@ -7,7 +7,7 @@ import { InternalLink, ExternalLink } from '@components/ui/button'
 import { Separator } from '@components/ui/separator'
 
 const NotFoundError = () => (
-  <div className='flex min-h-screen min-w-full max-w-full flex-col' style={{ minHeight: 'calc(100vh - 64px)' }}>
+  <div className='mt-16 flex min-h-screen min-w-full max-w-full flex-col' style={{ minHeight: 'calc(100vh - 64px)' }}>
 
     {/* Error Message */}
     <div className='flex grow flex-col items-center justify-center'>

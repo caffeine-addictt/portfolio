@@ -9,7 +9,7 @@ import { ProjectCardsSkeleton } from './projectcard'
 const FullPageSkeleton = () => {
   const params = useSearchParams()
   return (
-    <div className='mb-4 flex min-h-screen min-w-full max-w-full flex-col items-center' style={{ minHeight: 'calc(100vh - 64px)' }}>
+    <div className='mb-4 mt-16 flex min-h-screen min-w-full max-w-full flex-col items-center' style={{ minHeight: 'calc(100vh - 64px)' }}>
       <SearchUISkeleton query={params?.get('query') || ''}/>
 
       <div className='flex w-[80%] flex-wrap justify-center gap-2 max-sm:w-[97.5%]'>
