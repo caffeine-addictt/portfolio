@@ -28,7 +28,7 @@ const ProjectsListPage = async ({ searchParams }: PageParamProps) => {
   })
 
   return (
-    <div className='flex min-h-screen min-w-full max-w-full flex-col items-center' style={{ minHeight: 'calc(100vh - 64px)' }}>
+    <div className='flex mt-16 min-h-screen min-w-full max-w-full flex-col items-center' style={{ minHeight: 'calc(100vh - 64px)' }}>
 
       {/* Filtering */}
       <SearchUI
