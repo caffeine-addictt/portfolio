@@ -47,7 +47,7 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
 
   if (!!!fetched.length) {
     return (
-      <div className='flex min-h-screen min-w-full max-w-full flex-col items-center mt-16' style={{ minHeight: 'calc(100vh - 64px)' }}>
+      <div className='mt-16 flex min-h-screen min-w-full max-w-full flex-col items-center' style={{ minHeight: 'calc(100vh - 64px)' }}>
         <div className='mt-8 flex w-[80%] flex-col items-center max-sm:w-[97.5%]'>
           <h1 className='mx-auto w-fit text-5xl font-bold sm:w-[50%]'>
             <span className='block text-center text-base uppercase tracking-wide text-accent-light dark:text-accent-dark'>Alex Ng - Project</span>
@@ -69,7 +69,7 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
   const newEnd = data.timeframe.end && new Date(data.timeframe.end)
 
   return (
-    <div className='flex min-h-screen min-w-full max-w-full flex-col items-center mt-16' style={{ minHeight: 'calc(100vh - 64px)' }}>
+    <div className='mt-16 flex min-h-screen min-w-full max-w-full flex-col items-center' style={{ minHeight: 'calc(100vh - 64px)' }}>
       <div className='mt-8 flex w-[80%] flex-col items-center max-sm:w-[97.5%]'>
 
         {/* Header */}
