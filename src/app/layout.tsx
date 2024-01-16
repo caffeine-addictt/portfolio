@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     default: 'Alex\'s Portfolio',
     template: '%s | Alex\'s Portfolio',
   },
+  category: 'technology',
   description: 'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
   keywords: ['portfolio', 'blog', 'nextjs', 'tailwindcss', 'vercel', 'react', 'typescript', 'programmer', 'coding', 'developer', 'full-stack', 'software', 'singapore', 'sg'],
   applicationName: 'Alex\'s Portfolio',
