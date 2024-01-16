@@ -17,7 +17,7 @@ const HomePage = () => {
   return (
     <div className='mt-16 h-fit w-full'>
 
-      <div className='mx-auto flex h-screen w-fit flex-col justify-center pb-16 max-sm:items-center max-sm:text-center'>
+      <div className='mx-auto flex w-fit flex-col justify-center pb-16 max-sm:items-center max-sm:text-center' style={{ height: 'calc(100vh - 64px)' }}>
         {/* Introduction and what I do */}
         <h1 className='mb-4 text-5xl font-bold'>Hi, I&apos;m <span className='text-accent-light dark:text-accent-dark'>Alex</span></h1>
         <p className='break-normal text-lg max-sm:max-w-xs'>
