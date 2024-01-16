@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { getAllSkills, queryProjects } from '@lib/sanity/client'
 
 import SearchUI from '@components/search'
-import { ProjectCards } from './projectcard'
+import { ProjectCards } from '@components/searchcards'
 import { escapeQueryString } from '@utils/strings'
 
 
@@ -34,6 +34,7 @@ const ProjectsListPage = async ({ searchParams }: PageParamProps) => {
       <SearchUI
         uri='/projects'
         skills={skills}
+        placeholder='Search projects'
         searchParams={{
           ...searchParams,
           tech: !!searchParams?.tech ? Array.from(Array.isArray(searchParams?.tech) ? searchParams?.tech : [searchParams?.tech]) : undefined
