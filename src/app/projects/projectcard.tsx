@@ -18,6 +18,7 @@ import {
 } from '@components/ui/card'
 import { Skeleton } from '@components/ui/skeleton'
 import { buttonVariants } from '@components/ui/button'
+import { AspectRatio } from '@components/ui/aspect-ratio'
 import { ArrowTopRightIcon } from '@radix-ui/react-icons'
 
 
@@ -63,10 +64,12 @@ export const ProjectCards = async ({ data }: { data: ProjectItem[] }) => (
       const newEnd = project.timeframe.end && new Date(project.timeframe.end)
 
       return (
-        <Card key={key} className='relative h-fit w-64 overflow-hidden rounded-sm'>
-          <Suspense fallback={<Skeleton className='h-60 w-60'/>}>
-            <ImageRender icon={project.images.icon} className='h-60 w-60' />
-          </Suspense>
+        <Card key={key} className='relative h-fit w-64 overflow-hidden rounded'>
+          <AspectRatio ratio={1/1}>
+            <Suspense fallback={<Skeleton className='h-64 w-64'/>}>
+              <ImageRender icon={project.images.icon} className='h-64 w-64' />
+            </Suspense>
+          </AspectRatio>
 
           {/* Hover */}
           <div className='absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-2 opacity-0 transition-all duration-300 hover:opacity-100 hover:backdrop-blur-sm'>
@@ -126,8 +129,10 @@ export const ProjectCardsSkeleton = ({ cardCount }: { cardCount: number }) => {
   return (
     <>
       {[...Array(cardCount)].map((_, key) => (
-        <Card key={key} className='h-fit w-64 overflow-hidden rounded-sm'>
-          <Skeleton className='h-60 w-60' />
+        <Card key={key} className='h-fit w-64 overflow-hidden rounded'>
+          <AspectRatio ratio={1/1} asChild>
+            <Skeleton className='h-64 w-64' />
+          </AspectRatio>
 
           {/* Title */}
           <CardHeader>
