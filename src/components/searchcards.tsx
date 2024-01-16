@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 import { cn } from '@utils/tailwind'
 import { urlFor } from '@lib/sanity/client'
-import { ProjectItem, SkillsItem } from '@lib/sanity/schema'
+import { ProjectItem, BlogItem, SkillsItem } from '@lib/sanity/schema'
 
 import {
   Card,
@@ -71,7 +71,7 @@ export const ProjectCards = async ({ data }: { data: ProjectItem[] }) => (
             technologies: project.technologies
           }}
           startingDate={new Date(project.timeframe.start)}
-          endingDate={project.timeframe.end && new Date(project.timeframe.end)}
+          endingDate={project.timeframe?.end ? new Date(project.timeframe.end) : undefined}
           renderEndDate={true}
         />
       )
@@ -82,7 +82,35 @@ export const ProjectCards = async ({ data }: { data: ProjectItem[] }) => (
 
 
 
-interface RenderCardProps extends React.ComponentProps<typeof Card> {
+export const BlogCards = async ({ data }: { data: BlogItem[] }) => (
+  <>
+    {!!!data?.length ? (
+      <p>
+        Looks like no blogs were found, try a different search term!
+      </p>
+    ) : (
+      data.map((project, key) => (
+        <RenderCard
+          key={key}
+          cardData={{
+            title: project.title,
+            shortDescription: project.description.short,
+            icon: project.images.icon,
+            slug: project.slug,
+            technologies: project.technologies
+          }}
+          startingDate={new Date(project.timeframe.published)}
+          renderEndDate={false}
+        />
+      )
+    ))}
+  </>
+)
+
+
+
+
+interface RenderCardProps extends React.HTMLAttributes<HTMLDivElement> {
   cardData: {
     title: string
     shortDescription: string
@@ -94,8 +122,11 @@ interface RenderCardProps extends React.ComponentProps<typeof Card> {
   endingDate?: Date
   renderEndDate: boolean
 }
-const RenderCard = ({ key, cardData, startingDate, endingDate, renderEndDate }: RenderCardProps) => (
-  <Card key={key} className='relative h-fit w-64 overflow-hidden rounded'>
+const RenderCard = React.forwardRef<
+  HTMLDivElement,
+  RenderCardProps
+>(({ cardData, startingDate, endingDate, renderEndDate, ...props }, ref) => (
+  <Card ref={ref} {...props} className='relative h-fit w-64 overflow-hidden rounded'>
     <AspectRatio ratio={1/1}>
       <Suspense fallback={<Skeleton className='h-64 w-64'/>}>
         <ImageRender icon={cardData.icon} className='h-64 w-64' />
@@ -151,7 +182,8 @@ const RenderCard = ({ key, cardData, startingDate, endingDate, renderEndDate }: 
       </p>
     </CardFooter>
   </Card>
-)
+))
+RenderCard.displayName = 'RenderCard'
 
 
 
