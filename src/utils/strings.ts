@@ -16,6 +16,11 @@ export const titleCase = (str: string) => {
  * @returns escaped string
  */
 export const escapeQueryString = (str: string): string => {
-  const escapedString = (str + '').replace(/[^0-9a-zA-Z]/gmi, '')
+  const escapedString = (str + '')
+    .replace(/&(?!\w+;)/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
   return escapedString
 }
