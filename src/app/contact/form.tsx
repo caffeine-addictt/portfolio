@@ -86,6 +86,7 @@ export const ContactForm = () => {
                   <SelectItem value='bug'>Bug Report</SelectItem>
                   <SelectItem value='suggestion'>Suggestion</SelectItem>
                   <SelectItem value='enquiry'>Enquiry</SelectItem>
+                  <SelectItem value='hireme'>Hire Me</SelectItem>
                 </SelectContent>
               </Select>
               <FormDescription>
