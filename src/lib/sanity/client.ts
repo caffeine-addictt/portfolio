@@ -29,7 +29,8 @@ export interface ProjectQuery {
   slug?: string | string[]
   tech?: string | string[],
   lookingFor?: string[],
-  orderByRecency?: boolean
+  orderByRecency?: boolean,
+  fetchAll?: boolean
 }
 
 const queryProjects = cache(async ({
@@ -39,7 +40,8 @@ const queryProjects = cache(async ({
   slug,
   tech,
   lookingFor,
-  orderByRecency = false
+  orderByRecency = false,
+  fetchAll = false
 }: ProjectQuery): Promise<ProjectItem[]> => {
   if (offset < 0) throw new Error('Offset cannot be negative')
   if (queryLength < 0) throw new Error('Limit cannot be negative')
@@ -55,8 +57,9 @@ const queryProjects = cache(async ({
   ]
 
   const orderingConditions = orderByRecency ? ' | order(start_time desc)' : ''
+  const splicing = fetchAll ? '' : `[${offset}...${queryLength+offset}]`
   const fetched = await client.fetch(`
-    *[${req.join(' && ')}]${orderingConditions}{${params.join(',')}}[${offset}...${queryLength+offset}]
+    *[${req.join(' && ')}]${orderingConditions}{${params.join(',')}}${splicing}
   `)
   return Array.isArray(fetched) ? fetched : [fetched]
 })
