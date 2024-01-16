@@ -10,6 +10,7 @@ import type { Metadata } from 'next'
 
 import Navbar from '@components/navbar'
 import Footer from '@components/footer'
+import { BackToTopButton } from '@components/ui/clientbutton'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -96,6 +97,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           <Navbar />
           <main className='flex w-full max-w-full grow'>
             {children}
+            <BackToTopButton />
           </main>
           <Footer />
         </ThemeProvider>

@@ -11,7 +11,6 @@ import { Skeleton } from '@components/ui/skeleton'
 import { Separator } from '@components/ui/separator'
 import { InternalLink } from '@components/ui/button'
 import { TooltipWrapper } from '@components/ui/tooltip'
-import BackToTopButton from '@components/totop-button'
 
 
 
@@ -107,11 +106,9 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
         <div className='prose prose-xl my-8 w-[80%] text-text-light dark:prose-invert dark:text-text-dark max-sm:w-[97.5%]'>
           <PortableText value={data.description.long} />
         </div>
+
+        <button type='button' onClick={async e => {'use server'; console.log(e)}}>test</button>
       </div>
-
-
-      {/* Floating back-to-top button */}
-      <BackToTopButton />
     </div>
   )
 }
