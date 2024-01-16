@@ -21,7 +21,7 @@ const HomePage = () => {
         {/* Introduction and what I do */}
         <h1 className='mb-4 text-5xl font-bold'>Hi, I&apos;m <span className='text-accent-light dark:text-accent-dark'>Alex</span></h1>
         <p className='break-normal text-lg max-sm:max-w-xs'>
-          I&apos;m a <span className='text-black dark:text-white underline text-xl'>full-stack developer</span> and hobbist hacker based in Singapore.
+          I&apos;m a <span className='text-xl text-black underline dark:text-white'>full-stack developer</span> and hobbist hacker based in Singapore.
         </p>
 
         {/* Links */}
@@ -49,26 +49,26 @@ const HomePage = () => {
 
 
       {/* About me */}
-      <div id='about' className='flex h-full w-full min-h-screen flex-col gap-4 items-center justify-center'>
-        <div className='flex w-[60%] flex-col items-center justify-center max-sm:w-[97.5%] max-md:w-[75%] text-center text-lg'>
-          <h1 className='text-5xl font-bold mb-8'>
+      <div id='about' className='flex h-full min-h-screen w-full flex-col items-center justify-center gap-4'>
+        <div className='flex w-[60%] flex-col items-center justify-center text-center text-lg max-md:w-[75%] max-sm:w-[97.5%]'>
+          <h1 className='mb-8 text-5xl font-bold'>
             I AM <span className='text-accent-light dark:text-accent-dark'>PASSIONATE</span> AND
             <span className='text-accent-light dark:text-accent-dark'> ALWAYS LEARNING</span>
           </h1>
 
           <p className='mb-2 max-sm:max-w-[70%]'>
             I started my journey creating games
-            <span className='text-accent-light dark:text-accent-dark font-bold'> { (new Date()).getUTCFullYear() - 2017 }+ years ago</span>.
+            <span className='font-bold text-accent-light dark:text-accent-dark'> { (new Date()).getUTCFullYear() - 2017 }+ years ago</span>.
           </p>
           <p className='mb-8 max-w-2xl'>
-            Now I create software like <span className='text-accent-light dark:text-accent-dark font-bold'>this website</span> and web applications using
-            <span className='text-accent-light dark:text-accent-dark font-bold'> React</span> and
-            <span className='text-accent-light dark:text-accent-dark font-bold'> NextJS</span> and libraries in
-            <span className='text-accent-light dark:text-accent-dark font-bold'> Python</span>.
+            Now I create software like <span className='font-bold text-accent-light dark:text-accent-dark'>this website</span> and web applications using
+            <span className='font-bold text-accent-light dark:text-accent-dark'> React</span> and
+            <span className='font-bold text-accent-light dark:text-accent-dark'> NextJS</span> and libraries in
+            <span className='font-bold text-accent-light dark:text-accent-dark'> Python</span>.
           </p>
 
           <p>I&apos;m always looking for new and exciting projects to work on!</p>
-          <Separator className='mt-2 mb-4 h-[1px] w-full max-w-[70%] md:max-w-[50%] lg:max-w-[30%]'/>
+          <Separator className='mb-4 mt-2 h-[1px] w-full max-w-[70%] md:max-w-[50%] lg:max-w-[30%]'/>
 
           <div className='flex flex-row gap-2'>
             <SmoothScroll variant='outline' toId='skills'>
@@ -87,18 +87,18 @@ const HomePage = () => {
 
 
       {/* My Skills */}
-      <div id='skills' className='flex h-full w-full min-h-screen flex-col gap-4 items-center justify-center'>
-        <div className='flex w-[60%] flex-col items-center justify-center max-sm:w-[97.5%] max-md:w-[75%] text-center text-lg'>
-          <h1 className='text-5xl font-bold mb-8'>
+      <div id='skills' className='flex h-full min-h-screen w-full flex-col items-center justify-center gap-4'>
+        <div className='flex w-[60%] flex-col items-center justify-center text-center text-lg max-md:w-[75%] max-sm:w-[97.5%]'>
+          <h1 className='mb-8 text-5xl font-bold'>
             MY <span className='text-accent-light dark:text-accent-dark'>SKILLS</span>
           </h1>
 
-          <div className='flex flex-wrap gap-2 max-w-[70%]'>
+          <div className='flex max-w-[70%] flex-wrap gap-2'>
             <RenderSkills />
           </div>
 
-          <Separator className='mt-8 mb-4 h-[1px] w-full max-w-[70%] md:max-w-[50%] lg:max-w-[30%]'/>
-          <div className='flex flex-wrap gap-2 items-center'>
+          <Separator className='mb-4 mt-8 h-[1px] w-full max-w-[70%] md:max-w-[50%] lg:max-w-[30%]'/>
+          <div className='flex flex-wrap items-center gap-2'>
             <TooltipWrapper text='View my blog!' asChild>
               <InternalLink href='/blog' variant='outline'>
                 <FileTextIcon className='mr-2 h-4 w-4 rotate-0 scale-100' />
@@ -127,9 +127,9 @@ const RenderSkills = async () => {
   return (
     <>
       {skills.map((skill, key) => (
-        <TooltipWrapper text={skill.name} asChild>
-          <ExternalLink href={skill.href} key={key} size='icon' variant='outline'>
-            <Suspense fallback={<Skeleton className='w-full h-full relative' />}>
+        <TooltipWrapper key={key} text={skill.name} asChild>
+          <ExternalLink href={skill.href} size='icon' variant='outline'>
+            <Suspense fallback={<Skeleton className='relative h-full w-full' />}>
               {skill?.icon?.dark && skill?.icon?.light ? (
                 <>
                   <Image
@@ -137,14 +137,14 @@ const RenderSkills = async () => {
                     alt={skill.name}
                     width={16}
                     height={16}
-                    className='w-full h-full absolute inset-0 object-cover scale-100 dark:scale-0 transition-all'
+                    className='absolute inset-0 h-full w-full scale-100 object-cover transition-all dark:scale-0'
                   />
                   <Image
                     src={urlFor(skill.icon.dark).url()}
                     alt={skill.name}
                     width={16}
                     height={16}
-                    className='w-full h-full absolute inset-0 object-cover scale-0 dark:scale-100 transition-all'
+                    className='absolute inset-0 h-full w-full scale-0 object-cover transition-all dark:scale-100'
                   />
                 </>
               ) : (
@@ -155,11 +155,11 @@ const RenderSkills = async () => {
                       alt={skill.name}
                       width={16}
                       height={16}
-                      className='w-full h-full absolute inset-0 object-cover scale-100 dark:scale-0 transition-all'
+                      className='absolute inset-0 h-full w-full scale-100 object-cover transition-all dark:scale-0'
                     />
 
                   ) : (
-                    <Skeleton className='w-full h-full relative' />
+                    <Skeleton className='relative h-full w-full' />
                   )}
                 </>
               )}

@@ -51,7 +51,7 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
         <div className='mt-8 flex w-[80%] flex-col items-center max-sm:w-[97.5%]'>
           <h1 className='mx-auto w-fit text-5xl font-bold sm:w-[50%]'>
             <span className='block text-center text-base uppercase tracking-wide text-accent-light dark:text-accent-dark'>Alex Ng - Project</span>
-            <span className='mt-2 block text-center text-5xl leading-8 tracking-tight sm:text-6xl'>Looks like this project doesn't exist!</span>
+            <span className='mt-2 block text-center text-5xl leading-8 tracking-tight sm:text-6xl'>Looks like this project doesn&apos;t exist!</span>
           </h1>
 
           <TooltipWrapper text='Check out my other projects!' asChild>

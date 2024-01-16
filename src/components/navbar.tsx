@@ -12,7 +12,7 @@ import { GitHubLogoIcon, FileTextIcon, CodeIcon } from '@radix-ui/react-icons'
 
 const Navbar = () => {
   return (
-    <nav className='flex h-16 w-full justify-center bg-white/60 shadow-sm backdrop-blur-sm dark:bg-black/60 fixed'>
+    <nav className='fixed flex h-16 w-full justify-center bg-white/60 shadow-sm backdrop-blur-sm dark:bg-black/60'>
       <div className='mb-2 mt-4 flex h-full w-[95%] flex-row justify-between gap-1 self-center'>
         {/* Left */}
         <div className='flex flex-row gap-1 self-center'>
