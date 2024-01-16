@@ -2,7 +2,7 @@ import { cache } from 'react'
 import { createClient } from 'next-sanity'
 import imageUrlBuilder from '@sanity/image-url'
 
-import { ProjectItem, SkillsItem } from './schema'
+import { ProjectItem, BlogItem, SkillsItem } from './schema'
 
 
 /** Sanity client */
@@ -67,6 +67,41 @@ const queryProjects = cache(async ({
 
 
 
+export interface BlogQuery extends ProjectQuery { }
+const queryBlogs = cache(async ({
+  offset = 0,
+  queryLength = 10,
+  additionalConditionals = [],
+  slug,
+  tech,
+  lookingFor,
+  orderByRecency = false,
+  fetchAll = false
+}: BlogQuery): Promise<BlogItem[]> => {
+  if (offset < 0) throw new Error('Offset cannot be negative')
+  if (queryLength < 0) throw new Error('Limit cannot be negative')
+
+  const req = ['_type=="blogs"', ...additionalConditionals]
+  if (slug) Array.isArray(slug) ? req.push(`slug.current in ${JSON.stringify(slug)}`) : req.push(`slug.current == "${slug}"`)
+  if (tech) Array.isArray(tech) ? req.push(`technologies[]->.name in ${JSON.stringify(tech)}`) : req.push(`technologies[]->.name == "${tech}"`)
+
+  const params = lookingFor || [
+    '...',
+    '"slug": slug.current',
+    'technologies[]->',
+  ]
+
+  const orderingConditions = orderByRecency ? ' | order(timeframe.published desc)' : ''
+  const splicing = fetchAll ? '' : `[${offset}...${queryLength+offset}]`
+  const fetched = await client.fetch(`
+    *[${req.join(' && ')}]${orderingConditions}{${params.join(',')}}${splicing}
+  `)
+  return Array.isArray(fetched) ? fetched : [fetched]
+})
+
+
+
+
 const getAllSkills = cache(async (): Promise<SkillsItem[]> => {
   const fetched = await client.fetch(`
     *[_type == "skills"]{
@@ -83,6 +118,7 @@ const getAllSkills = cache(async (): Promise<SkillsItem[]> => {
 export {
   client,
   urlFor,
+  queryBlogs,
   getAllSkills,
   queryProjects
 }
