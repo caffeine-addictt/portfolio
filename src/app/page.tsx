@@ -15,9 +15,9 @@ import { BackpackIcon, ArrowTopRightIcon, FileTextIcon } from '@radix-ui/react-i
 
 const HomePage = () => {
   return (
-    <div className='flex h-full w-full flex-col items-center justify-center' style={{ minHeight: 'calc(100vh - 64px)' }}>
+    <div className='mt-16 h-fit w-full'>
 
-      <div className='flex flex-col justify-center max-sm:items-center max-sm:text-center' style={{ minHeight: 'calc(100vh - 64px)' }}>
+      <div className='mx-auto flex h-screen w-fit flex-col justify-center pb-16 max-sm:items-center max-sm:text-center'>
         {/* Introduction and what I do */}
         <h1 className='mb-4 text-5xl font-bold'>Hi, I&apos;m <span className='text-accent-light dark:text-accent-dark'>Alex</span></h1>
         <p className='break-normal text-lg max-sm:max-w-xs'>
@@ -42,14 +42,11 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Filler to center */}
-      <div className='invisible block h-16 w-full self-end'>This is a filler block to center the main content</div>
-
 
 
 
       {/* About me */}
-      <div id='about' className='flex h-full min-h-screen w-full flex-col items-center justify-center gap-4'>
+      <div id='about' className='flex h-screen w-full flex-col items-center justify-center gap-4'>
         <div className='flex w-[60%] flex-col items-center justify-center text-center text-lg max-md:w-[75%] max-sm:w-[97.5%]'>
           <h1 className='mb-8 text-5xl font-bold'>
             I AM <span className='text-accent-light dark:text-accent-dark'>PASSIONATE</span> AND
