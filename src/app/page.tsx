@@ -19,9 +19,10 @@ const HomePage = () => {
 
       <div className='mx-auto flex w-fit flex-col justify-center pb-16 max-sm:items-center max-sm:text-center' style={{ height: 'calc(100vh - 64px)' }}>
         {/* Introduction and what I do */}
-        <h1 className='mb-4 text-5xl font-bold'>Hi, I&apos;m <span className='text-accent-light dark:text-accent-dark'>Alex</span></h1>
+        <p>Hi, I&apos;m Alex</p>
+        <h1 className='mb-4 text-5xl font-bold'>I Bring <span className='text-accent-light dark:text-accent-dark'>Ideas</span> to Life</h1>
         <p className='break-normal text-lg max-sm:max-w-xs'>
-          I&apos;m a <span className='text-xl text-black underline dark:text-white'>full-stack developer</span> and hobbist hacker based in Singapore.
+          I&apos;m a <span className='text-xl font-medium text-black dark:text-white'>full-stack developer</span> and hobbist hacker based in Singapore.
         </p>
 
         {/* Links */}
