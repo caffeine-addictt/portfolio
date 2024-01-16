@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import { cn } from '@utils/tailwind'
+import { Toaster } from '@components/ui/toaster'
 import { ThemeProvider } from '@components/theme-provider'
 
 import { Inter } from 'next/font/google'
@@ -98,6 +99,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           <main className='flex w-full max-w-full grow'>
             {children}
             <BackToTopButton />
+            <Toaster />
           </main>
           <Footer />
         </ThemeProvider>
