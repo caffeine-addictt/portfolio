@@ -1,9 +1,11 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      SANITY_PROJ_ID_PROD: string
-      SANITY_DATASET_PROD: string
-      SANITY_API_VERSION: string
+      NEXT_PUBLIC_BASE_URL: string
+      
+      NEXT_PUBLIC_DATASET: string
+      NEXT_PUBLIC_PROJECT_ID: string
+      NEXT_PUBLIC_API_VERSION: string
     }
   }
 }

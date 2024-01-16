@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import { cn } from '@utils/tailwind'
+import { Toaster } from '@components/ui/toaster'
 import { ThemeProvider } from '@components/theme-provider'
 
 import { Inter } from 'next/font/google'
@@ -10,6 +11,7 @@ import type { Metadata } from 'next'
 
 import Navbar from '@components/navbar'
 import Footer from '@components/footer'
+import { BackToTopButton } from '@components/ui/clientbutton'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -19,6 +21,7 @@ export const metadata: Metadata = {
     default: 'Alex\'s Portfolio',
     template: '%s | Alex\'s Portfolio',
   },
+  category: 'technology',
   description: 'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
   keywords: ['portfolio', 'blog', 'nextjs', 'tailwindcss', 'vercel', 'react', 'typescript', 'programmer', 'coding', 'developer', 'full-stack', 'software', 'singapore', 'sg'],
   applicationName: 'Alex\'s Portfolio',
@@ -86,6 +89,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang='en' suppressHydrationWarning>
       <body className={cn(
         inter.className,
+        'scroll-smooth',
         'flex min-h-screen min-w-full max-w-full flex-col',
         'text-text-light dark:text-text-dark',
         'bg-background-light dark:bg-background-dark'
@@ -94,6 +98,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           <Navbar />
           <main className='flex w-full max-w-full grow'>
             {children}
+            <BackToTopButton />
+            <Toaster />
           </main>
           <Footer />
         </ThemeProvider>
@@ -104,5 +110,5 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     </html>
   )
 }
-
 export default RootLayout
+export const revalidate = 1800 // Revalidate cache every ~30mins
