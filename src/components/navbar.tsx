@@ -29,7 +29,7 @@ import {
 
 const Navbar = () => {
   return (
-    <nav className='fixed transition-all will-change-scroll flex h-16 w-full justify-center bg-white/60 shadow-sm backdrop-blur-sm dark:bg-black/60'>
+    <nav className='fixed flex h-16 w-full justify-center bg-white/60 shadow-sm backdrop-blur-sm transition-all will-change-scroll dark:bg-black/60'>
       <div className='mb-2 mt-4 flex h-full w-[95%] flex-row justify-between gap-1 self-center'>
         {/* Left */}
         <div className='flex flex-row gap-1 self-center'>
@@ -114,9 +114,9 @@ export default Navbar
 const MobileDropdown = () => (
   <DropdownMenu>
     <DropdownMenuTrigger className='group' asChild>
-      <Button variant='outline' size='icon' className='relative flex jusify-center items-center md:hidden'>
-        <HamburgerMenuIcon className='h-6 w-6 absolute rotate-0 scale-100 group-data-[state=open]:-rotate-180 group-data-[state=open]:scale-0 transition-all' />
-        <Cross2Icon className='h-6 w-6 absolute rotate-0 scale-0 group-data-[state=open]:-rotate-180 group-data-[state=open]:scale-100 transition-all' />
+      <Button variant='outline' size='icon' className='relative flex items-center justify-center md:hidden'>
+        <HamburgerMenuIcon className='absolute h-6 w-6 rotate-0 scale-100 transition-all group-data-[state=open]:-rotate-180 group-data-[state=open]:scale-0' />
+        <Cross2Icon className='absolute h-6 w-6 rotate-0 scale-0 transition-all group-data-[state=open]:-rotate-180 group-data-[state=open]:scale-100' />
         <span className='sr-only'>Toggle menu</span>
       </Button>
     </DropdownMenuTrigger>
