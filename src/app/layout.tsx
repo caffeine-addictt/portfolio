@@ -102,9 +102,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           <main className='flex w-full max-w-full grow'>
             {children}
             <BackToTopButton />
-            <Toaster />
           </main>
           <Footer />
+          <Toaster />
         </ThemeProvider>
 
         <Analytics />
