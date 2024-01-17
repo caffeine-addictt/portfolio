@@ -9,7 +9,7 @@ import { urlFor, queryProjects } from '@lib/sanity/client'
 
 import { Skeleton } from '@components/ui/skeleton'
 import { Separator } from '@components/ui/separator'
-import { InternalLink } from '@components/ui/button'
+import { ExternalLink, InternalLink } from '@components/ui/button'
 import { TooltipWrapper } from '@components/ui/tooltip'
 
 import { GitHubLogoIcon } from '@radix-ui/react-icons'
@@ -83,7 +83,7 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
         {/* Time */}
         <p className='mt-2 text-base font-light'>
           {newStart.getUTCMonth()+1}/{newStart.getUTCFullYear()}
-          -
+          &nbsp;-&nbsp;
           {newEnd ? `${newEnd.getUTCMonth()+1}/${newEnd.getUTCFullYear()}` : 'Present'}
         </p>
 
@@ -96,17 +96,17 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
           <div className='flex w-fit flex-wrap gap-2 mb-2'>
             {data.links?.repo && (
               <TooltipWrapper text='View the source code!' asChild>
-                <InternalLink href={data.links.repo} variant='outline' size='icon'>
+                <ExternalLink href={data.links.repo} variant='outline' size='icon'>
                   <GitHubLogoIcon />
-                </InternalLink>
+                </ExternalLink>
               </TooltipWrapper>
             )}
 
             {data.links?.demo && (
               <TooltipWrapper text='View the live demo!' asChild>
-                <InternalLink href={data.links.demo} variant='outline'>
+                <ExternalLink href={data.links.demo} variant='outline'>
                   Live Demo
-                </InternalLink>
+                </ExternalLink>
               </TooltipWrapper>
             )}
 
@@ -114,9 +114,9 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
               <>
                 {data.links.extra.map((link, index) => (
                   <TooltipWrapper key={index} text={link.title} asChild>
-                    <InternalLink href={link.url} variant='outline'>
+                    <ExternalLink href={link.url} variant='outline'>
                       {link.title}
-                    </InternalLink>
+                    </ExternalLink>
                   </TooltipWrapper>
                 ))}
               </>
@@ -130,7 +130,7 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
           <div className='flex w-fit flex-wrap gap-2 mb-4'>
             {data.technologies.map((tech, index) => (
               <TooltipWrapper key={index} text={tech.name} asChild>
-                <InternalLink href={tech.href} variant='outline' size='icon'>
+                <ExternalLink href={tech.href} variant='outline' size='icon'>
                   <Suspense fallback={<Skeleton className='relative h-full w-full' />}>
                     {tech?.icon?.dark && tech?.icon?.light ? (
                       <>
@@ -166,7 +166,7 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
                       </>
                     )}
                   </Suspense>
-                </InternalLink>
+                </ExternalLink>
               </TooltipWrapper>
             ))}
           </div>
