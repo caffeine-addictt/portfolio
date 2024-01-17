@@ -36,7 +36,12 @@ export const generateMetadata = async ({ params: { slug } }: { params: { slug: s
   const data = fetched[0]
   return {
     title: data.title,
-    description: data.description.short
+    description: data.description.short,
+    openGraph: {
+      type: 'article',
+      title: data.title,
+      description: data.description.short
+    }
   }
 }
 

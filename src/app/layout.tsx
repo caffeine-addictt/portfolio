@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: 'Alex\'s Portfolio and Blog Site',
     description: 'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
     card: 'summary_large_image',
-    images: ['https://ngjx.org/images/siteImage.png'],
+    images: 'https://ngjx.org/images/siteImage.png'
   },
   appleWebApp: {
     title: 'Alex\'s Portfolio and Blog Site',
