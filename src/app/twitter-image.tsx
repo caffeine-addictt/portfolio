@@ -1,5 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
+
 import { ImageResponse } from 'next/og'
-import Image from 'next/image'
  
 // Route segment config
 export const runtime = 'edge'
@@ -16,12 +17,14 @@ export const contentType = 'image/png'
 // Image generation
 const OGImage = () => {
   return new ImageResponse(
-    <Image
-      src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/siteImage.png`}
-      alt={alt}
-      width={size.width}
-      height={size.height}
-    />
+    (
+      <div style={{ background: '#020104', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <img
+          src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/siteImage.png`}
+          alt={alt}
+        />
+      </div>
+    ), { ...size }
   )
 }
 export default OGImage

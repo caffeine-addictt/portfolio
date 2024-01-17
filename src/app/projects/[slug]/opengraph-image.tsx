@@ -1,5 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
+
 import * as React from 'react'
-import Image from 'next/image'
 import { ImageResponse } from 'next/og'
 
 import { escapeQueryString } from '@utils/strings'
@@ -25,18 +26,14 @@ const og = async ({ params: { slug } }: { params: { slug: string } }) => {
       {/* Background */}
       <div style={{ position: 'absolute', inset: 0, display: 'flex' }}>
         {fetched.images?.image ? (
-          <Image
+          <img
             src={urlFor(fetched.images?.image).url()}
             alt={fetched.title}
-            width={size.width}
-            height={size.height}
           />
         ) : (
-          <Image
+          <img
             src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/siteImage.png`}
             alt={fetched.title}
-            width={size.width}
-            height={size.height}
           />
         )}
 
@@ -55,7 +52,7 @@ const og = async ({ params: { slug } }: { params: { slug: string } }) => {
           {fetched.description.short}
         </p>
       </div>
-    </div>
+    </div>, { ...size }
   )
 }
 export default og
