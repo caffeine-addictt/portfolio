@@ -10,7 +10,7 @@ const FullPageSkeleton = () => (
     <div className='mt-8 flex w-[80%] flex-col items-center max-sm:w-[97.5%]'>
 
       {/* Header */}
-      <div className='mx-auto w-fit flex jusity-center flex-col items-center gap-4 sm:w-[50%]'>
+      <div className='mx-auto flex w-fit flex-col items-center gap-4 sm:w-[50%]'>
         <Skeleton className='h-6 w-32' />
         <Skeleton className='h-12 w-60' />
       </div>
@@ -23,22 +23,22 @@ const FullPageSkeleton = () => (
 
 
       {/* Links */}
-      <div className='flex w-fit flex-wrap gap-2 mb-2'>
-        <Separator className='w-10 h-10 rounded-md overflow-hidden' />
-        <Separator className='w-16 h-10 rounded-md overflow-hidden' />
-        <Separator className='w-16 h-10 rounded-md overflow-hidden' />
+      <div className='mb-2 flex w-fit flex-wrap gap-2'>
+        <Separator className='h-10 w-10 overflow-hidden rounded-md' />
+        <Separator className='h-10 w-16 overflow-hidden rounded-md' />
+        <Separator className='h-10 w-16 overflow-hidden rounded-md' />
       </div>
 
 
       {/* Technology stack */}
-      <div className='flex w-fit flex-wrap gap-2 mb-4'>
-        <Separator className='h-10 w-10 rounded-md overflow-hidden' />
-        <Separator className='h-10 w-10 rounded overflow-hidden' />
+      <div className='mb-4 flex w-fit flex-wrap gap-2'>
+        <Separator className='h-10 w-10 overflow-hidden rounded-md' />
+        <Separator className='h-10 w-10 overflow-hidden rounded' />
       </div>
 
 
       {/* Short description */}
-      <Skeleton className='w-20 h-7' />
+      <Skeleton className='h-7 w-20' />
 
 
       {/* Image */}
@@ -48,7 +48,7 @@ const FullPageSkeleton = () => (
 
 
       {/* Content */}
-      <div className='flex flex-col items-center gap-1 mb-8 mt-12 w-[80%] max-sm:w-[97.5%]'>
+      <div className='mb-8 mt-12 flex w-[80%] flex-col items-center gap-1 max-sm:w-[97.5%]'>
         <Skeleton className='h-5 w-64'/>
         <Skeleton className='h-5 w-72'/>
         <Skeleton className='h-5 w-60'/>

@@ -46,6 +46,7 @@ export const generateMetadata = async ({ params: { slug } }: { params: { slug: s
 // Render Logic
 const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) => {
   const fetched = await queryProjects({ slug: escapeQueryString(slug), queryLength: 1 })
+  await new Promise(resolve => setTimeout(resolve, 1000))
 
   if (!!!fetched.length) {
     return (
@@ -71,7 +72,7 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
   const newEnd = data.timeframe.end && new Date(data.timeframe.end)
 
   return (
-    <div className='mt-16 mb-8 flex min-h-screen min-w-full max-w-full flex-col items-center' style={{ minHeight: 'calc(100vh - 64px)' }}>
+    <div className='mb-8 mt-16 flex min-h-screen min-w-full max-w-full flex-col items-center' style={{ minHeight: 'calc(100vh - 64px)' }}>
       <div className='mt-8 flex w-[80%] flex-col items-center max-sm:w-[97.5%]'>
 
         {/* Header */}
@@ -93,7 +94,7 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
 
         {/* Links */}
         {(!!data.links?.demo || data.links?.repo || !!data.links?.extra?.length) && (
-          <div className='flex w-fit flex-wrap gap-2 mb-2'>
+          <div className='mb-2 flex w-fit flex-wrap gap-2'>
             {data.links?.repo && (
               <TooltipWrapper text='View the source code!' asChild>
                 <ExternalLink href={data.links.repo} variant='outline' size='icon'>
@@ -127,7 +128,7 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
 
         {/* Technology stack */}
         {!!data.technologies?.length && (
-          <div className='flex w-fit flex-wrap gap-2 mb-4'>
+          <div className='mb-4 flex w-fit flex-wrap gap-2'>
             {data.technologies.map((tech, index) => (
               <TooltipWrapper key={index} text={tech.name} asChild>
                 <ExternalLink href={tech.href} variant='outline' size='icon' className='relative'>
@@ -205,7 +206,7 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
 
 
         {/* Content */}
-        <article className='prose lg:prose-xl prose-blue dark:!prose-invert my-8 w-[80%] max-sm:w-[97.5%]'>
+        <article className='prose prose-neutral my-8 w-[80%] dark:prose-invert lg:prose-xl max-sm:w-[97.5%]'>
           <PortableText value={data.description.long} />
         </article>
 

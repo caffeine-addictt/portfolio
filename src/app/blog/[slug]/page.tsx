@@ -12,8 +12,6 @@ import { Separator } from '@components/ui/separator'
 import { ExternalLink, InternalLink } from '@components/ui/button'
 import { TooltipWrapper } from '@components/ui/tooltip'
 
-import { GitHubLogoIcon } from '@radix-ui/react-icons'
-
 
 
 
@@ -72,7 +70,7 @@ const BlogPage = async ({ params: { slug } }: { params: { slug: string } }) => {
   const newUpdated = (data.timeframe.updated !== data.timeframe.published) && new Date(data.timeframe.updated)
 
   return (
-    <div className='mt-16 mb-8 flex min-h-screen min-w-full max-w-full flex-col items-center' style={{ minHeight: 'calc(100vh - 64px)' }}>
+    <div className='mb-8 mt-16 flex min-h-screen min-w-full max-w-full flex-col items-center' style={{ minHeight: 'calc(100vh - 64px)' }}>
       <div className='mt-8 flex w-[80%] flex-col items-center max-sm:w-[97.5%]'>
 
         {/* Header */}
@@ -93,7 +91,7 @@ const BlogPage = async ({ params: { slug } }: { params: { slug: string } }) => {
 
         {/* Technology stack */}
         {!!data.technologies?.length && (
-          <div className='flex w-fit flex-wrap gap-2 mb-4'>
+          <div className='mb-4 flex w-fit flex-wrap gap-2'>
             {data.technologies.map((tech, index) => (
               <TooltipWrapper key={index} text={tech.name} asChild>
                 <ExternalLink href={tech.href} variant='outline' size='icon' className='relative'>
@@ -171,7 +169,7 @@ const BlogPage = async ({ params: { slug } }: { params: { slug: string } }) => {
 
 
         {/* Content */}
-        <article className='prose lg:prose-xl prose-blue dark:!prose-invert my-8 w-[80%] max-sm:w-[97.5%]'>
+        <article className='prose prose-neutral my-8 w-[80%] dark:prose-invert lg:prose-xl max-sm:w-[97.5%]'>
           <PortableText value={data.description.long} />
         </article>
 
