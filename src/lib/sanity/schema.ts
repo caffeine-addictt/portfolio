@@ -13,10 +13,10 @@ export interface ProjectItem {
   links: {
     demo?: string;
     repo?: string;
-    extra: {
+    extra?: {
       title: string;
       url: string;
-    };
+    }[];
   };
   technologies: SkillsItem[];
   timeframe: {
