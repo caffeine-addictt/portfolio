@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<a name="readme-top"></a>
 
-## Getting Started
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<!-- PROJECT SHIELDS -->
+<div align="center">
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+  <a href="[contributors-url]">[![Contributors][contributors-shield]][contributors-url]</a>
+  <a href="[forks-url]">[![Forks][forks-shield]][forks-url]</a>
+  <a href="[stars-url]">[![Stargazers][stars-shield]][stars-url]</a>
+  <a href="[issues-url]">[![Issues][issues-shield]][issues-url]</a>
+  <a href="[license-url]">[![BSD-3-Clause License][license-shield]][license-url]</a>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+</div>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <h3 align="center">ngjx.org</h3>
 
-## Learn More
+  <p align="center">
+    My portfolio and blog website
+    <br />
+    <a href="https://github.com/caffeine-addictt/portfolio/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/caffeine-addictt/portfolio/issues">Request Feature</a>
+  </p>
+</div>
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<!-- ABOUT THE PROJECT -->
+## About The Project
+This is the source code for my portfolio adn blog website!
 
-## Deploy on Vercel
+View the [Live Demo](https://ngjx.org)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the BSD-3-Clause License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Alex - [contact@ngjx.org](mailto:contact@ngjx.org)
+
+Form - [ngjx.org/contact](https://ngjx.org/contact)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/caffeine-addictt/portfolio.svg?style=for-the-badge
+[contributors-url]: https://github.com/caffeine-addictt/portfolio/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/caffeine-addictt/portfolio.svg?style=for-the-badge
+[forks-url]: https://github.com/caffeine-addictt/portfolio/network/members
+[stars-shield]: https://img.shields.io/github/stars/caffeine-addictt/portfolio.svg?style=for-the-badge
+[stars-url]: https://github.com/caffeine-addictt/portfolio/stargazers
+[issues-shield]: https://img.shields.io/github/issues/caffeine-addictt/portfolio.svg?style=for-the-badge
+[issues-url]: https://github.com/caffeine-addictt/portfolio/issues
+[license-shield]: https://img.shields.io/github/license/caffeine-addictt/portfolio.svg?style=for-the-badge
+[license-url]: https://github.com/caffeine-addictt/portfolio/blob/master/LICENSE.txt
