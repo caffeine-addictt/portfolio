@@ -24,7 +24,7 @@ export const generateStaticParams = async () => {
 }
 
 export const generateMetadata = async ({ params: { slug } }: { params: { slug: string } }): Promise<Metadata> => {
-  const fetched = (await queryProjects({ slug: escapeQueryString(slug), queryLength: 1 }))
+  const fetched = (await queryProjects({ slug: escapeQueryString(slug), queryLength: 1, lookingFor: ['title', 'description'] }))
 
   if (!!!fetched.length) {
     return {
@@ -71,7 +71,7 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
   const newEnd = data.timeframe.end && new Date(data.timeframe.end)
 
   return (
-    <div className='mt-16 flex min-h-screen min-w-full max-w-full flex-col items-center' style={{ minHeight: 'calc(100vh - 64px)' }}>
+    <div className='mt-16 mb-8 flex min-h-screen min-w-full max-w-full flex-col items-center' style={{ minHeight: 'calc(100vh - 64px)' }}>
       <div className='mt-8 flex w-[80%] flex-col items-center max-sm:w-[97.5%]'>
 
         {/* Header */}
@@ -130,23 +130,23 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
           <div className='flex w-fit flex-wrap gap-2 mb-4'>
             {data.technologies.map((tech, index) => (
               <TooltipWrapper key={index} text={tech.name} asChild>
-                <ExternalLink href={tech.href} variant='outline' size='icon'>
+                <ExternalLink href={tech.href} variant='outline' size='icon' className='relative'>
                   <Suspense fallback={<Skeleton className='relative h-full w-full' />}>
                     {tech?.icon?.dark && tech?.icon?.light ? (
                       <>
                         <Image
                           src={urlFor(tech.icon.light).url()}
-                          alt={tech.name}
+                          alt='/images/dark.svg'
                           width={16}
                           height={16}
-                          className='absolute inset-0 h-full w-full scale-100 object-cover transition-all dark:scale-0'
+                          className='absolute h-6 w-6 scale-100 transition-all dark:scale-0'
                         />
                         <Image
                           src={urlFor(tech.icon.dark).url()}
-                          alt={tech.name}
+                          alt='/images/light.svg'
                           width={16}
                           height={16}
-                          className='absolute inset-0 h-full w-full scale-0 object-cover transition-all dark:scale-100'
+                          className='absolute h-6 w-6 scale-0 transition-all dark:scale-100'
                         />
                       </>
                     ) : (
@@ -154,14 +154,29 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
                         {tech.icon?.dark || tech.icon?.light ? (
                           <Image
                             src={tech.icon.dark ? urlFor(tech.icon.dark).url() : urlFor(tech.icon.light).url()}
-                            alt={tech.name}
+                            alt='/images/dark.svg'
                             width={16}
                             height={16}
-                            className='absolute inset-0 h-full w-full scale-100 object-cover transition-all dark:scale-0'
+                            className='absolute h-6 w-6 scale-100 transition-all dark:scale-0'
                           />
 
                         ) : (
-                          <Skeleton className='relative h-full w-full' />
+                          <>
+                            <Image
+                              src='/images/dark.svg'
+                              alt='/images/dark.svg'
+                              width={16}
+                              height={16}
+                              className='absolute h-6 w-6 scale-100 transition-all dark:scale-0'
+                            />
+                            <Image
+                              src='/images/light.svg'
+                              alt='/images/light.svg'
+                              width={16}
+                              height={16}
+                              className='absolute h-6 w-6 scale-0 transition-all dark:scale-100'
+                            />
+                          </>
                         )}
                       </>
                     )}
@@ -190,9 +205,9 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
 
 
         {/* Content */}
-        <div className='prose prose-xl my-8 w-[80%] text-text-light dark:prose-invert dark:text-text-dark max-sm:w-[97.5%]'>
+        <article className='prose lg:prose-xl prose-blue dark:!prose-invert my-8 w-[80%] max-sm:w-[97.5%]'>
           <PortableText value={data.description.long} />
-        </div>
+        </article>
 
       </div>
     </div>
