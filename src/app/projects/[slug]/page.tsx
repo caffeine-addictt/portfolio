@@ -12,6 +12,8 @@ import { Separator } from '@components/ui/separator'
 import { InternalLink } from '@components/ui/button'
 import { TooltipWrapper } from '@components/ui/tooltip'
 
+import { GitHubLogoIcon } from '@radix-ui/react-icons'
+
 
 
 
@@ -43,7 +45,7 @@ export const generateMetadata = async ({ params: { slug } }: { params: { slug: s
 
 // Render Logic
 const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const fetched = (await queryProjects({ slug: escapeQueryString(slug), queryLength: 1 }))
+  const fetched = await queryProjects({ slug: escapeQueryString(slug), queryLength: 1 })
 
   if (!!!fetched.length) {
     return (
@@ -88,6 +90,89 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
         {/* Separator */}
         <Separator className='my-4 w-[30%]' />
 
+
+        {/* Links */}
+        {(!!data.links?.demo || data.links?.repo || !!data.links?.extra?.length) && (
+          <div className='flex w-fit flex-wrap gap-2 mb-2'>
+            {data.links?.repo && (
+              <TooltipWrapper text='View the source code!' asChild>
+                <InternalLink href={data.links.repo} variant='outline' size='icon'>
+                  <GitHubLogoIcon />
+                </InternalLink>
+              </TooltipWrapper>
+            )}
+
+            {data.links?.demo && (
+              <TooltipWrapper text='View the live demo!' asChild>
+                <InternalLink href={data.links.demo} variant='outline'>
+                  Live Demo
+                </InternalLink>
+              </TooltipWrapper>
+            )}
+
+            {!!data.links?.extra?.length && (
+              <>
+                {data.links.extra.map((link, index) => (
+                  <TooltipWrapper key={index} text={link.title} asChild>
+                    <InternalLink href={link.url} variant='outline'>
+                      {link.title}
+                    </InternalLink>
+                  </TooltipWrapper>
+                ))}
+              </>
+            )}
+          </div>
+        )}
+
+
+        {/* Technology stack */}
+        {!!data.technologies?.length && (
+          <div className='flex w-fit flex-wrap gap-2 mb-4'>
+            {data.technologies.map((tech, index) => (
+              <TooltipWrapper key={index} text={tech.name} asChild>
+                <InternalLink href={tech.href} variant='outline' size='icon'>
+                  <Suspense fallback={<Skeleton className='relative h-full w-full' />}>
+                    {tech?.icon?.dark && tech?.icon?.light ? (
+                      <>
+                        <Image
+                          src={urlFor(tech.icon.light).url()}
+                          alt={tech.name}
+                          width={16}
+                          height={16}
+                          className='absolute inset-0 h-full w-full scale-100 object-cover transition-all dark:scale-0'
+                        />
+                        <Image
+                          src={urlFor(tech.icon.dark).url()}
+                          alt={tech.name}
+                          width={16}
+                          height={16}
+                          className='absolute inset-0 h-full w-full scale-0 object-cover transition-all dark:scale-100'
+                        />
+                      </>
+                    ) : (
+                      <>
+                        {tech.icon?.dark || tech.icon?.light ? (
+                          <Image
+                            src={tech.icon.dark ? urlFor(tech.icon.dark).url() : urlFor(tech.icon.light).url()}
+                            alt={tech.name}
+                            width={16}
+                            height={16}
+                            className='absolute inset-0 h-full w-full scale-100 object-cover transition-all dark:scale-0'
+                          />
+
+                        ) : (
+                          <Skeleton className='relative h-full w-full' />
+                        )}
+                      </>
+                    )}
+                  </Suspense>
+                </InternalLink>
+              </TooltipWrapper>
+            ))}
+          </div>
+        )}
+
+
         {/* Short description */}
         <p className='text-lg'>
           {data.description.short}
@@ -107,7 +192,6 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
           <PortableText value={data.description.long} />
         </div>
 
-        <button type='button' onClick={async e => {'use server'; console.log(e)}}>test</button>
       </div>
     </div>
   )
