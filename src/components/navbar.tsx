@@ -70,7 +70,7 @@ const Navbar = () => {
 
 
           <TooltipWrapper text='My Resume' asChild>
-            <Button variant='outline' className='my-auto max-md:hidden' onClick={() => toast({ title: 'Coming soon!', description: 'My Resume will be available soon.' })}>
+            <Button variant='outline' className='my-auto max-md:hidden' onClick={() => toast({ title: 'Coming soon!', description: 'My Resume will be available soon.', variant: 'destructive' })}>
               <FileTextIcon className='mr-2 h-4 w-4 rotate-0 scale-100' />
               My Resume
             </Button>
