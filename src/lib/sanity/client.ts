@@ -67,7 +67,7 @@ const queryProjects = cache(async ({
 
 
 
-export interface BlogQuery extends ProjectQuery { }
+export type BlogQuery = ProjectQuery
 const queryBlogs = cache(async ({
   offset = 0,
   queryLength = 10,
