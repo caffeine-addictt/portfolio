@@ -1,6 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable react/no-unknown-property */
-
 import * as React from 'react'
 import Image from 'next/image'
 import { ImageResponse } from 'next/og'
@@ -10,7 +7,7 @@ import { urlFor, queryBlogs } from '@lib/sanity/client'
 
 
 export const runtime = 'edge'
-export const alt = 'About my project'
+export const alt = 'About my blog'
 export const contentType = 'image/png'
 export const size = {
   width: 1200,
@@ -24,9 +21,9 @@ const og = async ({ params: { slug } }: { params: { slug: string } }) => {
   const fetched = data[0]
   
   return new ImageResponse(
-    <div tw='relative flex w-full h-full flex items-center justify-center'>
+    <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       {/* Background */}
-      <div tw='absolute flex inset-0'>
+      <div style={{ position: 'absolute', inset: 0, display: 'flex' }}>
         {fetched.images?.image ? (
           <Image
             src={urlFor(fetched.images?.image).url()}
@@ -44,17 +41,17 @@ const og = async ({ params: { slug } }: { params: { slug: string } }) => {
         )}
 
         {/* Overlay */}
-        <div tw='absolute inset-0 bg-black bg-opacity-50 z-10' />
+        <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgb(0,0,0)', opacity: 0.5, zIndex: 10 }}/>
       </div>
-      <div tw='flex flex-col text-neutral-50'>
+      <div style={{ display: 'flex', flexDirection: 'column', color: 'rgb(250,250,250)' }}>
 
         {/* Title */}
-        <h1 tw='text-7xl font-bold'>
+        <h1 style={{ fontSize: '4.5rem', fontWeight: 700, textAlign: 'center' }}>
           {fetched.title}
         </h1>
 
         {/* Description */}
-        <p tw='text-3xl mt-6 space-x-10 text-'>
+        <p style={{ fontSize: '1.875rem', lineHeight: '2.25rem', marginTop: '1.5rem', fontWeight: 400, textAlign: 'center', marginLeft: '2.5rem', marginRight: '0px' }}>
           {fetched.description.short}
         </p>
       </div>
