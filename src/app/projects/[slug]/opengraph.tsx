@@ -19,7 +19,10 @@ export const size = {
 
 
 const og = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const fetched = (await queryProjects({ slug: escapeQueryString(slug), queryLength: 1, lookingFor: ['images', 'title', 'description'] }))[0]
+  const data = (await queryProjects({ slug: escapeQueryString(slug), queryLength: 1, lookingFor: ['images', 'title', 'description'] }))
+  if (!data.length) return
+  const fetched = data[0]
+  
   return new ImageResponse(
     <div tw='relative flex w-full h-full flex items-center justify-center'>
       {/* Background */}
