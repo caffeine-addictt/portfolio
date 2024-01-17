@@ -12,12 +12,21 @@
     "sanity": "sanity dev"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
+    "@portabletext/react": "^3.0.11",
+    "@radix-ui/react-aspect-ratio": "^1.0.3",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-scroll-area": "^1.0.5",
+    "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-tooltip": "^1.0.7",
+    "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.24.1",
+    "@tailwindcss/typography": "^0.5.10",
     "@vercel/analytics": "^1.1.1",
     "@vercel/speed-insights": "^1.0.3",
     "class-variance-authority": "^0.7.0",
@@ -28,11 +37,14 @@
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.49.3",
     "react-is": "^18.2.0",
+    "resend": "^2.1.0",
     "sanity": "^3.24.1",
     "styled-components": "^6.1.8",
     "tailwind-merge": "^2.2.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^3.0.1",

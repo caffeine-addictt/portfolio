@@ -20,26 +20,24 @@ export const SkillsSchema = {
       type: 'datetime',
       title: 'Start Time',
       description: 'Start time of the skill',
-      initialValue: () => (new Date()).toISOString(),
+      initialValue: () => (new Date()).toISOString().substring(0, 10),
       validation: (e: Rule) => e.required().error('Start time is required')
     },
     {
       name: 'icon',
       type: 'object',
       title: 'Icon URLs',
-      description: 'Rendered as a small square image (e.g. https://www.google.com/someicon.png)',
+      description: 'Rendered as a small square image',
       fields: [
         {
           name: 'dark',
-          type: 'url',
-          title: 'Dark Mode',
-          validation: (e: Rule) => e.uri({ scheme: ['https'] }).error('Only HTTPS is allowed')
+          type: 'image',
+          title: 'Dark Mode'
         },
         {
           name: 'light',
-          type: 'url',
-          title: 'Light Mode',
-          validation: (e: Rule) => e.uri({ scheme: ['https'] }).error('Only HTTPS is allowed')
+          type: 'image',
+          title: 'Light Mode'
         }
       ]
     },

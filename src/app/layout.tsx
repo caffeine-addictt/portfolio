@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import { cn } from '@utils/tailwind'
+import { Toaster } from '@components/ui/toaster'
 import { ThemeProvider } from '@components/theme-provider'
 
 import { Inter } from 'next/font/google'
@@ -10,6 +11,7 @@ import type { Metadata } from 'next'
 
 import Navbar from '@components/navbar'
 import Footer from '@components/footer'
+import { BackToTopButton } from '@components/ui/clientbutton'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -19,21 +21,25 @@ export const metadata: Metadata = {
     default: 'Alex\'s Portfolio',
     template: '%s | Alex\'s Portfolio',
   },
-  description: 'Alex\'s Portfolio and Blog Site',
+  category: 'technology',
+  description: 'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
   keywords: ['portfolio', 'blog', 'nextjs', 'tailwindcss', 'vercel', 'react', 'typescript', 'programmer', 'coding', 'developer', 'full-stack', 'software', 'singapore', 'sg'],
   applicationName: 'Alex\'s Portfolio',
   authors: [{ name: 'Alex', url: 'https://ngjx.org' }],
   creator: 'Alex Ng Jun Xiang',
   publisher: 'Alex Ng Jun Xiang',
   manifest: '/manifest.json',
+  alternates: {
+    canonical: 'https://ngjx.org'
+  },
   openGraph: {
     title: 'Alex\'s Portfolio and Blog Site',
-    description: 'Alex\'s Portfolio and Blog Site',
+    description: 'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
     url: 'https://ngjx.org',
     siteName: 'ngjx.org',
     images: [
       {
-        url: 'https://ngjx.org/images/siteScreenshot.png',
+        url: 'https://ngjx.org/images/siteImage.png',
         width: 1200,
         height: 630,
       },
@@ -54,9 +60,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: 'Alex\'s Portfolio and Blog Site',
-    description: 'Alex\'s Portfolio and Blog Site',
+    description: 'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
     card: 'summary_large_image',
-    images: ['https://ngjx.org/images/siteScreenshot.png'],
+    images: ['https://ngjx.org/images/siteImage.png'],
   },
   appleWebApp: {
     title: 'Alex\'s Portfolio and Blog Site',
@@ -86,6 +92,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang='en' suppressHydrationWarning>
       <body className={cn(
         inter.className,
+        'scroll-smooth',
         'flex min-h-screen min-w-full max-w-full flex-col',
         'text-text-light dark:text-text-dark',
         'bg-background-light dark:bg-background-dark'
@@ -94,8 +101,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           <Navbar />
           <main className='flex w-full max-w-full grow'>
             {children}
+            <BackToTopButton />
           </main>
           <Footer />
+          <Toaster />
         </ThemeProvider>
 
         <Analytics />
@@ -104,5 +113,5 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     </html>
   )
 }
-
 export default RootLayout
+export const revalidate = 1800 // Revalidate cache every ~30mins
