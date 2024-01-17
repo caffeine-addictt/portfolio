@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { ImageResponse } from 'next/og'
 
 import { escapeQueryString } from '@utils/strings'
-import { urlFor, queryProjects } from '@lib/sanity/client'
+import { urlFor, queryBlogs } from '@lib/sanity/client'
 
 
 export const runtime = 'edge'
@@ -19,7 +19,7 @@ export const size = {
 
 
 const og = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const data = (await queryProjects({ slug: escapeQueryString(slug), queryLength: 1, lookingFor: ['images', 'title', 'description'] }))
+  const data = (await queryBlogs({ slug: escapeQueryString(slug), queryLength: 1, lookingFor: ['images', 'title', 'description'] }))
   if (!data.length) return
   const fetched = data[0]
   

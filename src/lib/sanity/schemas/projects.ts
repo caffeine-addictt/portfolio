@@ -147,7 +147,7 @@ export const ProjectsSchema = {
           name: 'start',
           type: 'datetime',
           title: 'Start',
-          initialValue: () => (new Date()).toISOString(),
+          initialValue: () => (new Date()).toISOString().substring(0, 10),
           validation: (e: Rule) => e.required().error('Start date is required')
         },
         {

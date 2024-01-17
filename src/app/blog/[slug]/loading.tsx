@@ -22,14 +22,6 @@ const FullPageSkeleton = () => (
       <Separator className='my-4 w-[30%]' />
 
 
-      {/* Links */}
-      <div className='mb-2 flex w-fit flex-wrap gap-2'>
-        <Separator className='h-10 w-10 overflow-hidden rounded-md' />
-        <Separator className='h-10 w-16 overflow-hidden rounded-md' />
-        <Separator className='h-10 w-16 overflow-hidden rounded-md' />
-      </div>
-
-
       {/* Technology stack */}
       <div className='mb-4 flex w-fit flex-wrap gap-2'>
         <Separator className='h-10 w-10 overflow-hidden rounded-md' />

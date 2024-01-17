@@ -5,31 +5,29 @@ import Image from 'next/image'
 import { Metadata } from 'next'
 import { PortableText } from '@portabletext/react'
 import { escapeQueryString } from '@utils/strings'
-import { urlFor, queryProjects } from '@lib/sanity/client'
+import { urlFor, queryBlogs } from '@lib/sanity/client'
 
 import { Skeleton } from '@components/ui/skeleton'
 import { Separator } from '@components/ui/separator'
 import { ExternalLink, InternalLink } from '@components/ui/button'
 import { TooltipWrapper } from '@components/ui/tooltip'
 
-import { GitHubLogoIcon } from '@radix-ui/react-icons'
-
 
 
 
 // SEO
 export const generateStaticParams = async () => {
-  const projects = await queryProjects({ queryLength: 50, orderByRecency: true, lookingFor: ['"slug": slug.current'] })
-  return projects.map((project) => ({ slug: project.slug }))
+  const projects = await queryBlogs({ queryLength: 50, orderByRecency: true, lookingFor: ['"slug": slug.current'] })
+  return projects.map((blog) => ({ slug: blog.slug }))
 }
 
 export const generateMetadata = async ({ params: { slug } }: { params: { slug: string } }): Promise<Metadata> => {
-  const fetched = (await queryProjects({ slug: escapeQueryString(slug), queryLength: 1, lookingFor: ['title', 'description'] }))
+  const fetched = (await queryBlogs({ slug: escapeQueryString(slug), queryLength: 1, lookingFor: ['title', 'description'] }))
 
   if (!!!fetched.length) {
     return {
-      title: 'Looks like this project doesn\'t exist!',
-      description: `Oops! Looks like this project doesn't exist! Check out my other projects instead at ${process.env.NEXT_PUBLIC_BASE_URL}/projects!`
+      title: 'Looks like this blog doesn\'t exist!',
+      description: `Oops! Looks like this blog doesn't exist! Check out my other blogs instead at ${process.env.NEXT_PUBLIC_BASE_URL}/blog!`
     }
   }
 
@@ -44,22 +42,21 @@ export const generateMetadata = async ({ params: { slug } }: { params: { slug: s
 
 
 // Render Logic
-const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const fetched = await queryProjects({ slug: escapeQueryString(slug), queryLength: 1 })
-  await new Promise(resolve => setTimeout(resolve, 1000))
+const BlogPage = async ({ params: { slug } }: { params: { slug: string } }) => {
+  const fetched = await queryBlogs({ slug: escapeQueryString(slug), queryLength: 1 })
 
   if (!!!fetched.length) {
     return (
       <div className='mt-16 flex min-h-screen min-w-full max-w-full flex-col items-center' style={{ minHeight: 'calc(100vh - 64px)' }}>
         <div className='mt-8 flex w-[80%] flex-col items-center max-sm:w-[97.5%]'>
           <h1 className='mx-auto w-fit text-5xl font-bold sm:w-[50%]'>
-            <span className='block text-center text-base uppercase tracking-wide text-accent-light dark:text-accent-dark'>Alex Ng - Project</span>
-            <span className='mt-2 block text-center text-5xl leading-8 tracking-tight sm:text-6xl'>Looks like this project doesn&apos;t exist!</span>
+            <span className='block text-center text-base uppercase tracking-wide text-accent-light dark:text-accent-dark'>Alex Ng - Blog</span>
+            <span className='mt-2 block text-center text-5xl leading-8 tracking-tight sm:text-6xl'>Looks like this blog doesn&apos;t exist!</span>
           </h1>
 
-          <TooltipWrapper text='Check out my other projects!' asChild>
-            <InternalLink href={`${process.env.NEXT_PUBLIC_BASE_URL}/projects`} variant='ghost' className='mt-8 text-base font-light'>
-              Check out my other projects instead!
+          <TooltipWrapper text='Check out my other blogs!' asChild>
+            <InternalLink href={`${process.env.NEXT_PUBLIC_BASE_URL}/blog`} variant='ghost' className='mt-8 text-base font-light'>
+              Check out my other blogs instead!
             </InternalLink>
           </TooltipWrapper>
         </div>
@@ -67,9 +64,10 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
     )
   }
 
+
   const data = fetched[0]
-  const newStart = new Date(data.timeframe.start)
-  const newEnd = data.timeframe.end && new Date(data.timeframe.end)
+  const newPublished = new Date(data.timeframe.published)
+  const newUpdated = (data.timeframe.updated !== data.timeframe.published) && new Date(data.timeframe.updated)
 
   return (
     <div className='mb-8 mt-16 flex min-h-screen min-w-full max-w-full flex-col items-center' style={{ minHeight: 'calc(100vh - 64px)' }}>
@@ -77,53 +75,18 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
 
         {/* Header */}
         <h1 className='mx-auto w-fit text-5xl font-bold sm:w-[50%]'>
-          <span className='block text-center text-base uppercase tracking-wide text-accent-light dark:text-accent-dark'>Alex Ng - Project</span>
+          <span className='block text-center text-base uppercase tracking-wide text-accent-light dark:text-accent-dark'>Alex Ng - Blog</span>
           <span className='mt-2 block text-center text-5xl leading-8 tracking-tight sm:text-6xl'>{data.title}</span>
         </h1>
 
         {/* Time */}
         <p className='mt-2 text-base font-light'>
-          {newStart.getUTCMonth()+1}/{newStart.getUTCFullYear()}
-          &nbsp;-&nbsp;
-          {newEnd ? `${newEnd.getUTCMonth()+1}/${newEnd.getUTCFullYear()}` : 'Present'}
+          Published: {newPublished.getUTCMonth()+1}/{newPublished.getUTCFullYear()}
+          {newUpdated ? `&nbsp;&nbsp;Updated: ${newUpdated.getUTCMonth()+1}/${newUpdated.getUTCFullYear()}` : ''}
         </p>
 
         {/* Separator */}
         <Separator className='my-4 w-[30%]' />
-
-
-        {/* Links */}
-        {(!!data.links?.demo || data.links?.repo || !!data.links?.extra?.length) && (
-          <div className='mb-2 flex w-fit flex-wrap gap-2'>
-            {data.links?.repo && (
-              <TooltipWrapper text='View the source code!' asChild>
-                <ExternalLink href={data.links.repo} variant='outline' size='icon'>
-                  <GitHubLogoIcon />
-                </ExternalLink>
-              </TooltipWrapper>
-            )}
-
-            {data.links?.demo && (
-              <TooltipWrapper text='View the live demo!' asChild>
-                <ExternalLink href={data.links.demo} variant='outline'>
-                  Live Demo
-                </ExternalLink>
-              </TooltipWrapper>
-            )}
-
-            {!!data.links?.extra?.length && (
-              <>
-                {data.links.extra.map((link, index) => (
-                  <TooltipWrapper key={index} text={link.title} asChild>
-                    <ExternalLink href={link.url} variant='outline'>
-                      {link.title}
-                    </ExternalLink>
-                  </TooltipWrapper>
-                ))}
-              </>
-            )}
-          </div>
-        )}
 
 
         {/* Technology stack */}
@@ -158,7 +121,7 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
                             alt='/images/dark.svg'
                             width={16}
                             height={16}
-                            className='absolute h-6 w-6 scale-100 transition-all dark:scale-0'
+                            className='absolute h-full w-full scale-100 transition-all dark:scale-0'
                           />
 
                         ) : (
@@ -214,7 +177,7 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
     </div>
   )
 }
-export default ProjectPage
+export default BlogPage
 
 
 
