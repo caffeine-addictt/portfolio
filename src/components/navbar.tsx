@@ -2,8 +2,9 @@
 
 import * as React from 'react'
 
-import { ModeToggle } from '@components/theme-provider'
+import { useToast } from '@components/ui/use-toast'
 import { TooltipWrapper } from '@components/ui/tooltip'
+import { ModeToggle } from '@components/theme-provider'
 import { InternalLink, ExternalLink, Button } from '@components/ui/button'
 
 import {
@@ -28,6 +29,8 @@ import {
 
 
 const Navbar = () => {
+  const { toast } = useToast()
+
   return (
     <nav className='fixed flex h-16 w-full justify-center bg-white/60 shadow-sm backdrop-blur-sm transition-all will-change-scroll dark:bg-black/60'>
       <div className='mb-2 mt-4 flex h-full w-[95%] flex-row justify-between gap-1 self-center'>
@@ -67,10 +70,10 @@ const Navbar = () => {
 
 
           <TooltipWrapper text='My Resume' asChild>
-            <InternalLink href='/resume' variant='outline' className='my-auto max-md:hidden'>
+            <Button variant='outline' className='my-auto max-md:hidden' onClick={() => toast({ title: 'Coming soon!', description: 'My Resume will be available soon.' })}>
               <FileTextIcon className='mr-2 h-4 w-4 rotate-0 scale-100' />
               My Resume
-            </InternalLink>
+            </Button>
           </TooltipWrapper>
 
 
@@ -100,7 +103,7 @@ const Navbar = () => {
           <ModeToggle className='my-auto' />
 
           {/* Mobile dropdown */}
-          <MobileDropdown />
+          <MobileDropdown toast={toast} />
         </div>
       </div>
     </nav>
@@ -111,7 +114,7 @@ export default Navbar
 
 
 
-const MobileDropdown = () => (
+const MobileDropdown = ({ toast }: { toast: ReturnType<typeof useToast>['toast'] }) => (
   <DropdownMenu>
     <DropdownMenuTrigger className='group' asChild>
       <Button variant='outline' size='icon' className='relative flex items-center justify-center md:hidden'>
@@ -140,10 +143,10 @@ const MobileDropdown = () => (
         </InternalLink>
       </DropdownMenuItem>
       <DropdownMenuItem>
-        <InternalLink href='/' variant='link' className='w-full'>
-          <FileTextIcon className='mr-2 h-4 w-4' />
+        <Button variant='link' className='w-full' onClick={() => toast({ title: 'Coming soon!', description: 'My Resume will be available soon.', variant: 'destructive' })}>
+          <FileTextIcon className='mr-2 h-4 w-4 rotate-0 scale-100' />
           My Resume
-        </InternalLink>
+        </Button>
       </DropdownMenuItem>
 
       <DropdownMenuItem>
