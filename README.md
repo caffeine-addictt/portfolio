@@ -31,7 +31,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-This is the source code for my portfolio adn blog website!
+This is the source code for my portfolio and blog website!
 
 View the [Live Demo](https://ngjx.org)
 
