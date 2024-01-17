@@ -30,7 +30,7 @@ export const ImageRender = async ({ icon, className }: { icon?: any, className?:
       return (
         <Image
           src={urlFor(icon).url()}
-          alt='Project Image'
+          alt='Image'
           width={500}
           height={500}
           className={cn('h-full w-full', className)}
@@ -41,8 +41,8 @@ export const ImageRender = async ({ icon, className }: { icon?: any, className?:
 
   return (
     <Image
-      src='/images/defaultProjectImage.png'
-      alt='Project Image'
+      src='/images/defaultCardPicture.png'
+      alt='Image'
       width={500}
       height={500}
       className={cn('h-full w-full', className)}
@@ -67,7 +67,7 @@ export const ProjectCards = async ({ data }: { data: ProjectItem[] }) => (
             title: project.title,
             shortDescription: project.description.short,
             icon: project.images.icon,
-            slug: project.slug,
+            link: `/projects/${project.slug}`,
             technologies: project.technologies
           }}
           startingDate={new Date(project.timeframe.start)}
@@ -96,7 +96,7 @@ export const BlogCards = async ({ data }: { data: BlogItem[] }) => (
             title: project.title,
             shortDescription: project.description.short,
             icon: project.images.icon,
-            slug: project.slug,
+            link: `/blog/${project.slug}`,
             technologies: project.technologies
           }}
           startingDate={new Date(project.timeframe.published)}
@@ -114,7 +114,7 @@ interface RenderCardProps extends React.HTMLAttributes<HTMLDivElement> {
   cardData: {
     title: string
     shortDescription: string
-    slug: string
+    link: string
     icon?: any
     technologies?: SkillsItem[]
   }
@@ -135,7 +135,7 @@ const RenderCard = React.forwardRef<
 
     {/* Hover */}
     <div className='absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-2 opacity-0 transition-all duration-300 hover:opacity-100 hover:backdrop-blur-sm'>
-      <Link href={`/projects/${cardData.slug}`} className='absolute inset-0 h-full w-full' />
+      <Link href={cardData.link} className='absolute inset-0 h-full w-full' />
       <div className={cn(buttonVariants({ variant: 'secondary' }))}>
         Learn more
         <ArrowTopRightIcon className='ml-2 h-4 w-4' />
