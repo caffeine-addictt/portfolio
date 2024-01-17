@@ -14,6 +14,7 @@ import {
 } from '@components/ui/dropdown-menu'
 import { Input } from '@components/ui/input'
 import { Button } from '@components/ui/button'
+import { ScrollArea } from '@components/ui/scroll-area'
 
 import {
   CaretDownIcon,
@@ -66,17 +67,6 @@ const SearchUI = ({ uri, searchParams, skills, placeholder }: PageParamProps) =>
     runSearch(query)
   }
 
-  const debouncedSearch = useDebouncedCallback(runSearch, 1000)
-  const wrappedSetTechList = (tech: string[] | ((tech: string[]) => string[])) => {
-    setTechList(t => {
-      let a = Array.isArray(tech) ? tech : tech(t)
-      debouncedSearch(query, a)
-
-      return a
-    })
-  }
-  
-
   return (
     <div className='my-8 max-w-2xl max-md:max-w-xl max-sm:max-w-[90%]'>
       <div className='flex flex-row gap-2 max-sm:justify-center'>
@@ -87,7 +77,12 @@ const SearchUI = ({ uri, searchParams, skills, placeholder }: PageParamProps) =>
       </div>
 
       <div className='mt-2 flex justify-center'>
-        <TechStackCheckbox techList={techList} setTech={setTechList} runSearch={runSearch} skills={skills} />
+        <TechStackCheckbox
+          skills={skills.sort((a, b) => a.name.localeCompare(b.name))}
+          techList={techList}
+          setTech={setTechList}
+          runSearch={runSearch}
+        />
       </div>
     </div>
   )
@@ -101,9 +96,18 @@ interface TechStackCheckboxProps {
   skills: SkillsItem[]
   techList: string[]
   setTech: (tech: string[] | ((tech: string[]) => string[])) => void
+  runSearch: (q?: string, t?: string[]) => void
 }
-const TechStackCheckbox = ({ skills, techList, setTech }: TechStackCheckboxProps) => (
-  <DropdownMenu>
+const TechStackCheckbox = ({
+  skills,
+  techList,
+  setTech,
+  runSearch
+}: TechStackCheckboxProps) => (
+  <DropdownMenu onOpenChange={isOpen => {
+    if (isOpen) return
+    runSearch(undefined, techList)
+  }}>
     <DropdownMenuTrigger className='group flex flex-row'>
       <CaretDownIcon className='mr-1 h-6 w-6 transition-all group-data-[state=open]:rotate-180'/>
       Filter
@@ -111,29 +115,54 @@ const TechStackCheckbox = ({ skills, techList, setTech }: TechStackCheckboxProps
 
 
     {/* Options */}
-    <DropdownMenuContent align='center' loop>
-      <DropdownMenuLabel>Technologies</DropdownMenuLabel>
+    <DropdownMenuContent align='center'>
+      <DropdownMenuLabel>Filter Technologies</DropdownMenuLabel>
       <DropdownMenuSeparator />
 
-      {skills.map((skill, key) => (
-        <DropdownItem
-          key={key}
-          techList={techList}
-          setTech={setTech}
-          name={skill.name}
-        />
-      ))}
+      <ScrollArea className='h-64'>
+        <div className='w-fit max-w-96 pr-2 flex flex-wrap gap-2 justify-items-start'>
+
+          {/* Split 4 columns most evenly possible */}
+          {[...Array(3)].map((_, key) => {
+            const totalOverflow = skills.length % 3
+            const itemsPerColum = Math.floor(skills.length / 3) + Math.max(totalOverflow - key, 0)
+            const iterationOverflow = (key >= totalOverflow) ? totalOverflow : 0
+
+            const beginSlice = (key * itemsPerColum) + iterationOverflow
+            const endSlice = (key * itemsPerColum) + itemsPerColum + iterationOverflow
+
+            return (
+              <div key={key} className='flex flex-col flex-initial'>
+                {skills.slice(beginSlice, endSlice).map((skill, key) => (
+                  <DropdownItem
+                    key={key}
+                    techList={techList}
+                    setTech={setTech}
+                    name={skill.name}
+                  />
+                ))}
+              </div>
+            )
+          })}
+
+        </div>
+      </ScrollArea>
     </DropdownMenuContent>
   </DropdownMenu>
 )
 
 
-interface DropdownItemProps extends Omit<TechStackCheckboxProps, 'skills'> { name: string }
+interface DropdownItemProps extends Omit<
+  TechStackCheckboxProps,
+  'skills' | 'runSearch' | 'filteredTechList' | 'setFilteredTechList' | 'filterQuery' | 'setFilterQuery'
+> { name: string }
 const DropdownItem = ({ name, techList, setTech }: DropdownItemProps) => (
   <DropdownMenuCheckboxItem
+    className='w-28 justify-end h-10'
+    onSelect={e => e.preventDefault()}
     checked={techList.includes(name)}
     onCheckedChange={(checked: boolean) => setTech(prev => {
-      return checked ? prev.concat(name) : prev.filter(t => t !== name).sort()
+      return checked ? prev.concat(name) : prev.filter(t => t !== name)
     })}
   >
     {name}
