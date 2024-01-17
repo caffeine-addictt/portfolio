@@ -33,11 +33,14 @@ interface PageParamProps {
 const SearchUI = ({ uri, searchParams, skills, placeholder }: PageParamProps) => {
   const [query, setQuery] = useState<string>(searchParams?.query || '')
   const [techList, setTechList] = useState<string[]>(searchParams?.tech || [])
+  const originalTechParam: string[] | undefined = searchParams?.tech?.sort()
 
   const runSearch = (q?: string, t?: string[]) => {
+    if ((q || query) === searchParams?.query) return
     if (
-      ((q || query) === searchParams?.query)
-      && ( (t || techList) === searchParams?.tech )
+      !!originalTechParam?.length
+      && !!(t || techList)?.length
+      && (t || techList).sort().every((tech, i) => originalTechParam?.[i] === tech)
     ) return
 
     const newParams = new URLSearchParams()
@@ -72,7 +75,7 @@ const SearchUI = ({ uri, searchParams, skills, placeholder }: PageParamProps) =>
       return a
     })
   }
-
+  
 
   return (
     <div className='my-8 max-w-2xl max-md:max-w-xl max-sm:max-w-[90%]'>
@@ -83,8 +86,8 @@ const SearchUI = ({ uri, searchParams, skills, placeholder }: PageParamProps) =>
         </Button>
       </div>
 
-      <div className='mt-2 flex flex-row justify-center gap-2'>
-        <TechStackCheckbox techList={techList} setTech={wrappedSetTechList} skills={skills} />
+      <div className='mt-2 flex justify-center'>
+        <TechStackCheckbox techList={techList} setTech={setTechList} runSearch={runSearch} skills={skills} />
       </div>
     </div>
   )
