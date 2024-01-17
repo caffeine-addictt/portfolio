@@ -91,7 +91,7 @@ const HomePage = () => {
             MY <span className='text-accent-light dark:text-accent-dark'>SKILLS</span>
           </h1>
 
-          <div className='flex max-w-[70%] justify-center flex-wrap gap-2'>
+          <div className='flex max-w-[70%] flex-wrap justify-center gap-2'>
             <RenderSkills />
           </div>
 
