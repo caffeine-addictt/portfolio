@@ -27,19 +27,17 @@ export const SkillsSchema = {
       name: 'icon',
       type: 'object',
       title: 'Icon URLs',
-      description: 'Rendered as a small square image (e.g. https://www.google.com/someicon.png)',
+      description: 'Rendered as a small square image',
       fields: [
         {
           name: 'dark',
-          type: 'url',
-          title: 'Dark Mode',
-          validation: (e: Rule) => e.uri({ scheme: ['https'] }).error('Only HTTPS is allowed')
+          type: 'image',
+          title: 'Dark Mode'
         },
         {
           name: 'light',
-          type: 'url',
-          title: 'Light Mode',
-          validation: (e: Rule) => e.uri({ scheme: ['https'] }).error('Only HTTPS is allowed')
+          type: 'image',
+          title: 'Light Mode'
         }
       ]
     },
