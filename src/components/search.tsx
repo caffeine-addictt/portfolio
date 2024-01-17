@@ -115,11 +115,14 @@ const TechStackCheckbox = ({
 
     {/* Options */}
     <DropdownMenuContent align='center'>
-      <DropdownMenuLabel>Filter Technologies</DropdownMenuLabel>
+      <DropdownMenuLabel className='flex flex-row justify-between'>
+        Filter Technologies
+        <span className='text-sm font-light'>Press any key</span>
+      </DropdownMenuLabel>
       <DropdownMenuSeparator />
 
       <ScrollArea className='h-64'>
-        <div className='w-fit max-w-96 pr-2 flex flex-wrap gap-2 justify-items-start'>
+        <div className='flex w-fit max-w-7xl flex-wrap gap-2 pr-2'>
 
           {/* Split 4 columns most evenly possible */}
           {[...Array(3)].map((_, key) => {
@@ -131,7 +134,7 @@ const TechStackCheckbox = ({
             const endSlice = (key * itemsPerColum) + itemsPerColum + iterationOverflow
 
             return (
-              <div key={key} className='flex flex-col flex-initial'>
+              <div key={key} className='flex flex-initial flex-col'>
                 {skills.slice(beginSlice, endSlice).map((skill, key) => (
                   <DropdownItem
                     key={key}
@@ -157,7 +160,7 @@ interface DropdownItemProps extends Omit<
 > { name: string }
 const DropdownItem = ({ name, techList, setTech }: DropdownItemProps) => (
   <DropdownMenuCheckboxItem
-    className='w-28 justify-end h-10'
+    className='h-10 w-28 justify-end'
     onSelect={e => e.preventDefault()}
     checked={techList.includes(name)}
     onCheckedChange={(checked: boolean) => setTech(prev => {
