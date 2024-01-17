@@ -59,7 +59,7 @@ export const BlogsSchema = {
           type: 'date',
           title: 'Published',
           description: 'Published date of the blog post',
-          initialValue: () => (new Date()).toISOString(),
+          initialValue: () => (new Date()).toISOString().substring(0, 10),
           validation: (e: Rule) => e.required().error('Published date is required')
         },
         {
@@ -67,7 +67,7 @@ export const BlogsSchema = {
           type: 'date',
           title: 'Updated',
           description: 'Updated date of the blog post',
-          initialValue: () => (new Date()).toISOString(),
+          initialValue: () => (new Date()).toISOString().substring(0, 10),
           validation: (e: Rule) => e.required().error('Updated date is required')
         }
       ]

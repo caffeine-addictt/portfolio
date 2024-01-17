@@ -20,7 +20,7 @@ export const SkillsSchema = {
       type: 'datetime',
       title: 'Start Time',
       description: 'Start time of the skill',
-      initialValue: () => (new Date()).toISOString(),
+      initialValue: () => (new Date()).toISOString().substring(0, 10),
       validation: (e: Rule) => e.required().error('Start time is required')
     },
     {
