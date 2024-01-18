@@ -9,8 +9,9 @@ import { urlFor, queryBlogs } from '@lib/sanity/client'
 
 import { Skeleton } from '@components/ui/skeleton'
 import { Separator } from '@components/ui/separator'
-import { ExternalLink, InternalLink } from '@components/ui/button'
 import { TooltipWrapper } from '@components/ui/tooltip'
+import { ExternalLink, InternalLink } from '@components/ui/button'
+import { EnforceTypographyStyling } from '@components/typography'
 
 
 
@@ -174,9 +175,10 @@ const BlogPage = async ({ params: { slug } }: { params: { slug: string } }) => {
 
 
         {/* Content */}
-        <article className='prose prose-neutral my-8 w-[80%] dark:!prose-invert lg:prose-xl max-sm:w-[97.5%]'>
-          <PortableText value={data.description.long} />
-        </article>
+        <EnforceTypographyStyling
+          className='my-8 w-[80%] max-sm:w-[97.5%]'
+          value={data.description.long}
+        />
 
       </div>
     </div>

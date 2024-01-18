@@ -66,9 +66,9 @@ export const ProjectCards = async ({ data }: { data: ProjectItem[] }) => (
           cardData={{
             title: project.title,
             shortDescription: project.description.short,
-            icon: project.images.icon,
+            icon: project.images?.icon,
             link: `/projects/${project.slug}`,
-            technologies: project.technologies
+            technologies: project?.technologies
           }}
           startingDate={new Date(project.timeframe.start)}
           endingDate={project.timeframe?.end ? new Date(project.timeframe.end) : undefined}
@@ -95,11 +95,11 @@ export const BlogCards = async ({ data }: { data: BlogItem[] }) => (
           cardData={{
             title: project.title,
             shortDescription: project.description.short,
-            icon: project.images.icon,
+            icon: project.images?.icon,
             link: `/blog/${project.slug}`,
-            technologies: project.technologies
+            technologies: project?.technologies
           }}
-          startingDate={new Date(project.timeframe.published)}
+          startingDate={new Date(project.timeframe?.published)}
           renderEndDate={false}
         />
       )
