@@ -179,9 +179,6 @@ const BlogPage = async ({ params: { slug } }: { params: { slug: string } }) => {
           className='my-8 w-[80%] max-sm:w-[97.5%]'
           value={data.description.long}
         />
-        {/* <article className='prose prose-neutral my-8 w-[80%] lg:prose-xl !prose-invert max-sm:w-[97.5%]'>
-          <PortableText value={data.description.long} />
-        </article> */}
 
       </div>
     </div>
