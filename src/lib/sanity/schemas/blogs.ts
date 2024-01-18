@@ -39,7 +39,7 @@ export const BlogsSchema = {
         {
           name: 'long',
           type: 'array',
-          of: [{ type: 'block' }],
+          of: [{ type: 'block' }, { type: 'image' }],
           title: 'Long',
           description: 'Long description of the blog post',
           validation: (e: Rule) => e.required().error('Long description is required')

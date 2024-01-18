@@ -45,7 +45,7 @@ export const ProjectsSchema = {
         {
           name: 'long',
           type: 'array',
-          of: [{ type: 'block' }],
+          of: [{ type: 'block' }, { type: 'image' }],
           title: 'Long',
           description: 'Rendered as dropdown text',
           validation: (e: Rule) => e.required().error('Description is required'),
