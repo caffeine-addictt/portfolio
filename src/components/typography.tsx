@@ -10,6 +10,8 @@ import { Skeleton } from '@components/ui/skeleton'
 import { AspectRatio } from '@components/ui/aspect-ratio'
 
 
+
+
 /**
  * Resolves issues with @tailwind/typography
  * dark:!prose-invert does not support "dark:"
@@ -24,27 +26,8 @@ const EnforceTypographyStyling = React.forwardRef<
       components={{
         ...props.components,
         types: {
-          image: ({ value }) => {
-            const { width, height } = getImageDimensions(value)
-            if (!width || !height) return null
-
-            return (
-              <div className='my-8 flex h-96 max-h-96 w-auto items-center'>
-                <AspectRatio ratio={width / height}>
-                  <Suspense fallback={<Skeleton className='h-full w-full' />}>
-                    <Image
-                      src={urlFor(value).url()}
-                      alt={value.alt || ''}
-                      width={width}
-                      height={height}
-                      loading='lazy'
-                      className='h-full w-full rounded-lg object-cover'
-                    />
-                  </Suspense>
-                </AspectRatio>
-              </div>
-            )
-          },
+          image: imageComponent,
+          ...props.components?.types,
         }
       }}
     />
@@ -76,3 +59,28 @@ const EnforceTypographyStyling = React.forwardRef<
 EnforceTypographyStyling.displayName = 'EnforceTypographyStyling'
 
 export { EnforceTypographyStyling }
+
+
+
+
+const imageComponent = ({ value }: { value: any }) => {
+  const { width, height } = getImageDimensions(value)
+  if (!width || !height) return null
+
+  return (
+    <div className='my-8 flex h-96 max-h-96 w-auto items-center'>
+      <AspectRatio ratio={width / height}>
+        <Suspense fallback={<Skeleton className='h-full w-full' />}>
+          <Image
+            src={urlFor(value).url()}
+            alt={value.alt || ''}
+            width={width}
+            height={height}
+            loading='lazy'
+            className='h-full w-full rounded-lg object-cover'
+          />
+        </Suspense>
+      </AspectRatio>
+    </div>
+  )
+}
