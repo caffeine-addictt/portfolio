@@ -24,7 +24,7 @@ const og = async ({ params: { slug } }: { params: { slug: string } }) => {
   return new ImageResponse(
     <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       {/* Background */}
-      <div style={{ position: 'absolute', inset: 0, display: 'flex' }}>
+      <div style={{ position: 'absolute', width: '100%', height: '100%', inset: 0, display: 'flex' }}>
         {fetched.images?.image ? (
           <img
             src={urlFor(fetched.images?.image).url()}
@@ -36,19 +36,16 @@ const og = async ({ params: { slug } }: { params: { slug: string } }) => {
             alt={fetched.title}
           />
         )}
-
-        {/* Overlay */}
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgb(0,0,0)', opacity: 0.5, zIndex: 10 }}/>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', color: 'rgb(250,250,250)' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', color: 'rgb(250,250,250)', textShadow: '0 0 20px rgb(0,0,0)', backdropFilter: 'blur(50px)', background: 'rgba(0,0,0,0.7)', padding: '2rem' }}>
 
         {/* Title */}
-        <h1 style={{ fontSize: '4.5rem', fontWeight: 700, textAlign: 'center' }}>
+        <h1 style={{ fontSize: '5rem', fontWeight: 700, textAlign: 'center' }}>
           {fetched.title}
         </h1>
 
         {/* Description */}
-        <p style={{ fontSize: '1.875rem', lineHeight: '2.25rem', marginTop: '1.5rem', fontWeight: 400, textAlign: 'center', marginLeft: '2.5rem', marginRight: '0px' }}>
+        <p style={{ fontSize: '1.875rem', lineHeight: '2.25rem', marginTop: '1.5rem', fontWeight: 400, textAlign: 'center', marginLeft: 'auto', marginRight: 'auto' }}>
           {fetched.description.short}
         </p>
       </div>
