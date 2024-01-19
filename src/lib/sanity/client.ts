@@ -116,8 +116,7 @@ export const queryBlogs = cache(async ({
 export const getAllSkills = cache(async (): Promise<SkillsItem[]> => {
   const fetched = await client.fetch(`
     *[_type == "skills"]{
-      ...,
-      "slug": slug.current
+      ...
     }
   `)
   return Array.isArray(fetched) ? fetched : [fetched]
