@@ -4,7 +4,6 @@ import { getAllSkills, queryProjects } from '@lib/sanity/client'
 
 import SearchUI from '@components/search'
 import { ProjectCards } from '@components/searchcards'
-import { escapeQueryString } from '@utils/strings'
 
 
 
