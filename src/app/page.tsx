@@ -128,7 +128,7 @@ const RenderSkills = async () => {
         <TooltipWrapper key={key} text={skill.name} asChild>
           <ExternalLink href={skill.href} size='icon' variant='outline' className='relative'>
             <Suspense fallback={<Skeleton className='relative h-full w-full' />}>
-              {skill?.icon?.dark && skill?.icon?.light ? (
+              {(skill?.icon?.dark && skill?.icon?.light) ? (
                 <>
                   <Image
                     src={urlFor(skill.icon.light).url()}
@@ -147,13 +147,13 @@ const RenderSkills = async () => {
                 </>
               ) : (
                 <>
-                  {skill.icon?.dark || skill.icon?.light ? (
+                  {(skill.icon?.dark || skill.icon?.light) ? (
                     <Image
                       src={skill.icon.dark ? urlFor(skill.icon.dark).url() : urlFor(skill.icon.light).url()}
                       alt='/images/dark.svg'
                       width={16}
                       height={16}
-                      className='absolute h-6 w-6 scale-100 transition-all dark:scale-0'
+                      className='absolute h-6 w-6 scale-100 transition-all'
                     />
 
                   ) : (
