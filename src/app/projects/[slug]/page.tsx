@@ -3,7 +3,6 @@ import { Suspense } from 'react'
 
 import Image from 'next/image'
 import { Metadata } from 'next'
-import { PortableText } from '@portabletext/react'
 import { escapeQueryString } from '@utils/strings'
 import { urlFor, queryProjects } from '@lib/sanity/client'
 

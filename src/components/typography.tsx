@@ -71,7 +71,7 @@ const imageComponent = ({ value }: { value: any }) => {
   if (!width || !height) return null
 
   return (
-    <div className='my-8 flex aspect-video h-96 max-h-96 w-screen max-w-full mx-auto items-center rounded-lg overflow-hidden'>
+    <div className='mx-auto my-8 flex aspect-video h-96 max-h-96 w-screen max-w-full items-center overflow-hidden rounded-lg'>
       <Suspense fallback={<Skeleton className='h-screen w-screen' />}>
         <Image
           src={urlFor(value).url()}
@@ -79,7 +79,7 @@ const imageComponent = ({ value }: { value: any }) => {
           width={width}
           height={height}
           loading='lazy'
-          className='w-full h-full'
+          className='h-full w-full'
         />
       </Suspense>
     </div>
