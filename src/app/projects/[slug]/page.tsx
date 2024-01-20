@@ -138,7 +138,7 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
               <TooltipWrapper key={index} text={tech.name} asChild>
                 <ExternalLink href={tech.href} variant='outline' size='icon' className='relative'>
                   <Suspense fallback={<Skeleton className='relative h-full w-full' />}>
-                    {tech?.icon?.dark && tech?.icon?.light ? (
+                    {(tech?.icon?.dark && tech?.icon?.light) ? (
                       <>
                         <Image
                           src={urlFor(tech.icon.light).url()}
@@ -157,13 +157,13 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
                       </>
                     ) : (
                       <>
-                        {tech.icon?.dark || tech.icon?.light ? (
+                        {(tech.icon?.dark || tech.icon?.light) ? (
                           <Image
                             src={tech.icon.dark ? urlFor(tech.icon.dark).url() : urlFor(tech.icon.light).url()}
                             alt='/images/dark.svg'
                             width={16}
                             height={16}
-                            className='absolute h-6 w-6 scale-100 transition-all dark:scale-0'
+                            className='absolute h-6 w-6 scale-100 transition-all'
                           />
 
                         ) : (
