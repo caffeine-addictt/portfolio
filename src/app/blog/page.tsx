@@ -4,7 +4,6 @@ import { queryBlogs, getAllSkills } from '@lib/sanity/client'
 
 import SearchUI from '@components/search'
 import { BlogCards } from '@components/searchcards'
-import { escapeQueryString } from '@utils/strings'
 
 
 
@@ -18,15 +17,13 @@ export const metadata: Metadata = {
 interface PageParamProps { searchParams?: { query?: string; page?: string; tech?: string[] | string } }
 const BlogsListPage = async ({ searchParams }: PageParamProps) => {
   const [skills, data] = await Promise.all([
-    getAllSkills().catch(e => {throw new Error('Failed to fetch skills')}),
+    getAllSkills().catch(() => {throw new Error('Failed to fetch skills') }),
     queryBlogs({
       orderByRecency: true,
+      tech: searchParams?.tech,
       offset: ((Number(searchParams?.page) || 1) - 1),
-      tech: searchParams?.tech ?
-        Array.from(Array.isArray(searchParams.tech) ?
-          searchParams.tech.map((tech) => escapeQueryString(tech)) : [escapeQueryString(searchParams.tech)]) : undefined,
       additionalConditionals: searchParams?.query ? [`[title, description.short] match "*${searchParams.query}*"`] : []
-    }).catch(e => {throw new Error('Failed to fetch blogs')})
+    }).catch(() => {throw new Error('Failed to fetch blogs') })
   ])
 
 
