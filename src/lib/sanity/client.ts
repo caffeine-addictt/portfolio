@@ -2,6 +2,7 @@ import { cache } from 'react'
 import { createClient } from 'next-sanity'
 import imageUrlBuilder from '@sanity/image-url'
 
+import { escapeQueryString } from '@utils/strings'
 import { ProjectItem, BlogItem, SkillsItem } from './schema'
 
 
@@ -33,6 +34,13 @@ export const getImageDimensions = (image: any): { width?: number, height?: numbe
 
 
 // Fetch querys
+const generateTechQuery = (tech: string | string[], andOr: '&&' | '||' = '||'): string => {
+  tech = Array.isArray(tech) ? tech : [tech]
+  return `(${tech.map(q => `"${escapeQueryString(q)}" in technologies[]->name`).join(` ${andOr} `)})`
+}
+
+
+
 export interface ProjectQuery {
   offset?: number
   queryLength?: number
@@ -59,7 +67,7 @@ export const queryProjects = cache(async ({
 
   const req = ['_type=="projects"', ...additionalConditionals]
   if (slug) Array.isArray(slug) ? req.push(`slug.current in ${JSON.stringify(slug)}`) : req.push(`slug.current == "${slug}"`)
-  if (tech) Array.isArray(tech) ? req.push(`technologies[]->.name in ${JSON.stringify(tech)}`) : req.push(`technologies[]->.name == "${tech}"`)
+  if (tech) req.push(generateTechQuery(tech))
 
   const params = lookingFor || [
     '...',
@@ -94,7 +102,7 @@ export const queryBlogs = cache(async ({
 
   const req = ['_type=="blogs"', ...additionalConditionals]
   if (slug) Array.isArray(slug) ? req.push(`slug.current in ${JSON.stringify(slug)}`) : req.push(`slug.current == "${slug}"`)
-  if (tech) Array.isArray(tech) ? req.push(`technologies[]->.name in ${JSON.stringify(tech)}`) : req.push(`technologies[]->.name == "${tech}"`)
+  if (tech) req.push(generateTechQuery(tech))
 
   const params = lookingFor || [
     '...',
