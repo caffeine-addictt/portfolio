@@ -99,9 +99,9 @@ const codeComponent = ({ value }: codeComponentProps) => {
           {(value.language || value.filename) && (
             <div className='mb-4 w-fit text-base text-gray-500'>
               {(value.language && value.filename) ? (
-                <div className='flex flex-row gap-2 items-center'>
+                <div className='flex flex-row items-center gap-2'>
                   {value.filename}
-                  <Separator orientation='vertical' className='w-1 h-5' />
+                  <Separator orientation='vertical' className='h-5 w-1' />
                   {value.language}
                 </div>
               ) : (
