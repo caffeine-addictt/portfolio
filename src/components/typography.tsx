@@ -10,6 +10,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { a11yDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 import { Skeleton } from '@components/ui/skeleton'
+import { Separator } from '@components/ui/separator'
 
 
 
@@ -87,15 +88,34 @@ const imageComponent = ({ value }: { value: any }) => {
 }
 
 
-const codeComponent = ({ value }: { value: any }) => {
+interface codeComponentProps { value: { code: string | string[], language?: string, filename?: string, [key: string]: any} }
+const codeComponent = ({ value }: codeComponentProps) => {
   return (
-    <div>
-      <SyntaxHighlighter
-        style={a11yDark}
-        language={value.language || 'text'}
-      >
-        {value.code}
-      </SyntaxHighlighter>
-    </div>
+    <SyntaxHighlighter
+      style={a11yDark}
+      language={value.language || 'text'}
+      PreTag={({ children, ...props }) => (
+        <pre className='!m-0' {...props}>
+          {(value.language || value.filename) && (
+            <div className='mb-4 w-fit text-base text-gray-500'>
+              {(value.language && value.filename) ? (
+                <div className='flex flex-row gap-2 items-center'>
+                  {value.filename}
+                  <Separator orientation='vertical' className='w-1 h-5' />
+                  {value.language}
+                </div>
+              ) : (
+                <>
+                  {value.language || value.filename}
+                </>
+              )}
+            </div>
+          )}
+          {children}
+        </pre>
+      )}
+    >
+      {value.code}
+    </SyntaxHighlighter>
   )
 }
