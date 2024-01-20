@@ -1,4 +1,5 @@
 import { Rule } from 'sanity'
+import highlighter from '../highlighter'
 
 export const BlogsSchema = {
   name: 'blogs',
@@ -39,7 +40,23 @@ export const BlogsSchema = {
         {
           name: 'long',
           type: 'array',
-          of: [{ type: 'block' }, { type: 'image' }],
+          of: [
+            { type: 'image' },
+            {
+              type: 'block',
+              marks: {
+                decorators: [
+                  { title: 'Emphasis', value: 'em' },
+                  { title: 'Strong', value: 'strong' }, 
+                  { title: 'Code', value: 'code' },
+                  { title: 'Underline', value: 'underline' },
+                  { title: 'Strike', value: 'strike-through' },
+                  { title: 'Highlight', value: 'highlight', icon: () => 'H', component: highlighter },
+                ]
+              }
+            },
+            { name: 'code', type: 'code', title: 'Code Block', options: { withFilename: true, highlightedLines: true } }
+          ],
           title: 'Long',
           description: 'Long description of the blog post',
           validation: (e: Rule) => e.required().error('Long description is required')
