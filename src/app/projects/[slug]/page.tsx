@@ -202,7 +202,7 @@ const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) =
 
         {/* Image */}
         {data.images?.image && (
-          <div className='mt-8 flex aspect-video h-96 max-h-96 w-full items-center overflow-hidden rounded-lg border'>
+          <div className='mt-8 flex aspect-video h-96 max-h-96 max-w-[80%] items-center overflow-hidden rounded-lg border max-sm:max-w-[97.5%]'>
             <Suspense fallback={<HeaderImageSkeleton />}>
               <HeaderImage imageObj={data.images.image} />
             </Suspense>
