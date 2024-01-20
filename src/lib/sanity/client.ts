@@ -10,13 +10,24 @@ const client = createClient({
   apiVersion: process.env.NEXT_PUBLIC_API_VERSION,
   dataset: process.env.NEXT_PUBLIC_DATASET,
   projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-  useCdn: false
+  useCdn: process.env.NODE_ENV === 'production',
 })
 
 
 /** Image builder */
-const builder = imageUrlBuilder(client)
-const urlFor = (source: any) => builder.image(source)
+export const builder = imageUrlBuilder(client)
+export const urlFor = (source: any) => builder.image(source)
+
+
+/** Get image dimensions */
+export const getImageDimensions = (image: any): { width?: number, height?: number } => {
+  const [,, dimensions] = /^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/.exec(image.asset._ref) || []
+  const [width, height] = (dimensions || '').split('x').map(v => parseInt(v, 10))
+  return {
+    width: width,
+    height: height
+  }
+}
 
 
 
@@ -33,7 +44,7 @@ export interface ProjectQuery {
   fetchAll?: boolean
 }
 
-const queryProjects = cache(async ({
+export const queryProjects = cache(async ({
   offset = 0,
   queryLength = 10,
   additionalConditionals = [],
@@ -68,7 +79,7 @@ const queryProjects = cache(async ({
 
 
 export type BlogQuery = ProjectQuery
-const queryBlogs = cache(async ({
+export const queryBlogs = cache(async ({
   offset = 0,
   queryLength = 10,
   additionalConditionals = [],
@@ -102,23 +113,11 @@ const queryBlogs = cache(async ({
 
 
 
-const getAllSkills = cache(async (): Promise<SkillsItem[]> => {
+export const getAllSkills = cache(async (): Promise<SkillsItem[]> => {
   const fetched = await client.fetch(`
     *[_type == "skills"]{
-      ...,
-      "slug": slug.current
+      ...
     }
   `)
   return Array.isArray(fetched) ? fetched : [fetched]
 })
-
-
-
-
-export {
-  client,
-  urlFor,
-  queryBlogs,
-  getAllSkills,
-  queryProjects
-}

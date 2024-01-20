@@ -1,4 +1,5 @@
 import { Rule } from 'sanity'
+import highlighter from '../highlighter'
 
 export const ProjectsSchema = {
   name: 'projects',
@@ -45,11 +46,27 @@ export const ProjectsSchema = {
         {
           name: 'long',
           type: 'array',
-          of: [{ type: 'block' }, { type: 'image' }],
+          of: [
+            { type: 'image' },
+            {
+              type: 'block',
+              marks: {
+                decorators: [
+                  { title: 'Emphasis', value: 'em' },
+                  { title: 'Strong', value: 'strong' }, 
+                  { title: 'Code', value: 'code' },
+                  { title: 'Underline', value: 'underline' },
+                  { title: 'Strike', value: 'strike-through' },
+                  { title: 'Highlight', value: 'highlight', icon: () => 'H', component: highlighter },
+                ]
+              }
+            },
+            { name: 'code', type: 'code', title: 'Code Block', options: { withFilename: true, highlightedLines: true } }
+          ],
           title: 'Long',
-          description: 'Rendered as dropdown text',
-          validation: (e: Rule) => e.required().error('Description is required'),
-        },
+          description: 'Long description of the blog post',
+          validation: (e: Rule) => e.required().error('Long description is required')
+        }
       ]
     },
 

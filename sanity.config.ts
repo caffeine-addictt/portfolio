@@ -1,6 +1,7 @@
 import { defineConfig } from 'sanity'
-import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
+import { codeInput } from '@sanity/code-input'
+import { structureTool } from 'sanity/structure'
 import { schemaTypes } from './src/lib/sanity/schemas'
 
 export default defineConfig({
@@ -8,9 +9,9 @@ export default defineConfig({
   title: 'portfolio',
 
   projectId: 'wyyihfvc',
-  dataset: 'production',
+  dataset: 'development',
 
-  plugins: [structureTool(), visionTool()],
+  plugins: [visionTool(), structureTool(), codeInput()],
 
   schema: {
     types: schemaTypes,
