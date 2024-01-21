@@ -37,7 +37,18 @@ const og = async ({ params: { slug } }: { params: { slug: string } }) => {
           />
         )}
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', color: 'rgb(250,250,250)', textShadow: '0 0 20px rgb(0,0,0)', backdropFilter: 'blur(50px)', background: 'rgba(0,0,0,0.7)', padding: '2rem' }}>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        
+        color: 'rgb(250,250,250)',
+        textShadow: '0 0 20px rgb(0,0,0)',
+        backdropFilter: 'blur(50px)',
+        background: 'rgba(0,0,0,0.7)',
+        
+        padding: '2rem',
+        textAlign: 'center'
+      }}>
 
         {/* Title */}
         <h1 style={{ fontSize: '5rem', fontWeight: 700, textAlign: 'center' }}>
