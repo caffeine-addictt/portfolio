@@ -87,7 +87,7 @@ const BlogPage = async ({ params: { slug } }: { params: { slug: string } }) => {
         {/* Time */}
         <p className='mt-2 text-base font-light'>
           Published: {newPublished.getUTCMonth()+1}/{newPublished.getUTCFullYear()}
-          {newUpdated ? `&nbsp;&nbsp;Updated: ${newUpdated.getUTCMonth()+1}/${newUpdated.getUTCFullYear()}` : ''}
+          {newUpdated ? <>&nbsp;&nbsp;{`Updated: ${newUpdated.getUTCMonth()+1}/${newUpdated.getUTCFullYear()}`}</> : ''}
         </p>
 
         {/* Separator */}
