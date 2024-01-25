@@ -162,13 +162,13 @@ const RenderCard = React.forwardRef<
       {!!cardData.technologies?.length ? (
         <p className='flex flex-wrap gap-1'>
           {cardData.technologies.map((tech, key) => (
-            <span key={key} className='block rounded bg-accent-light p-1 px-2 text-sm font-light dark:bg-accent-dark'>
+            <span key={key} className='block rounded bg-accent-light p-1 px-2 text-sm font-light text-text-dark dark:bg-accent-dark'>
               {tech.name}
             </span>
           ))}
         </p>
       ) : (
-        <p className='block rounded bg-accent-light p-1 px-2 text-sm font-light dark:bg-accent-dark'>Unspecified</p>
+        <p className='block rounded bg-accent-dark p-1 px-2 text-sm font-light text-text-light dark:bg-accent-dark'>Unspecified</p>
       )}
 
 

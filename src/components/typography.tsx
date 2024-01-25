@@ -10,6 +10,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { a11yDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 import { Skeleton } from '@components/ui/skeleton'
+import { CopyButton } from '@components/ui/clientbutton'
 import { Separator } from '@components/ui/separator'
 
 
@@ -72,7 +73,7 @@ const imageComponent = ({ value }: { value: any }) => {
   if (!width || !height) return null
 
   return (
-    <div className='mx-auto my-8 flex w-screen max-h-screen max-w-full items-center overflow-hidden rounded-lg'>
+    <div className='mx-auto my-8 flex max-h-screen w-screen max-w-full items-center overflow-hidden rounded-lg'>
       <Suspense fallback={<Skeleton className='h-screen w-screen' />}>
         <Image
           src={urlFor(value).url()}
@@ -95,9 +96,9 @@ const codeComponent = ({ value }: codeComponentProps) => {
       style={a11yDark}
       language={value.language || 'text'}
       PreTag={({ children, ...props }) => (
-        <pre className='!m-0' {...props}>
+        <pre {...props}>
           {(value.language || value.filename) && (
-            <div className='mb-4 w-fit text-base text-gray-500'>
+            <div className='mb-4 flex w-full flex-row justify-between text-base text-gray-500'>
               {(value.language && value.filename) ? (
                 <div className='flex flex-row items-center gap-2'>
                   {value.filename}
@@ -109,6 +110,10 @@ const codeComponent = ({ value }: codeComponentProps) => {
                   {value.language || value.filename}
                 </>
               )}
+
+              <CopyButton
+                content={Array.isArray(value.code) ? value.code.join('\n') : value.code}
+              />
             </div>
           )}
           {children}
