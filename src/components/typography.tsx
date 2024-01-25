@@ -73,7 +73,7 @@ const imageComponent = ({ value }: { value: any }) => {
   if (!width || !height) return null
 
   return (
-    <div className='mx-auto my-8 flex w-screen max-h-screen max-w-full items-center overflow-hidden rounded-lg'>
+    <div className='mx-auto my-8 flex max-h-screen w-screen max-w-full items-center overflow-hidden rounded-lg'>
       <Suspense fallback={<Skeleton className='h-screen w-screen' />}>
         <Image
           src={urlFor(value).url()}
@@ -98,7 +98,7 @@ const codeComponent = ({ value }: codeComponentProps) => {
       PreTag={({ children, ...props }) => (
         <pre {...props}>
           {(value.language || value.filename) && (
-            <div className='mb-4 w-full flex flex-row justify-between text-base text-gray-500'>
+            <div className='mb-4 flex w-full flex-row justify-between text-base text-gray-500'>
               {(value.language && value.filename) ? (
                 <div className='flex flex-row items-center gap-2'>
                   {value.filename}
