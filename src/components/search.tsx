@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 import {
   DropdownMenu,
@@ -31,6 +32,8 @@ interface PageParamProps {
   searchParams?: { query?: string; page?: string; tech?: string[] }
 }
 const SearchUI = ({ uri, searchParams, skills, placeholder }: PageParamProps) => {
+  const router = useRouter()
+
   const [query, setQuery] = useState<string>(searchParams?.query || '')
   const [techList, setTechList] = useState<string[]>(searchParams?.tech || [])
   const originalTechParam: string[] | undefined = searchParams?.tech?.sort()
@@ -48,7 +51,7 @@ const SearchUI = ({ uri, searchParams, skills, placeholder }: PageParamProps) =>
     if (searchParams?.page) newParams.append('page', searchParams?.page)
     if (!!(t || techList).length) (t || techList).forEach(tech => newParams.append('tech', tech))
 
-    window.location.href = `${uri}?${newParams.toString()}`
+    router.push(`${uri}?${newParams.toString()}`)
   }
 
 
