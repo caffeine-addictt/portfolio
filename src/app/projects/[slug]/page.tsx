@@ -51,7 +51,6 @@ export const generateMetadata = async ({ params: { slug } }: { params: { slug: s
 // Render Logic
 const ProjectPage = async ({ params: { slug } }: { params: { slug: string } }) => {
   const fetched = await queryProjects({ slug: escapeQueryString(slug), queryLength: 1 })
-  await new Promise(resolve => setTimeout(resolve, 1000))
 
   if (!!!fetched.length) {
     return (
