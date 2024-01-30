@@ -15,7 +15,7 @@ export const onSubmit = async (values: z.infer<typeof formSchema>): Promise<bool
     const filteredMessage = escapeQueryString(values.message)
 
     resend.emails.send({
-      from: 'feedback@contact.ngjx.org',
+      from: 'feedback@ngjx.org',
       to: 'contact@ngjx.org',
       subject: filteredSubject,
       text: filteredMessage,
