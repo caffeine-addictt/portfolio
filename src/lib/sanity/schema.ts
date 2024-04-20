@@ -1,4 +1,3 @@
-
 export interface ProjectItem {
   slug: string;
   title: string;
@@ -25,9 +24,6 @@ export interface ProjectItem {
   };
 }
 
-
-
-
 export interface BlogItem {
   slug: string;
   title: string;
@@ -47,9 +43,6 @@ export interface BlogItem {
   };
 }
 
-
-
-
 export interface SkillsItem {
   name: string;
   href: string;
@@ -57,5 +50,5 @@ export interface SkillsItem {
   icon: {
     dark: any;
     light: any;
-  }
+  };
 }

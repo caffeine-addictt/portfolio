@@ -1,5 +1,5 @@
-import { Rule } from 'sanity'
-import highlighter from '../highlighter'
+import { Rule } from 'sanity';
+import highlighter from '../highlighter';
 
 export const BlogsSchema = {
   name: 'blogs',
@@ -13,16 +13,16 @@ export const BlogsSchema = {
       description: 'Slug of the blog post',
       options: {
         source: 'title',
-        maxLength: 40
+        maxLength: 40,
       },
-      validation: (e: Rule) => e.required().error('Slug is required')
+      validation: (e: Rule) => e.required().error('Slug is required'),
     },
     {
       name: 'title',
       type: 'string',
       title: 'Title',
       description: 'Title of the blog post',
-      validation: (e: Rule) => e.required().error('Title is required')
+      validation: (e: Rule) => e.required().error('Title is required'),
     },
     {
       name: 'description',
@@ -35,7 +35,8 @@ export const BlogsSchema = {
           type: 'string',
           title: 'Short',
           description: 'Short description of the blog post',
-          validation: (e: Rule) => e.required().error('Short description is required')
+          validation: (e: Rule) =>
+            e.required().error('Short description is required'),
         },
         {
           name: 'long',
@@ -47,23 +48,33 @@ export const BlogsSchema = {
               marks: {
                 decorators: [
                   { title: 'Emphasis', value: 'em' },
-                  { title: 'Strong', value: 'strong' }, 
+                  { title: 'Strong', value: 'strong' },
                   { title: 'Code', value: 'code' },
                   { title: 'Underline', value: 'underline' },
                   { title: 'Strike', value: 'strike-through' },
-                  { title: 'Highlight', value: 'highlight', icon: () => 'H', component: highlighter },
-                ]
-              }
+                  {
+                    title: 'Highlight',
+                    value: 'highlight',
+                    icon: () => 'H',
+                    component: highlighter,
+                  },
+                ],
+              },
             },
-            { name: 'code', type: 'code', title: 'Code Block', options: { withFilename: true, highlightedLines: true } }
+            {
+              name: 'code',
+              type: 'code',
+              title: 'Code Block',
+              options: { withFilename: true, highlightedLines: true },
+            },
           ],
           title: 'Long',
           description: 'Long description of the blog post',
-          validation: (e: Rule) => e.required().error('Long description is required')
-        }
-      ]
+          validation: (e: Rule) =>
+            e.required().error('Long description is required'),
+        },
+      ],
     },
-
 
     {
       name: 'timeframe',
@@ -76,20 +87,21 @@ export const BlogsSchema = {
           type: 'date',
           title: 'Published',
           description: 'Published date of the blog post',
-          initialValue: () => (new Date()).toISOString().substring(0, 10),
-          validation: (e: Rule) => e.required().error('Published date is required')
+          initialValue: () => new Date().toISOString().substring(0, 10),
+          validation: (e: Rule) =>
+            e.required().error('Published date is required'),
         },
         {
           name: 'updated',
           type: 'date',
           title: 'Updated',
           description: 'Updated date of the blog post',
-          initialValue: () => (new Date()).toISOString().substring(0, 10),
-          validation: (e: Rule) => e.required().error('Updated date is required')
-        }
-      ]
+          initialValue: () => new Date().toISOString().substring(0, 10),
+          validation: (e: Rule) =>
+            e.required().error('Updated date is required'),
+        },
+      ],
     },
-
 
     {
       name: 'images',
@@ -108,17 +120,16 @@ export const BlogsSchema = {
           type: 'image',
           title: 'Image',
           description: 'Image of the blog post',
-        }
-      ]
+        },
+      ],
     },
-
 
     {
       name: 'technologies',
       type: 'array',
       title: 'Technologies',
       description: 'Technologies used in the blog post',
-      of: [{ type: 'reference', to: [{ type: 'skills' }] }]
-    }
-  ]
-}
+      of: [{ type: 'reference', to: [{ type: 'skills' }] }],
+    },
+  ],
+};

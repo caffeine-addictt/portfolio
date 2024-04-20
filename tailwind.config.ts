@@ -1,10 +1,8 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 module.exports = {
   darkMode: 'class',
-  content: [
-    './src/**/*.{ts,tsx}',
-  ],
+  content: ['./src/**/*.{ts,tsx}'],
   theme: {
     container: {
       center: true,
@@ -42,8 +40,8 @@ module.exports = {
         'accent-dark': 'var(--accent-dark)',
         'neutral-dark': 'var(--neutral-dark)',
         'background-dark': 'var(--background-dark)',
-      }
+      },
     },
   },
   plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
-} satisfies Config
+} satisfies Config;

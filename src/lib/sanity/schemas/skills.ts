@@ -1,4 +1,4 @@
-import { Rule } from 'sanity'
+import { Rule } from 'sanity';
 
 export const SkillsSchema = {
   name: 'skills',
@@ -12,16 +12,16 @@ export const SkillsSchema = {
       description: 'Rendered as tooltip (e.g. JavaScript)',
       validation: (e: Rule) => [
         e.required().error('Skill name is required'),
-        e.max(30).warning('Shorter skill names are better')
-      ]
+        e.max(30).warning('Shorter skill names are better'),
+      ],
     },
     {
       name: 'start_time',
       type: 'datetime',
       title: 'Start Time',
       description: 'Start time of the skill',
-      initialValue: () => (new Date()).toISOString().substring(0, 10),
-      validation: (e: Rule) => e.required().error('Start time is required')
+      initialValue: () => new Date().toISOString().substring(0, 10),
+      validation: (e: Rule) => e.required().error('Start time is required'),
     },
     {
       name: 'icon',
@@ -32,21 +32,22 @@ export const SkillsSchema = {
         {
           name: 'dark',
           type: 'image',
-          title: 'Dark Mode'
+          title: 'Dark Mode',
         },
         {
           name: 'light',
           type: 'image',
-          title: 'Light Mode'
-        }
-      ]
+          title: 'Light Mode',
+        },
+      ],
     },
     {
       name: 'href',
       type: 'url',
       title: 'Link URL',
       description: 'Href of the clicked link (e.g. https://www.google.com)',
-      validation: (e: Rule) => e.uri({ scheme: ['https'] }).error('Only HTTPS is allowed')
-    }
+      validation: (e: Rule) =>
+        e.uri({ scheme: ['https'] }).error('Only HTTPS is allowed'),
+    },
   ],
-}
+};

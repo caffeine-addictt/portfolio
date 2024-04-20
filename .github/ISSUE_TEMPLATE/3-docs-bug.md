@@ -1,22 +1,24 @@
 ---
-name: "Documentation or README.md issue report"
+name: 'Documentation or README.md issue report'
 about: "Report an issue in the project's documentation or README.md file."
-title: ""
-labels: "Documentation"
+title: ''
+labels: 'Documentation'
 assignees: caffeine-addictt
-
 ---
 
 # Documentation Issue Report
+
 Your issue may already be reported!
 Please check out our [active issues](https://github.com/caffeine-addictt/portfolio/issues) before creating one.
 
 ## Describe the Bug
+
 <!--
 A clear and concise description of the bug
 -->
 
 ## Steps to Reproduce
+
 <!--
 e.g.:
 1. Navigate to docs/x
@@ -30,6 +32,7 @@ e.g.:
 4.
 
 ## Additional Context
+
 <!--
 Any other extra context or information
 -->
