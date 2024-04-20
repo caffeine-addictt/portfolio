@@ -1,4 +1,3 @@
-
 export interface ProjectItem {
   slug: string;
   title: string;
@@ -25,9 +24,6 @@ export interface ProjectItem {
   };
 }
 
-
-
-
 export interface BlogItem {
   slug: string;
   title: string;
@@ -39,15 +35,13 @@ export interface BlogItem {
     image?: any;
     icon?: any;
   };
+  estimatedReadingTime: number;
   technologies: SkillsItem[];
   timeframe: {
     published: ReturnType<typeof Date.prototype.toISOString>;
     updated: ReturnType<typeof Date.prototype.toISOString>;
   };
 }
-
-
-
 
 export interface SkillsItem {
   name: string;
@@ -56,5 +50,5 @@ export interface SkillsItem {
   icon: {
     dark: any;
     light: any;
-  }
+  };
 }

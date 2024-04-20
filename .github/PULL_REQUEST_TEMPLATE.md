@@ -25,6 +25,7 @@
 ## Description
 
 ## Related Tickets & Documents
+
 <!--
 For pull requests that relate or close an issue, please include them
 below.  We like to follow [Github's guidance on linking issues to pull requests](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue).
@@ -38,6 +39,7 @@ automatically close the issue.
 - Closes #
 
 ## QA Instructions, Screenshots, Recordings
+
 <!--
 Please replace this line with instructions on how to test your changes, a note
 on the devices and browsers this has been tested on, as well as any relevant
@@ -45,6 +47,7 @@ images for UI changes.
 -->
 
 ## Added/updated tests?
+
 <!--
 We encourage you to keep the code coverage percentage at 80% and above.
 -->
@@ -57,10 +60,12 @@ We encourage you to keep the code coverage percentage at 80% and above.
 ## [optional] Are there any post deployment tasks we need to perform?
 
 ## Checklist
+
 <!---
 Go over all the following points, and put an `x` in all the boxes that apply.
 If you're unsure about any of these, don't hesitate to ask. We're here to help!
 -->
+
 - [ ] My code follows the code style of this project.
 - [ ] My change requires a change to the documentation.
 - [ ] I have updated the documentation accordingly.

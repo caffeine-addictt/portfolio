@@ -1,40 +1,56 @@
-import '@styles/globals.css'
-import { Analytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/next'
+import '@styles/globals.css';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
-import { cn } from '@utils/tailwind'
-import { Toaster } from '@components/ui/toaster'
-import { ThemeProvider } from '@components/theme-provider'
+import { cn } from '@utils/tailwind';
+import { Toaster } from '@components/ui/toaster';
+import { ThemeProvider } from '@components/theme-provider';
 
-import { Inter } from 'next/font/google'
-import type { Metadata } from 'next'
+import { Inter } from 'next/font/google';
+import type { Metadata } from 'next';
 
-import Navbar from '@components/navbar'
-import Footer from '@components/footer'
-import { BackToTopButton } from '@components/ui/clientbutton'
+import Navbar from '@components/navbar';
+import Footer from '@components/footer';
+import { BackToTopButton } from '@components/ui/clientbutton';
 
-
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
-    default: 'Alex\'s Portfolio',
-    template: '%s | Alex\'s Portfolio',
+    default: "Alex's Portfolio",
+    template: "%s | Alex's Portfolio",
   },
   category: 'technology',
-  description: 'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
-  keywords: ['portfolio', 'blog', 'nextjs', 'tailwindcss', 'vercel', 'react', 'typescript', 'programmer', 'coding', 'developer', 'full-stack', 'software', 'singapore', 'sg'],
-  applicationName: 'Alex\'s Portfolio',
+  description:
+    'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
+  keywords: [
+    'portfolio',
+    'blog',
+    'nextjs',
+    'tailwindcss',
+    'vercel',
+    'react',
+    'typescript',
+    'programmer',
+    'coding',
+    'developer',
+    'full-stack',
+    'software',
+    'singapore',
+    'sg',
+  ],
+  applicationName: "Alex's Portfolio",
   authors: [{ name: 'Alex', url: 'https://ngjx.org' }],
   creator: 'Alex Ng Jun Xiang',
   publisher: 'Alex Ng Jun Xiang',
   manifest: '/manifest.json',
   alternates: {
-    canonical: 'https://ngjx.org'
+    canonical: 'https://ngjx.org',
   },
   openGraph: {
-    title: 'Alex\'s Portfolio and Blog Site',
-    description: 'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
+    title: "Alex's Portfolio and Blog Site",
+    description:
+      'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
     url: 'https://ngjx.org',
     siteName: 'ngjx.org',
     images: [
@@ -59,13 +75,14 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: 'Alex\'s Portfolio and Blog Site',
-    description: 'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
+    title: "Alex's Portfolio and Blog Site",
+    description:
+      'Hi! I am a full stack developer and hobbist hacker based in Singapore! Interested to learn more? Check out my portfolio!',
     card: 'summary_large_image',
-    images: 'https://ngjx.org/images/siteImage.png'
+    images: 'https://ngjx.org/images/siteImage.png',
   },
   appleWebApp: {
-    title: 'Alex\'s Portfolio and Blog Site',
+    title: "Alex's Portfolio and Blog Site",
     capable: true,
     statusBarStyle: 'default',
   },
@@ -84,22 +101,23 @@ export const metadata: Metadata = {
       },
     ],
   },
-}
-
+};
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang='en' suppressHydrationWarning>
-      <body className={cn(
-        inter.className,
-        'scroll-smooth',
-        'flex min-h-screen min-w-full max-w-full flex-col',
-        'text-text-light dark:text-text-dark',
-        'bg-background-light dark:bg-background-dark'
-      )}>
-        <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={cn(
+          inter.className,
+          'scroll-smooth',
+          'flex min-h-screen min-w-full max-w-full flex-col',
+          'text-text-light dark:text-text-dark',
+          'bg-background-light dark:bg-background-dark',
+        )}
+      >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
-          <main className='flex w-full max-w-full grow'>
+          <main className="flex w-full max-w-full grow">
             {children}
             <BackToTopButton />
           </main>
@@ -111,7 +129,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <SpeedInsights />
       </body>
     </html>
-  )
-}
-export default RootLayout
-export const revalidate = 1800 // Revalidate cache every ~30mins
+  );
+};
+export default RootLayout;
+export const revalidate = 1800; // Revalidate cache every ~30mins
