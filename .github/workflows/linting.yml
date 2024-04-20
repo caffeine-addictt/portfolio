@@ -1,0 +1,33 @@
+name: Linting
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  linting:
+    name: Linting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4.0.2
+        with:
+          cache: npm
+
+      - name: Install dependencies
+        run: |
+          set -xe
+          npm i
+
+      - name: Lint
+        run: |
+          set -xe
+          npm run lint
