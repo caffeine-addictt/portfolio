@@ -29,7 +29,7 @@ const Navbar = () => {
   const { toast } = useToast();
 
   return (
-    <nav className="fixed flex h-16 w-full justify-center bg-white/60 shadow-sm backdrop-blur-sm transition-all will-change-scroll dark:bg-black/60">
+    <nav className="fixed z-50 flex h-16 w-full justify-center bg-white/60 shadow-sm backdrop-blur-sm transition-all will-change-scroll dark:bg-black/60">
       <div className="mb-2 mt-4 flex h-full w-[95%] flex-row justify-between gap-1 self-center">
         {/* Left */}
         <div className="flex flex-row gap-1 self-center">
