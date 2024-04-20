@@ -39,7 +39,7 @@ const Navbar = () => {
               variant="link"
               className="my-auto text-lg font-bold"
             >
-              <CodeIcon className="mr-2 h-6 w-6 rotate-0 scale-100" />
+              <CodeIcon className="mr-2 size-6 rotate-0 scale-100" />
               Portfolio
             </InternalLink>
           </TooltipWrapper>
@@ -73,7 +73,7 @@ const Navbar = () => {
               variant="outline"
               className="my-auto max-md:hidden"
             >
-              <EnvelopeOpenIcon className="mr-2 h-4 w-4 rotate-0 scale-100" />
+              <EnvelopeOpenIcon className="mr-2 size-4 rotate-0 scale-100" />
               Contact Me
             </InternalLink>
           </TooltipWrapper>
@@ -90,7 +90,7 @@ const Navbar = () => {
                 })
               }
             >
-              <FileTextIcon className="mr-2 h-4 w-4 rotate-0 scale-100" />
+              <FileTextIcon className="mr-2 size-4 rotate-0 scale-100" />
               My Resume
             </Button>
           </TooltipWrapper>
@@ -102,7 +102,7 @@ const Navbar = () => {
               size="icon"
               className="my-auto max-sm:hidden"
             >
-              <LinkedInLogoIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100" />
+              <LinkedInLogoIcon className="size-[1.2rem] rotate-0 scale-100" />
             </ExternalLink>
           </TooltipWrapper>
 
@@ -113,7 +113,7 @@ const Navbar = () => {
               size="icon"
               className="my-auto max-sm:hidden"
             >
-              <GitHubLogoIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100" />
+              <GitHubLogoIcon className="size-[1.2rem] rotate-0 scale-100" />
             </ExternalLink>
           </TooltipWrapper>
 
@@ -140,8 +140,8 @@ const MobileDropdown = ({
         size="icon"
         className="relative flex items-center justify-center md:hidden"
       >
-        <HamburgerMenuIcon className="absolute h-6 w-6 rotate-0 scale-100 transition-all group-data-[state=open]:-rotate-180 group-data-[state=open]:scale-0" />
-        <Cross2Icon className="absolute h-6 w-6 rotate-0 scale-0 transition-all group-data-[state=open]:-rotate-180 group-data-[state=open]:scale-100" />
+        <HamburgerMenuIcon className="absolute size-6 rotate-0 scale-100 transition-all group-data-[state=open]:-rotate-180 group-data-[state=open]:scale-0" />
+        <Cross2Icon className="absolute size-6 rotate-0 scale-0 transition-all group-data-[state=open]:-rotate-180 group-data-[state=open]:scale-100" />
         <span className="sr-only">Toggle menu</span>
       </Button>
     </DropdownMenuTrigger>
@@ -155,13 +155,13 @@ const MobileDropdown = ({
 
       <DropdownMenuItem>
         <InternalLink href="/blog" variant="link" className="w-full">
-          <FileTextIcon className="mr-2 h-4 w-4" />
+          <FileTextIcon className="mr-2 size-4" />
           My Blog
         </InternalLink>
       </DropdownMenuItem>
       <DropdownMenuItem>
         <InternalLink href="/projects" variant="link" className="w-full">
-          <CodeIcon className="mr-2 h-6 w-6" />
+          <CodeIcon className="mr-2 size-6" />
           My Projects
         </InternalLink>
       </DropdownMenuItem>
@@ -177,7 +177,7 @@ const MobileDropdown = ({
             })
           }
         >
-          <FileTextIcon className="mr-2 h-4 w-4 rotate-0 scale-100" />
+          <FileTextIcon className="mr-2 size-4 rotate-0 scale-100" />
           My Resume
         </Button>
       </DropdownMenuItem>
@@ -188,7 +188,7 @@ const MobileDropdown = ({
           variant="link"
           className="w-full"
         >
-          <GitHubLogoIcon className="mr-2 h-4 w-4" />
+          <GitHubLogoIcon className="mr-2 size-4" />
           My Github
         </ExternalLink>
       </DropdownMenuItem>
@@ -198,14 +198,14 @@ const MobileDropdown = ({
           variant="link"
           className="w-full"
         >
-          <LinkedInLogoIcon className="mr-2 h-4 w-4" />
+          <LinkedInLogoIcon className="mr-2 size-4" />
           My LinkedIn
         </ExternalLink>
       </DropdownMenuItem>
 
       <DropdownMenuItem>
         <InternalLink href="/contact" variant="link" className="w-full">
-          <EnvelopeOpenIcon className="mr-2 h-4 w-4" />
+          <EnvelopeOpenIcon className="mr-2 size-4" />
           Contact Me
         </InternalLink>
       </DropdownMenuItem>

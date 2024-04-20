@@ -31,7 +31,7 @@ const ErrorPage = ({
       </div>
 
       {/* Report */}
-      <div className="absolute bottom-0 right-0 mb-8 flex h-fit w-fit flex-col items-center gap-4 sm:mr-[2.5%]">
+      <div className="absolute bottom-0 right-0 mb-8 flex size-fit flex-col items-center gap-4 sm:mr-[2.5%]">
         <TooltipWrapper text="Report an issue!" asChild>
           <InternalLink variant="outline" href="/contact">
             Report an issue

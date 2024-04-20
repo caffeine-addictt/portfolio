@@ -36,7 +36,7 @@ export const ImageRender = async ({
           alt="Image"
           width={500}
           height={500}
-          className={cn('h-full w-full', className)}
+          className={cn('size-full', className)}
         />
       );
     } catch (err) {
@@ -50,7 +50,7 @@ export const ImageRender = async ({
       alt="Image"
       width={500}
       height={500}
-      className={cn('h-full w-full', className)}
+      className={cn('size-full', className)}
     />
   );
 };
@@ -124,17 +124,17 @@ const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
       className="relative h-fit w-64 overflow-hidden rounded"
     >
       <AspectRatio ratio={1 / 1}>
-        <Suspense fallback={<Skeleton className="h-64 w-64" />}>
-          <ImageRender icon={cardData.icon} className="h-64 w-64" />
+        <Suspense fallback={<Skeleton className="size-64" />}>
+          <ImageRender icon={cardData.icon} className="size-64" />
         </Suspense>
       </AspectRatio>
 
       {/* Hover */}
-      <div className="absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-2 opacity-0 transition-all duration-300 hover:opacity-100 hover:backdrop-blur-sm">
-        <Link href={cardData.link} className="absolute inset-0 h-full w-full" />
+      <div className="absolute inset-0 flex size-full flex-col items-center justify-center gap-2 opacity-0 transition-all duration-300 hover:opacity-100 hover:backdrop-blur-sm">
+        <Link href={cardData.link} className="absolute inset-0 size-full" />
         <div className={cn(buttonVariants({ variant: 'secondary' }))}>
           Learn more
-          <ArrowTopRightIcon className="ml-2 h-4 w-4" />
+          <ArrowTopRightIcon className="ml-2 size-4" />
         </div>
       </div>
 
@@ -190,7 +190,7 @@ export const CardSkeleton = ({ cardCount }: { cardCount: number }) => (
     {[...Array(cardCount)].map((_, key) => (
       <Card key={key} className="h-fit w-64 overflow-hidden rounded">
         <AspectRatio ratio={1 / 1} asChild>
-          <Skeleton className="h-64 w-64" />
+          <Skeleton className="size-64" />
         </AspectRatio>
 
         {/* Title */}

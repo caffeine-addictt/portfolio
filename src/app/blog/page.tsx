@@ -52,7 +52,7 @@ const BlogsListPage = async ({ searchParams }: PageParamProps) => {
         }}
       />
 
-      <div className="mb-4 flex w-[80%] flex-wrap justify-center gap-2 self-center max-sm:w-[97.5%]">
+      <div className="mb-4 flex w-4/5 flex-wrap justify-center gap-2 self-center max-sm:w-[97.5%]">
         <BlogCards data={data} />
       </div>
     </div>

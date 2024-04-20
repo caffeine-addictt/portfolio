@@ -87,7 +87,7 @@ const SearchUI = ({
           size="icon"
           className="px-2"
         >
-          <MagnifyingGlassIcon className="h-6 w-6" />
+          <MagnifyingGlassIcon className="size-6" />
         </Button>
       </div>
 
@@ -123,7 +123,7 @@ const TechStackCheckbox = ({
     }}
   >
     <DropdownMenuTrigger className="group flex flex-row">
-      <CaretDownIcon className="mr-1 h-6 w-6 transition-all group-data-[state=open]:rotate-180" />
+      <CaretDownIcon className="mr-1 size-6 transition-all group-data-[state=open]:rotate-180" />
       Filter
     </DropdownMenuTrigger>
 
@@ -213,13 +213,13 @@ export const SearchUISkeleton = ({
         className="w-screen"
       />
       <Button type="button" variant="outline" size="icon" className="px-2">
-        <MagnifyingGlassIcon className="h-6 w-6" />
+        <MagnifyingGlassIcon className="size-6" />
       </Button>
     </div>
 
     <div className="mt-2 flex flex-row justify-center gap-2">
       <div className="group flex flex-row">
-        <CaretDownIcon className="mr-1 h-6 w-6 transition-all group-data-[state=open]:rotate-180" />
+        <CaretDownIcon className="mr-1 size-6 transition-all group-data-[state=open]:rotate-180" />
         Filter
       </div>
     </div>

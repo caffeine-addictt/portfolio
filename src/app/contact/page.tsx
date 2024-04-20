@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const ContactPage = () => (
   <div
-    className="mb-4 mt-16 flex h-full w-full flex-col items-center"
+    className="mb-4 mt-16 flex size-full flex-col items-center"
     style={{ minHeight: 'calc(100vh - 64px)' }}
   >
     <h1 className="my-8 text-5xl font-bold text-accent-light dark:text-accent-dark">

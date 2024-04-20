@@ -78,7 +78,7 @@ const imageComponent = ({ value }: { value: any }) => {
           width={width}
           height={height}
           loading="lazy"
-          className="h-full w-full"
+          className="size-full"
         />
       </Suspense>
     </div>

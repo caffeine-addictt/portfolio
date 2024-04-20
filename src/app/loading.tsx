@@ -8,7 +8,7 @@ const LoadingPage = () => (
     className="mt-16 flex min-h-screen min-w-full max-w-full flex-col items-center justify-center"
     style={{ minHeight: 'calc(100vh - 64px)' }}
   >
-    <SymbolIcon className="h-10 w-10 animate-spin transition-transform before:rotate-0 after:rotate-180" />
+    <SymbolIcon className="size-10 animate-spin transition-transform before:rotate-0 after:rotate-180" />
   </div>
 );
 export default LoadingPage;

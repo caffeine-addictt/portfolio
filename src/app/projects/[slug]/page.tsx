@@ -71,8 +71,8 @@ const ProjectPage = async ({
         className="mt-16 flex min-h-screen min-w-full max-w-full flex-col items-center"
         style={{ minHeight: 'calc(100vh - 64px)' }}
       >
-        <div className="mt-8 flex w-[80%] flex-col items-center max-sm:w-[97.5%]">
-          <h1 className="mx-auto w-fit text-5xl font-bold sm:w-[50%]">
+        <div className="mt-8 flex w-4/5 flex-col items-center max-sm:w-[97.5%]">
+          <h1 className="mx-auto w-fit text-5xl font-bold sm:w-1/2">
             <span className="block text-center text-base uppercase tracking-wide text-accent-light dark:text-accent-dark">
               Alex Ng - Project
             </span>
@@ -104,9 +104,9 @@ const ProjectPage = async ({
       className="mb-8 mt-16 flex min-h-screen min-w-full max-w-full flex-col items-center"
       style={{ minHeight: 'calc(100vh - 64px)' }}
     >
-      <div className="mt-8 flex w-[80%] flex-col items-center max-sm:w-[97.5%]">
+      <div className="mt-8 flex w-4/5 flex-col items-center max-sm:w-[97.5%]">
         {/* Header */}
-        <h1 className="mx-auto w-fit text-5xl font-bold sm:w-[50%]">
+        <h1 className="mx-auto w-fit text-5xl font-bold sm:w-1/2">
           <span className="block text-center text-base uppercase tracking-wide text-accent-light dark:text-accent-dark">
             Alex Ng - Project
           </span>
@@ -178,7 +178,7 @@ const ProjectPage = async ({
                   className="relative"
                 >
                   <Suspense
-                    fallback={<Skeleton className="relative h-full w-full" />}
+                    fallback={<Skeleton className="relative size-full" />}
                   >
                     {tech?.icon?.dark && tech?.icon?.light ? (
                       <>
@@ -187,14 +187,14 @@ const ProjectPage = async ({
                           alt="/images/dark.svg"
                           width={16}
                           height={16}
-                          className="absolute h-6 w-6 scale-100 transition-all dark:scale-0"
+                          className="absolute size-6 scale-100 transition-all dark:scale-0"
                         />
                         <Image
                           src={urlFor(tech.icon.dark).url()}
                           alt="/images/light.svg"
                           width={16}
                           height={16}
-                          className="absolute h-6 w-6 scale-0 transition-all dark:scale-100"
+                          className="absolute size-6 scale-0 transition-all dark:scale-100"
                         />
                       </>
                     ) : (
@@ -209,7 +209,7 @@ const ProjectPage = async ({
                             alt="/images/dark.svg"
                             width={16}
                             height={16}
-                            className="absolute h-6 w-6 scale-100 transition-all"
+                            className="absolute size-6 scale-100 transition-all"
                           />
                         ) : (
                           <>
@@ -218,14 +218,14 @@ const ProjectPage = async ({
                               alt="/images/dark.svg"
                               width={16}
                               height={16}
-                              className="absolute h-6 w-6 scale-100 transition-all dark:scale-0"
+                              className="absolute size-6 scale-100 transition-all dark:scale-0"
                             />
                             <Image
                               src="/images/light.svg"
                               alt="/images/light.svg"
                               width={16}
                               height={16}
-                              className="absolute h-6 w-6 scale-0 transition-all dark:scale-100"
+                              className="absolute size-6 scale-0 transition-all dark:scale-100"
                             />
                           </>
                         )}
@@ -252,7 +252,7 @@ const ProjectPage = async ({
 
         {/* Content */}
         <EnforceTypographyStyling
-          className="my-8 w-[80%] max-sm:w-[97.5%]"
+          className="my-8 w-4/5 max-sm:w-[97.5%]"
           value={data.description.long}
         />
       </div>
@@ -272,7 +272,7 @@ const HeaderImage = async ({ imageObj }: { imageObj: any }) => {
           alt="Project Image"
           width={1600}
           height={1200}
-          className="h-full w-full"
+          className="size-full"
           loading="eager"
           priority
         />
@@ -288,7 +288,7 @@ const HeaderImage = async ({ imageObj }: { imageObj: any }) => {
       alt="Project Image"
       width={1600}
       height={1200}
-      className="h-full w-full"
+      className="size-full"
       loading="eager"
       priority
     />

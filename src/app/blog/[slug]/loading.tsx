@@ -9,9 +9,9 @@ const FullPageSkeleton = () => (
     className="mt-16 flex min-h-screen min-w-full max-w-full flex-col items-center"
     style={{ minHeight: 'calc(100vh - 64px)' }}
   >
-    <div className="mt-8 flex w-[80%] flex-col items-center max-sm:w-[97.5%]">
+    <div className="mt-8 flex w-4/5 flex-col items-center max-sm:w-[97.5%]">
       {/* Header */}
-      <div className="mx-auto flex w-fit flex-col items-center gap-4 sm:w-[50%]">
+      <div className="mx-auto flex w-fit flex-col items-center gap-4 sm:w-1/2">
         <Skeleton className="h-6 w-32" />
         <Skeleton className="h-12 w-60" />
       </div>
@@ -24,8 +24,8 @@ const FullPageSkeleton = () => (
 
       {/* Technology stack */}
       <div className="mb-4 flex w-fit flex-wrap gap-2">
-        <Separator className="h-10 w-10 overflow-hidden rounded-md" />
-        <Separator className="h-10 w-10 overflow-hidden rounded" />
+        <Separator className="size-10 overflow-hidden rounded-md" />
+        <Separator className="size-10 overflow-hidden rounded" />
       </div>
 
       {/* Short description */}
@@ -37,7 +37,7 @@ const FullPageSkeleton = () => (
       </div>
 
       {/* Content */}
-      <div className="mb-8 mt-12 flex w-[80%] flex-col items-center gap-1 max-sm:w-[97.5%]">
+      <div className="mb-8 mt-12 flex w-4/5 flex-col items-center gap-1 max-sm:w-[97.5%]">
         <Skeleton className="h-5 w-64" />
         <Skeleton className="h-5 w-72" />
         <Skeleton className="h-5 w-60" />
