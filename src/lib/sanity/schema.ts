@@ -39,6 +39,7 @@ export interface BlogItem {
     image?: any;
     icon?: any;
   };
+  estimatedReadingTime: number;
   technologies: SkillsItem[];
   timeframe: {
     published: ReturnType<typeof Date.prototype.toISOString>;

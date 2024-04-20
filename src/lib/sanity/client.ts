@@ -108,6 +108,7 @@ export const queryBlogs = cache(async ({
     '...',
     '"slug": slug.current',
     'technologies[]->',
+    '"estimatedReadingTime": round(length(pt::text(description.long)) / 5 / 180)' // Assume 5 characters per word, and 180 words per minute
   ]
 
   const orderingConditions = orderByRecency ? ' | order(timeframe.published desc)' : ''
