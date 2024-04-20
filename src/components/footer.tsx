@@ -32,7 +32,7 @@ const Footer = () => {
       <Separator className="absolute left-[2.5%] w-[95%]" />
 
       {/* Top */}
-      <div className="mb-4 flex h-full w-full flex-col pt-6 max-sm:gap-8 sm:flex-row sm:justify-between">
+      <div className="mb-4 flex size-full flex-col pt-6 max-sm:gap-8 sm:flex-row sm:justify-between">
         {/* Left */}
         <div className="flex flex-col max-sm:items-center max-sm:self-center">
           <TooltipWrapper text="Home page" asChild>
@@ -41,7 +41,7 @@ const Footer = () => {
               variant="link"
               className="justify-start p-0 text-lg font-bold"
             >
-              <CodeIcon className="mr-2 h-6 w-6 rotate-0 scale-100" />
+              <CodeIcon className="mr-2 size-6 rotate-0 scale-100" />
               Technology
             </InternalLink>
           </TooltipWrapper>
@@ -86,14 +86,14 @@ const Footer = () => {
                 href="https://github.com/caffeine-addictt"
                 text="GitHub"
               >
-                <GitHubLogoIcon className="h-6 w-6" />
+                <GitHubLogoIcon className="size-6" />
               </TechnologyStackItem>
 
               <TechnologyStackItem
                 href="https://linkedin.com/in/ngjx"
                 text="LinkedIn"
               >
-                <LinkedInLogoIcon className="h-6 w-6" />
+                <LinkedInLogoIcon className="size-6" />
               </TechnologyStackItem>
             </div>
           </div>
@@ -120,7 +120,7 @@ const Footer = () => {
       <Separator className="my-4" />
 
       {/* Bottom */}
-      <div className="flex h-full w-full flex-col items-center sm:flex-row-reverse sm:justify-between">
+      <div className="flex size-full flex-col items-center sm:flex-row-reverse sm:justify-between">
         <div className="text-sm font-light opacity-80">
           <TechnologyStackItem
             text="Vercel"

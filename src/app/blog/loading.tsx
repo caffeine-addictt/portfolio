@@ -18,7 +18,7 @@ const FullPageSkeleton = () => {
         placeholder="Search blogs"
       />
 
-      <div className="flex w-[80%] flex-wrap justify-center gap-2 max-sm:w-[97.5%]">
+      <div className="flex w-4/5 flex-wrap justify-center gap-2 max-sm:w-[97.5%]">
         <CardSkeleton cardCount={4} />
       </div>
     </div>

@@ -33,7 +33,7 @@ const NotFoundError = () => (
     </div>
 
     {/* Report */}
-    <div className="mb-8 flex h-fit w-fit flex-col items-center gap-4 self-center sm:mr-[2.5%] sm:self-end">
+    <div className="mb-8 flex size-fit flex-col items-center gap-4 self-center sm:mr-[2.5%] sm:self-end">
       <TooltipWrapper text="Report an issue!" asChild>
         <InternalLink variant="outline" href="/contact">
           Report an issue

@@ -61,7 +61,7 @@ const HomePage = () => {
         id="about"
         className="flex h-screen w-full flex-col items-center justify-center gap-4"
       >
-        <div className="flex w-[60%] flex-col items-center justify-center text-center text-lg max-md:w-[75%] max-sm:w-[97.5%]">
+        <div className="flex w-3/5 flex-col items-center justify-center text-center text-lg max-md:w-3/4 max-sm:w-[97.5%]">
           <h1 className="mb-8 text-5xl font-bold">
             I AM{' '}
             <span className="text-accent-light dark:text-accent-dark">
@@ -108,7 +108,7 @@ const HomePage = () => {
           <p>
             I&apos;m always looking for new and exciting projects to work on!
           </p>
-          <Separator className="mb-4 mt-2 h-[1px] w-full max-w-[70%] md:max-w-[50%] lg:max-w-[30%]" />
+          <Separator className="mb-4 mt-2 h-px w-full max-w-[70%] md:max-w-[50%] lg:max-w-[30%]" />
 
           <div className="flex flex-row gap-2">
             <SmoothScroll variant="outline" toId="skills">
@@ -126,9 +126,9 @@ const HomePage = () => {
       {/* My Skills */}
       <div
         id="skills"
-        className="flex h-full min-h-screen w-full flex-col items-center justify-center gap-4"
+        className="flex size-full min-h-screen flex-col items-center justify-center gap-4"
       >
-        <div className="flex w-[60%] flex-col items-center justify-center text-center text-lg max-md:w-[75%] max-sm:w-[97.5%]">
+        <div className="flex w-3/5 flex-col items-center justify-center text-center text-lg max-md:w-3/4 max-sm:w-[97.5%]">
           <h1 className="mb-8 text-5xl font-bold">
             MY{' '}
             <span className="text-accent-light dark:text-accent-dark">
@@ -140,11 +140,11 @@ const HomePage = () => {
             <RenderSkills />
           </div>
 
-          <Separator className="mb-4 mt-8 h-[1px] w-full max-w-[70%] md:max-w-[50%] lg:max-w-[30%]" />
+          <Separator className="mb-4 mt-8 h-px w-full max-w-[70%] md:max-w-[50%] lg:max-w-[30%]" />
           <div className="flex flex-wrap items-center gap-2">
             <TooltipWrapper text="View my blog!" asChild>
               <InternalLink href="/blog" variant="outline">
-                <FileTextIcon className="mr-2 h-4 w-4 rotate-0 scale-100" />
+                <FileTextIcon className="mr-2 size-4 rotate-0 scale-100" />
                 My Blog
               </InternalLink>
             </TooltipWrapper>
@@ -174,9 +174,7 @@ const RenderSkills = async () => {
             variant="outline"
             className="relative"
           >
-            <Suspense
-              fallback={<Skeleton className="relative h-full w-full" />}
-            >
+            <Suspense fallback={<Skeleton className="relative size-full" />}>
               {skill?.icon?.dark && skill?.icon?.light ? (
                 <>
                   <Image
@@ -184,14 +182,14 @@ const RenderSkills = async () => {
                     alt="/images/dark.svg"
                     width={16}
                     height={16}
-                    className="absolute h-6 w-6 scale-100 transition-all dark:scale-0"
+                    className="absolute size-6 scale-100 transition-all dark:scale-0"
                   />
                   <Image
                     src={urlFor(skill.icon.dark).url()}
                     alt="/images/light.svg"
                     width={16}
                     height={16}
-                    className="absolute h-6 w-6 scale-0 transition-all dark:scale-100"
+                    className="absolute size-6 scale-0 transition-all dark:scale-100"
                   />
                 </>
               ) : (
@@ -206,7 +204,7 @@ const RenderSkills = async () => {
                       alt="/images/dark.svg"
                       width={16}
                       height={16}
-                      className="absolute h-6 w-6 scale-100 transition-all"
+                      className="absolute size-6 scale-100 transition-all"
                     />
                   ) : (
                     <>
@@ -215,14 +213,14 @@ const RenderSkills = async () => {
                         alt="/images/dark.svg"
                         width={16}
                         height={16}
-                        className="absolute h-6 w-6 scale-100 transition-all dark:scale-0"
+                        className="absolute size-6 scale-100 transition-all dark:scale-0"
                       />
                       <Image
                         src="/images/light.svg"
                         alt="/images/light.svg"
                         width={16}
                         height={16}
-                        className="absolute h-6 w-6 scale-0 transition-all dark:scale-100"
+                        className="absolute size-6 scale-0 transition-all dark:scale-100"
                       />
                     </>
                   )}

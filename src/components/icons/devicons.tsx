@@ -8,7 +8,7 @@ const NextJSIcon = React.forwardRef<
   <div
     ref={ref}
     {...props}
-    className={cn('h-6 w-6 fill-black dark:fill-white', className)}
+    className={cn('size-6 fill-black dark:fill-white', className)}
   >
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
       <path d="M64 0C28.7 0 0 28.7 0 64s28.7 64 64 64c11.2 0 21.7-2.9 30.8-7.9L48.4 55.3v36.6h-6.8V41.8h6.8l50.5 75.8C116.4 106.2 128 86.5 128 64c0-35.3-28.7-64-64-64zm22.1 84.6l-7.5-11.3V41.8h7.5v42.8z" />
@@ -24,7 +24,7 @@ const VercelIcon = React.forwardRef<
   <div
     ref={ref}
     {...props}
-    className={cn('h-6 w-6 fill-black dark:fill-white', className)}
+    className={cn('size-6 fill-black dark:fill-white', className)}
   >
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 528 528">
       <path fillRule="evenodd" d="M256,48,496,464H16Z" />
@@ -37,9 +37,9 @@ const RadixUIIcon = React.forwardRef<
   React.ElementRef<'div'>,
   React.ComponentPropsWithoutRef<'div'> & { className?: string }
 >(({ className, ...props }, ref) => (
-  <div ref={ref} {...props} className="h-6 w-6 fill-black dark:fill-white">
+  <div ref={ref} {...props} className="size-6 fill-black dark:fill-white">
     <svg
-      className="h-full w-full"
+      className="size-full"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 17 25"
     >
@@ -56,7 +56,7 @@ const ShadcnUIIcon = React.forwardRef<
   React.ElementRef<'div'>,
   React.ComponentPropsWithoutRef<'div'> & { className?: string }
 >(({ className, ...props }, ref) => (
-  <div ref={ref} {...props} className="h-6 w-6">
+  <div ref={ref} {...props} className="size-6">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
       <rect width="256" height="256" fill="none"></rect>
       <line
@@ -90,7 +90,7 @@ const TailwindCSSIcon = React.forwardRef<
   React.ElementRef<'div'>,
   React.ComponentPropsWithoutRef<'div'> & { className?: string }
 >(({ className, ...props }, ref) => (
-  <div ref={ref} {...props} className={cn('h-6 w-6', className)}>
+  <div ref={ref} {...props} className={cn('size-6', className)}>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
       <path
         d="M64.004 25.602c-17.067 0-27.73 8.53-32 25.597 6.398-8.531 13.867-11.73 22.398-9.597 4.871 1.214 8.352 4.746 12.207 8.66C72.883 56.629 80.145 64 96.004 64c17.066 0 27.73-8.531 32-25.602-6.399 8.536-13.867 11.735-22.399 9.602-4.87-1.215-8.347-4.746-12.207-8.66-6.27-6.367-13.53-13.738-29.394-13.738zM32.004 64c-17.066 0-27.73 8.531-32 25.602C6.402 81.066 13.87 77.867 22.402 80c4.871 1.215 8.352 4.746 12.207 8.66 6.274 6.367 13.536 13.738 29.395 13.738 17.066 0 27.73-8.53 32-25.597-6.399 8.531-13.867 11.73-22.399 9.597-4.87-1.214-8.347-4.746-12.207-8.66C55.128 71.371 47.868 64 32.004 64zm0 0"

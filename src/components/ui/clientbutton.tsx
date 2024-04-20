@@ -29,7 +29,7 @@ const CopyButton = React.forwardRef<
           toast({ title: 'Copied to clipboard' });
         }}
       >
-        <CopyIcon className={cn('h-6 w-6', className)} />
+        <CopyIcon className={cn('size-6', className)} />
         <span className="sr-only">Copy to clipboard</span>
       </Button>
     </TooltipWrapper>
@@ -95,7 +95,7 @@ const BackToTopButton = React.forwardRef<
           'opacity-100': show,
         })}
       >
-        <ArrowUpIcon className="h-6 w-6" />
+        <ArrowUpIcon className="size-6" />
       </Button>
     </TooltipWrapper>
   );
