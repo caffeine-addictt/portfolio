@@ -146,7 +146,7 @@ const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
         <CardDescription>{cardData.shortDescription}</CardDescription>
       </CardContent>
 
-      <CardFooter className="flex flex-col items-start gap-2">
+      <CardFooter className="mb-0 mt-auto flex flex-col items-start gap-2">
         {/* Technologies */}
         <p className="flex flex-row text-ellipsis text-xs font-light">
           {renderReadingTime && estimatedReadingTime ? (
