@@ -17,9 +17,8 @@ import {
   CardTitle,
 } from '@components/ui/card';
 import { Skeleton } from '@components/ui/skeleton';
-import { buttonVariants } from '@components/ui/button';
 import { AspectRatio } from '@components/ui/aspect-ratio';
-import { ArrowTopRightIcon } from '@radix-ui/react-icons';
+import { BookOpen } from 'lucide-react';
 
 export const ImageRender = async ({
   icon,
@@ -75,6 +74,7 @@ export const ProjectCards = async ({ data }: { data: ProjectItem[] }) => (
             project.timeframe?.end ? new Date(project.timeframe.end) : undefined
           }
           renderEndDate={true}
+          renderReadingTime={false}
         />
       ))
     )}
@@ -96,8 +96,10 @@ export const BlogCards = async ({ data }: { data: BlogItem[] }) => (
             link: `/blog/${project.slug}`,
             technologies: project?.technologies,
           }}
+          estimatedReadingTime={project.estimatedReadingTime}
           startingDate={new Date(project.timeframe?.published)}
           renderEndDate={false}
+          renderReadingTime={true}
         />
       ))
     )}
@@ -112,12 +114,14 @@ interface RenderCardProps extends React.HTMLAttributes<HTMLDivElement> {
     icon?: any;
     technologies?: SkillsItem[];
   };
+  estimatedReadingTime?: number;
   startingDate: Date;
   endingDate?: Date;
   renderEndDate: boolean;
+  renderReadingTime: boolean;
 }
 const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
-  ({ cardData, startingDate, endingDate, renderEndDate, ...props }, ref) => (
+  ({ cardData, startingDate, endingDate, renderEndDate, renderReadingTime, estimatedReadingTime, ...props }, ref) => (
     <Card
       ref={ref}
       {...props}
@@ -145,7 +149,13 @@ const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
       <CardFooter className="flex flex-col items-start gap-2">
         {/* Technologies */}
         <p className="flex flex-row text-ellipsis text-xs font-light">
+          {renderReadingTime && estimatedReadingTime ? (
+            <>
+              <BookOpen className="mr-1 size-4" /> ~{estimatedReadingTime} min{estimatedReadingTime > 1 ? 's' : ''}
+            </>
+          ) :
             !!cardData.technologies?.length ? cardData.technologies.slice(0, 2).map((tech) => tech.name).join(', ') + (cardData.technologies.length > 2 ? '...' : '') : 'Unspecified'
+          }
         </p>
 
         {/* Date */}
