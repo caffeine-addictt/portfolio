@@ -144,22 +144,9 @@ const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
 
       <CardFooter className="flex flex-col items-start gap-2">
         {/* Technologies */}
-        {!!cardData.technologies?.length ? (
-          <p className="flex flex-wrap gap-1">
-            {cardData.technologies.map((tech, key) => (
-              <span
-                key={key}
-                className="block rounded bg-accent-light p-1 px-2 text-sm font-light text-text-dark dark:bg-accent-dark"
-              >
-                {tech.name}
-              </span>
-            ))}
-          </p>
-        ) : (
-          <p className="block rounded bg-accent-dark p-1 px-2 text-sm font-light text-text-light dark:bg-accent-dark">
-            Unspecified
-          </p>
-        )}
+        <p className="flex flex-row text-ellipsis text-xs font-light">
+            !!cardData.technologies?.length ? cardData.technologies.slice(0, 2).map((tech) => tech.name).join(', ') + (cardData.technologies.length > 2 ? '...' : '') : 'Unspecified'
+        </p>
 
         {/* Date */}
         <p className="text-sm font-light">
