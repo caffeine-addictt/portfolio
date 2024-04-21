@@ -125,7 +125,7 @@ const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
     <Card
       ref={ref}
       {...props}
-      className="relative h-fit w-64 overflow-hidden rounded"
+      className="relative flex h-[30rem] w-64 flex-col overflow-hidden rounded transition-all duration-300 hover:border-accent-light hover:shadow-lg dark:hover:border-accent-dark"
     >
       <AspectRatio ratio={1}>
         <Suspense fallback={<Skeleton className="size-64" />}>
