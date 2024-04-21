@@ -170,14 +170,15 @@ RenderCard.displayName = 'RenderCard';
 export const CardSkeleton = ({ cardCount }: { cardCount: number }) => (
   <>
     {[...Array(cardCount)].map((_, key) => (
-      <Card key={key} className="h-fit w-64 overflow-hidden rounded">
+      <Card key={key} className="flex h-[30rem] w-64 flex-col overflow-hidden rounded">
         <AspectRatio ratio={1} asChild>
-          <Skeleton className="size-64" />
+          <Skeleton className="size-64 rounded-none" />
         </AspectRatio>
 
         {/* Title */}
         <CardHeader>
           <CardTitle>
+            <Skeleton className="mb-1 h-6 w-40" />
             <Skeleton className="h-6 w-40" />
           </CardTitle>
         </CardHeader>
@@ -186,19 +187,14 @@ export const CardSkeleton = ({ cardCount }: { cardCount: number }) => (
         <CardContent>
           <div className="text-sm text-neutral-500 dark:text-neutral-400">
             <Skeleton className="mb-1 h-4 w-20" />
-            <Skeleton className="h-4 w-24" />
+            <Skeleton className="mb-1 h-4 w-32" />
+            <Skeleton className="h-4 w-28" />
           </div>
         </CardContent>
 
-        <CardFooter className="flex flex-col items-start gap-2">
-          {/* Technologies */}
-          <div className="flex flex-wrap gap-1">
-            {[...Array(3)].map((tech, key) => (
-              <Skeleton key={key} className="h-7 w-10" />
-            ))}
-          </div>
-
-          {/* Date */}
+        <CardFooter className="mb-0 mt-auto flex flex-row items-center gap-1">
+          <Skeleton className="h-5 w-14" />
+          <Skeleton className="size-2 rounded-full" />
           <Skeleton className="h-5 w-14" />
         </CardFooter>
       </Card>
