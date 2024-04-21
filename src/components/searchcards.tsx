@@ -19,6 +19,7 @@ import {
 import { Skeleton } from '@components/ui/skeleton';
 import { AspectRatio } from '@components/ui/aspect-ratio';
 import { BookOpen } from 'lucide-react';
+import { DotFilledIcon } from '@radix-ui/react-icons';
 
 export const ImageRender = async ({
   icon,
@@ -146,18 +147,7 @@ const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
         <CardDescription>{cardData.shortDescription}</CardDescription>
       </CardContent>
 
-      <CardFooter className="mb-0 mt-auto flex flex-col items-start gap-2">
-        {/* Technologies */}
-        <p className="flex flex-row text-ellipsis text-xs font-light">
-          {renderReadingTime && estimatedReadingTime ? (
-            <>
-              <BookOpen className="mr-1 size-4" /> ~{estimatedReadingTime} min{estimatedReadingTime > 1 ? 's' : ''}
-            </>
-          ) :
-            !!cardData.technologies?.length ? cardData.technologies.slice(0, 2).map((tech) => tech.name).join(', ') + (cardData.technologies.length > 2 ? '...' : '') : 'Unspecified'
-          }
-        </p>
-
+      <CardFooter className="mb-0 mt-auto flex flex-row items-center gap-1">
         {/* Date */}
         <p className="text-sm font-light">
           {startingDate.getUTCMonth() + 1}/{startingDate.getUTCFullYear()}
@@ -169,6 +159,20 @@ const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
                 : 'Present'}
             </>
           )}
+        </p>
+
+        {/* Separator */}
+        <DotFilledIcon />
+
+        {/* Technologies */}
+        <p className="flex flex-row text-ellipsis text-xs font-light">
+          {renderReadingTime && estimatedReadingTime ? (
+            <>
+              <BookOpen className="mr-1 size-4" /> ~{estimatedReadingTime} min{estimatedReadingTime > 1 ? 's' : ''}
+            </>
+          ) :
+            !!cardData.technologies?.length ? cardData.technologies.slice(0, 2).map((tech) => tech.name).join(', ') + (cardData.technologies.length > 2 ? '...' : '') : 'Unspecified'
+          }
         </p>
       </CardFooter>
     </Card>
