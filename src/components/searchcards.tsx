@@ -123,7 +123,7 @@ const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
       {...props}
       className="relative h-fit w-64 overflow-hidden rounded"
     >
-      <AspectRatio ratio={1 / 1}>
+      <AspectRatio ratio={1}>
         <Suspense fallback={<Skeleton className="size-64" />}>
           <ImageRender icon={cardData.icon} className="size-64" />
         </Suspense>
@@ -189,7 +189,7 @@ export const CardSkeleton = ({ cardCount }: { cardCount: number }) => (
   <>
     {[...Array(cardCount)].map((_, key) => (
       <Card key={key} className="h-fit w-64 overflow-hidden rounded">
-        <AspectRatio ratio={1 / 1} asChild>
+        <AspectRatio ratio={1} asChild>
           <Skeleton className="size-64" />
         </AspectRatio>
 
