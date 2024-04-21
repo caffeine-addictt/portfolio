@@ -17,9 +17,9 @@ import {
   CardTitle,
 } from '@components/ui/card';
 import { Skeleton } from '@components/ui/skeleton';
-import { buttonVariants } from '@components/ui/button';
 import { AspectRatio } from '@components/ui/aspect-ratio';
-import { ArrowTopRightIcon } from '@radix-ui/react-icons';
+import { BookOpen } from 'lucide-react';
+import { DotFilledIcon } from '@radix-ui/react-icons';
 
 export const ImageRender = async ({
   icon,
@@ -70,11 +70,10 @@ export const ProjectCards = async ({ data }: { data: ProjectItem[] }) => (
             link: `/projects/${project.slug}`,
             technologies: project?.technologies,
           }}
-          startingDate={new Date(project.timeframe.start)}
-          endingDate={
-            project.timeframe?.end ? new Date(project.timeframe.end) : undefined
+          date={
+            project.timeframe?.end ? new Date(project.timeframe.end) : 'Present'
           }
-          renderEndDate={true}
+          renderReadingTime={false}
         />
       ))
     )}
@@ -96,8 +95,9 @@ export const BlogCards = async ({ data }: { data: BlogItem[] }) => (
             link: `/blog/${project.slug}`,
             technologies: project?.technologies,
           }}
-          startingDate={new Date(project.timeframe?.published)}
-          renderEndDate={false}
+          estimatedReadingTime={project.estimatedReadingTime}
+          date={new Date(project.timeframe?.published)}
+          renderReadingTime={true}
         />
       ))
     )}
@@ -112,31 +112,28 @@ interface RenderCardProps extends React.HTMLAttributes<HTMLDivElement> {
     icon?: any;
     technologies?: SkillsItem[];
   };
-  startingDate: Date;
-  endingDate?: Date;
-  renderEndDate: boolean;
+  estimatedReadingTime?: number;
+  date: Date | string;
+  renderReadingTime: boolean;
 }
 const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
-  ({ cardData, startingDate, endingDate, renderEndDate, ...props }, ref) => (
+  (
+    { cardData, date, renderReadingTime, estimatedReadingTime, ...props },
+    ref,
+  ) => (
     <Card
       ref={ref}
       {...props}
-      className="relative h-fit w-64 overflow-hidden rounded"
+      className="relative flex h-[30rem] w-64 flex-col overflow-hidden rounded-lg transition-all duration-300 hover:border-accent-light hover:shadow-lg dark:hover:border-accent-dark"
     >
-      <AspectRatio ratio={1 / 1}>
+      <AspectRatio ratio={1}>
         <Suspense fallback={<Skeleton className="size-64" />}>
           <ImageRender icon={cardData.icon} className="size-64" />
         </Suspense>
       </AspectRatio>
 
       {/* Hover */}
-      <div className="absolute inset-0 flex size-full flex-col items-center justify-center gap-2 opacity-0 transition-all duration-300 hover:opacity-100 hover:backdrop-blur-sm">
-        <Link href={cardData.link} className="absolute inset-0 size-full" />
-        <div className={cn(buttonVariants({ variant: 'secondary' }))}>
-          Learn more
-          <ArrowTopRightIcon className="ml-2 size-4" />
-        </div>
-      </div>
+      <Link href={cardData.link} className="absolute inset-0 size-full" />
 
       {/* Title */}
       <CardHeader>
@@ -148,35 +145,31 @@ const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
         <CardDescription>{cardData.shortDescription}</CardDescription>
       </CardContent>
 
-      <CardFooter className="flex flex-col items-start gap-2">
-        {/* Technologies */}
-        {!!cardData.technologies?.length ? (
-          <p className="flex flex-wrap gap-1">
-            {cardData.technologies.map((tech, key) => (
-              <span
-                key={key}
-                className="block rounded bg-accent-light p-1 px-2 text-sm font-light text-text-dark dark:bg-accent-dark"
-              >
-                {tech.name}
-              </span>
-            ))}
-          </p>
-        ) : (
-          <p className="block rounded bg-accent-dark p-1 px-2 text-sm font-light text-text-light dark:bg-accent-dark">
-            Unspecified
-          </p>
-        )}
-
+      <CardFooter className="mb-0 mt-auto flex flex-row items-center gap-1">
         {/* Date */}
-        <p className="text-sm font-light">
-          {startingDate.getUTCMonth() + 1}/{startingDate.getUTCFullYear()}
-          {renderEndDate && (
+        <p className="w-fit text-sm font-light">
+          {typeof date === 'string'
+            ? date
+            : `${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`}
+        </p>
+
+        {/* Separator */}
+        <DotFilledIcon />
+
+        {/* Technologies */}
+        <p className="flex flex-row text-ellipsis text-xs font-light">
+          {renderReadingTime && estimatedReadingTime ? (
             <>
-              &nbsp;-&nbsp;
-              {endingDate
-                ? `${endingDate.getUTCMonth() + 1}/${endingDate.getUTCFullYear()}`
-                : 'Present'}
+              <BookOpen className="mr-1 size-4" /> ~{estimatedReadingTime} min
+              {estimatedReadingTime > 1 ? 's' : ''}
             </>
+          ) : !!cardData.technologies?.length ? (
+            cardData.technologies
+              .slice(0, 2)
+              .map((tech) => tech.name)
+              .join(', ') + (cardData.technologies.length > 2 ? '...' : '')
+          ) : (
+            'Unspecified'
           )}
         </p>
       </CardFooter>
@@ -188,14 +181,18 @@ RenderCard.displayName = 'RenderCard';
 export const CardSkeleton = ({ cardCount }: { cardCount: number }) => (
   <>
     {[...Array(cardCount)].map((_, key) => (
-      <Card key={key} className="h-fit w-64 overflow-hidden rounded">
-        <AspectRatio ratio={1 / 1} asChild>
-          <Skeleton className="size-64" />
+      <Card
+        key={key}
+        className="flex h-[30rem] w-64 flex-col overflow-hidden rounded-lg"
+      >
+        <AspectRatio ratio={1} asChild>
+          <Skeleton className="size-64 rounded-none" />
         </AspectRatio>
 
         {/* Title */}
         <CardHeader>
           <CardTitle>
+            <Skeleton className="mb-1 h-6 w-40" />
             <Skeleton className="h-6 w-40" />
           </CardTitle>
         </CardHeader>
@@ -204,19 +201,14 @@ export const CardSkeleton = ({ cardCount }: { cardCount: number }) => (
         <CardContent>
           <div className="text-sm text-neutral-500 dark:text-neutral-400">
             <Skeleton className="mb-1 h-4 w-20" />
-            <Skeleton className="h-4 w-24" />
+            <Skeleton className="mb-1 h-4 w-32" />
+            <Skeleton className="h-4 w-28" />
           </div>
         </CardContent>
 
-        <CardFooter className="flex flex-col items-start gap-2">
-          {/* Technologies */}
-          <div className="flex flex-wrap gap-1">
-            {[...Array(3)].map((tech, key) => (
-              <Skeleton key={key} className="h-7 w-10" />
-            ))}
-          </div>
-
-          {/* Date */}
+        <CardFooter className="mb-0 mt-auto flex flex-row items-center gap-1">
+          <Skeleton className="h-5 w-14" />
+          <Skeleton className="size-2 rounded-full" />
           <Skeleton className="h-5 w-14" />
         </CardFooter>
       </Card>
