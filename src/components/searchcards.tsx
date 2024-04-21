@@ -117,7 +117,10 @@ interface RenderCardProps extends React.HTMLAttributes<HTMLDivElement> {
   renderReadingTime: boolean;
 }
 const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
-  ({ cardData, date, renderReadingTime, estimatedReadingTime, ...props }, ref) => (
+  (
+    { cardData, date, renderReadingTime, estimatedReadingTime, ...props },
+    ref,
+  ) => (
     <Card
       ref={ref}
       {...props}
@@ -145,7 +148,9 @@ const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
       <CardFooter className="mb-0 mt-auto flex flex-row items-center gap-1">
         {/* Date */}
         <p className="w-fit text-sm font-light">
-          {typeof date === 'string' ? date : `${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`}
+          {typeof date === 'string'
+            ? date
+            : `${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`}
         </p>
 
         {/* Separator */}
@@ -155,11 +160,17 @@ const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
         <p className="flex flex-row text-ellipsis text-xs font-light">
           {renderReadingTime && estimatedReadingTime ? (
             <>
-              <BookOpen className="mr-1 size-4" /> ~{estimatedReadingTime} min{estimatedReadingTime > 1 ? 's' : ''}
+              <BookOpen className="mr-1 size-4" /> ~{estimatedReadingTime} min
+              {estimatedReadingTime > 1 ? 's' : ''}
             </>
-          ) :
-            !!cardData.technologies?.length ? cardData.technologies.slice(0, 2).map((tech) => tech.name).join(', ') + (cardData.technologies.length > 2 ? '...' : '') : 'Unspecified'
-          }
+          ) : !!cardData.technologies?.length ? (
+            cardData.technologies
+              .slice(0, 2)
+              .map((tech) => tech.name)
+              .join(', ') + (cardData.technologies.length > 2 ? '...' : '')
+          ) : (
+            'Unspecified'
+          )}
         </p>
       </CardFooter>
     </Card>
@@ -170,7 +181,10 @@ RenderCard.displayName = 'RenderCard';
 export const CardSkeleton = ({ cardCount }: { cardCount: number }) => (
   <>
     {[...Array(cardCount)].map((_, key) => (
-      <Card key={key} className="flex h-[30rem] w-64 flex-col overflow-hidden rounded">
+      <Card
+        key={key}
+        className="flex h-[30rem] w-64 flex-col overflow-hidden rounded"
+      >
         <AspectRatio ratio={1} asChild>
           <Skeleton className="size-64 rounded-none" />
         </AspectRatio>
