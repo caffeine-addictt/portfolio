@@ -70,11 +70,9 @@ export const ProjectCards = async ({ data }: { data: ProjectItem[] }) => (
             link: `/projects/${project.slug}`,
             technologies: project?.technologies,
           }}
-          startingDate={new Date(project.timeframe.start)}
-          endingDate={
-            project.timeframe?.end ? new Date(project.timeframe.end) : undefined
+          date={
+            project.timeframe?.end ? new Date(project.timeframe.end) : 'Present'
           }
-          renderEndDate={true}
           renderReadingTime={false}
         />
       ))
@@ -98,8 +96,7 @@ export const BlogCards = async ({ data }: { data: BlogItem[] }) => (
             technologies: project?.technologies,
           }}
           estimatedReadingTime={project.estimatedReadingTime}
-          startingDate={new Date(project.timeframe?.published)}
-          renderEndDate={false}
+          date={new Date(project.timeframe?.published)}
           renderReadingTime={true}
         />
       ))
@@ -116,13 +113,11 @@ interface RenderCardProps extends React.HTMLAttributes<HTMLDivElement> {
     technologies?: SkillsItem[];
   };
   estimatedReadingTime?: number;
-  startingDate: Date;
-  endingDate?: Date;
-  renderEndDate: boolean;
+  date: Date | string;
   renderReadingTime: boolean;
 }
 const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
-  ({ cardData, startingDate, endingDate, renderEndDate, renderReadingTime, estimatedReadingTime, ...props }, ref) => (
+  ({ cardData, date, renderReadingTime, estimatedReadingTime, ...props }, ref) => (
     <Card
       ref={ref}
       {...props}
@@ -149,16 +144,8 @@ const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
 
       <CardFooter className="mb-0 mt-auto flex flex-row items-center gap-1">
         {/* Date */}
-        <p className="text-sm font-light">
-          {startingDate.getUTCMonth() + 1}/{startingDate.getUTCFullYear()}
-          {renderEndDate && (
-            <>
-              &nbsp;-&nbsp;
-              {endingDate
-                ? `${endingDate.getUTCMonth() + 1}/${endingDate.getUTCFullYear()}`
-                : 'Present'}
-            </>
-          )}
+        <p className="w-fit text-sm font-light">
+          {typeof date === 'string' ? date : `${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`}
         </p>
 
         {/* Separator */}
