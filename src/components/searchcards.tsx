@@ -124,7 +124,7 @@ const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
     <Card
       ref={ref}
       {...props}
-      className="relative flex h-[30rem] w-64 flex-col overflow-hidden rounded transition-all duration-300 hover:border-accent-light hover:shadow-lg dark:hover:border-accent-dark"
+      className="relative flex h-[30rem] w-64 flex-col overflow-hidden rounded-lg transition-all duration-300 hover:border-accent-light hover:shadow-lg dark:hover:border-accent-dark"
     >
       <AspectRatio ratio={1}>
         <Suspense fallback={<Skeleton className="size-64" />}>
@@ -183,7 +183,7 @@ export const CardSkeleton = ({ cardCount }: { cardCount: number }) => (
     {[...Array(cardCount)].map((_, key) => (
       <Card
         key={key}
-        className="flex h-[30rem] w-64 flex-col overflow-hidden rounded"
+        className="flex h-[30rem] w-64 flex-col overflow-hidden rounded-lg"
       >
         <AspectRatio ratio={1} asChild>
           <Skeleton className="size-64 rounded-none" />
