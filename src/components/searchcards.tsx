@@ -130,13 +130,7 @@ const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
       </AspectRatio>
 
       {/* Hover */}
-      <div className="absolute inset-0 flex size-full flex-col items-center justify-center gap-2 opacity-0 transition-all duration-300 hover:opacity-100 hover:backdrop-blur-sm">
-        <Link href={cardData.link} className="absolute inset-0 size-full" />
-        <div className={cn(buttonVariants({ variant: 'secondary' }))}>
-          Learn more
-          <ArrowTopRightIcon className="ml-2 size-4" />
-        </div>
-      </div>
+      <Link href={cardData.link} className="absolute inset-0 size-full" />
 
       {/* Title */}
       <CardHeader>
