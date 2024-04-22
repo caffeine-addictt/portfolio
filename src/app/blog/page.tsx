@@ -25,8 +25,9 @@ const BlogsListPage = async ({ searchParams }: PageParamProps) => {
       additionalConditionals: searchParams?.query
         ? [`[title, description.short] match "*${searchParams.query}*"`]
         : [],
-    }).catch(() => {
-      throw new Error('Failed to fetch blogs');
+    }).catch((e) => {
+      console.log(`Failed to fetch blogs: ${e}`);
+      return [];
     }),
   ]);
 
