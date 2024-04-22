@@ -4,6 +4,9 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+import { cn } from '@utils/tailwind';
+import { useMediaQuery } from './hooks';
+
 import {
   DropdownMenu,
   DropdownMenuLabel,
@@ -12,17 +15,25 @@ import {
   DropdownMenuSeparator,
   DropdownMenuCheckboxItem,
 } from '@components/ui/dropdown-menu';
+
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@components/ui/drawer';
+
 import { Input } from '@components/ui/input';
 import { Button } from '@components/ui/button';
 import { ScrollArea } from '@components/ui/scroll-area';
-
 import { CaretDownIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { SkillsItem } from '@lib/sanity/schema';
+import { Check } from 'lucide-react';
 
 interface PageParamProps {
   uri: string;
   placeholder: string;
-  skills: SkillsItem[];
+  skills: string[];
   searchParams?: { query?: string; page?: string; tech?: string[] };
 }
 const SearchUI = ({
@@ -59,22 +70,16 @@ const SearchUI = ({
     setQuery(e.target.value);
   };
 
-  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      runSearch(query);
-    }
-  };
-
-  const handleClick = () => {
-    runSearch(query);
-  };
-
   return (
     <div className="my-8 max-w-2xl max-md:max-w-xl max-sm:max-w-[90%]">
       <div className="flex flex-row gap-2 max-sm:justify-center">
         <Input
           value={query}
-          onKeyUp={handleEnter}
+          onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === 'Enter') {
+              runSearch(query);
+            }
+          }}
           type="search"
           placeholder={placeholder}
           className="w-screen"
@@ -82,7 +87,7 @@ const SearchUI = ({
         />
         <Button
           type="button"
-          onClick={handleClick}
+          onClick={() => runSearch(query)}
           variant="outline"
           size="icon"
           className="px-2"
@@ -93,7 +98,7 @@ const SearchUI = ({
 
       <div className="mt-2 flex justify-center">
         <TechStackCheckbox
-          skills={skills.sort((a, b) => a.name.localeCompare(b.name))}
+          skills={skills.sort((a, b) => a.localeCompare(b))}
           techList={techList}
           setTech={setTechList}
           runSearch={runSearch}
@@ -105,7 +110,7 @@ const SearchUI = ({
 export default SearchUI;
 
 interface TechStackCheckboxProps {
-  skills: SkillsItem[];
+  skills: string[];
   techList: string[];
   setTech: (tech: string[] | ((tech: string[]) => string[])) => void;
   runSearch: (q?: string, t?: string[]) => void;
@@ -115,57 +120,147 @@ const TechStackCheckbox = ({
   techList,
   setTech,
   runSearch,
-}: TechStackCheckboxProps) => (
-  <DropdownMenu
-    onOpenChange={(isOpen) => {
-      if (isOpen) return;
-      runSearch(undefined, techList);
-    }}
-  >
-    <DropdownMenuTrigger className="group flex flex-row">
-      <CaretDownIcon className="mr-1 size-6 transition-all group-data-[state=open]:rotate-180" />
-      Filter
-    </DropdownMenuTrigger>
+}: TechStackCheckboxProps) => {
+  const isDesktop = useMediaQuery('(min-width: 768px)');
 
-    {/* Options */}
-    <DropdownMenuContent align="center">
-      <DropdownMenuLabel className="flex flex-row justify-between">
-        Filter Technologies
-        <span className="text-sm font-light">Press any key</span>
-      </DropdownMenuLabel>
-      <DropdownMenuSeparator />
+  const [open, setOpen] = useState<boolean>(false);
+  const [filter, setFilter] = useState<string>('');
+  const filtered = skills.filter((skill) =>
+    skill.toLowerCase().startsWith(filter.toLowerCase()),
+  );
 
-      <ScrollArea className="h-64">
-        <div className="flex w-fit max-w-7xl flex-wrap gap-2 pr-2">
-          {/* Split 4 columns most evenly possible */}
-          {[...Array(3)].map((_, key) => {
-            const totalOverflow = skills.length % 3;
-            const itemsPerColum =
-              Math.floor(skills.length / 3) + Math.max(totalOverflow - key, 0);
-            const iterationOverflow = key >= totalOverflow ? totalOverflow : 0;
+  // Mobile
+  if (!isDesktop) {
+    return (
+      <Drawer
+        open={open}
+        onOpenChange={(isOpen) => {
+          setOpen(isOpen);
+          if (isOpen) setFilter('');
+          runSearch(undefined, techList);
+        }}
+      >
+        <DrawerTrigger
+          onClick={() => setOpen((prev) => !prev)}
+          className="group flex flex-row"
+        >
+          <CaretDownIcon className="mr-1 size-6 transition-all group-data-[state=open]:rotate-180" />
+          Filter
+        </DrawerTrigger>
 
-            const beginSlice = key * itemsPerColum + iterationOverflow;
-            const endSlice =
-              key * itemsPerColum + itemsPerColum + iterationOverflow;
+        <DrawerContent className="pb-4">
+          <DrawerTitle className="mb-4 mt-2 w-full text-center text-xl">
+            Filter skills
+          </DrawerTitle>
 
-            return (
-              <div key={key} className="flex flex-initial flex-col">
-                {skills.slice(beginSlice, endSlice).map((skill, key) => (
+          {/* Filter */}
+          <Input
+            onChange={(e) => setFilter(e.target.value)}
+            value={filter}
+            className="mx-auto w-10/12 rounded-md"
+            placeholder="Search..."
+          />
+
+          {/* Render items */}
+          <ScrollArea className="h-fit">
+            <div className="mx-auto mt-4 flex h-[30rem] w-10/12 flex-col gap-1">
+              {filtered.length ? (
+                <>
+                  {filtered.map((skill, key) => {
+                    const isSelected = techList.includes(skill);
+                    return (
+                      <Button
+                        onClick={() =>
+                          setTech((prev) =>
+                            isSelected
+                              ? prev.filter((t) => t !== skill)
+                              : prev.concat(skill),
+                          )
+                        }
+                        className={cn('flex w-full flex-row justify-start', {
+                          'bg-neutral-300/40': isSelected,
+                          'dark:bg-neutral-700/30': isSelected,
+                        })}
+                        key={key}
+                        variant="outline"
+                      >
+                        {isSelected ? (
+                          <Check className="size-4" />
+                        ) : (
+                          <div className="size-4" />
+                        )}
+                        <span className="ml-5">{skill}</span>
+                      </Button>
+                    );
+                  })}
+                </>
+              ) : (
+                <DrawerDescription className="text-center">
+                  No skills found
+                </DrawerDescription>
+              )}
+            </div>
+          </ScrollArea>
+        </DrawerContent>
+      </Drawer>
+    );
+  }
+
+  // Desktop
+  return (
+    <DropdownMenu
+      open={open}
+      onOpenChange={(isOpen) => {
+        setOpen(isOpen);
+        if (isOpen) return setFilter('');
+        runSearch(undefined, techList);
+      }}
+    >
+      <DropdownMenuTrigger
+        onClick={() => setOpen((prev) => !prev)}
+        className="group flex flex-row"
+      >
+        <CaretDownIcon className="mr-1 size-6 transition-all group-data-[state=open]:rotate-180" />
+        Filter
+      </DropdownMenuTrigger>
+
+      {/* Options */}
+      <DropdownMenuContent align="center">
+        <DropdownMenuLabel className="flex flex-row items-center justify-between">
+          <Input
+            onChange={(e) => setFilter(e.target.value)}
+            value={filter}
+            className="w-3/5"
+            placeholder="Search..."
+          />
+          <span className="text-sm font-light">Press any key</span>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+
+        <ScrollArea className="h-fit pb-1">
+          <div className="flex w-full max-w-96 flex-wrap pr-2 max-sm:max-w-[80vw] sm:w-fit sm:min-w-64">
+            {filtered.length ? (
+              <>
+                {filtered.map((skill, key) => (
                   <DropdownItem
                     key={key}
                     techList={techList}
                     setTech={setTech}
-                    name={skill.name}
+                    name={skill}
                   />
                 ))}
-              </div>
-            );
-          })}
-        </div>
-      </ScrollArea>
-    </DropdownMenuContent>
-  </DropdownMenu>
-);
+              </>
+            ) : (
+              <p className="w-full text-center text-sm font-thin">
+                No skills found
+              </p>
+            )}
+          </div>
+        </ScrollArea>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 interface DropdownItemProps
   extends Omit<

@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Metadata } from 'next';
-import { queryBlogs, getAllSkills } from '@lib/sanity/client';
+import { queryBlogs, countBlogs } from '@lib/sanity/client';
 
 import SearchUI from '@components/search';
 import { BlogCards } from '@components/searchcards';
+import SearchPagination from '@components/search-pagination';
 
 export const metadata: Metadata = {
   title: 'My Blog',
@@ -14,21 +15,32 @@ interface PageParamProps {
   searchParams?: { query?: string; page?: string; tech?: string[] | string };
 }
 const BlogsListPage = async ({ searchParams }: PageParamProps) => {
-  const [skills, data] = await Promise.all([
-    getAllSkills().catch(() => {
-      throw new Error('Failed to fetch skills');
+  const currentPage = Number(searchParams?.page ?? 1);
+
+  const [totalItems, data] = await Promise.all([
+    countBlogs().catch((e) => {
+      console.log(`Failed to count blogs: ${e}`);
+      return 0;
     }),
     queryBlogs({
       orderByRecency: true,
       tech: searchParams?.tech,
-      offset: (Number(searchParams?.page) || 1) - 1,
+      offset: 10 * (currentPage - 1),
       additionalConditionals: searchParams?.query
         ? [`[title, description.short] match "*${searchParams.query}*"`]
         : [],
-    }).catch(() => {
-      throw new Error('Failed to fetch blogs');
+    }).catch((e) => {
+      console.log(`Failed to fetch blogs: ${e}`);
+      return [];
     }),
   ]);
+
+  const skills = new Set<string>();
+  data.forEach((tech) => {
+    tech.technologies.forEach((skill) => {
+      skills.add(skill.name);
+    });
+  });
 
   return (
     <div
@@ -38,7 +50,7 @@ const BlogsListPage = async ({ searchParams }: PageParamProps) => {
       {/* Filtering */}
       <SearchUI
         uri="/blog"
-        skills={skills}
+        skills={Array.from(skills)}
         placeholder="Search blogs"
         searchParams={{
           ...searchParams,
@@ -55,6 +67,13 @@ const BlogsListPage = async ({ searchParams }: PageParamProps) => {
       <div className="mb-4 flex w-4/5 flex-wrap justify-center gap-2 self-center max-sm:w-[97.5%]">
         <BlogCards data={data} />
       </div>
+
+      <SearchPagination
+        className="mx-auto mb-10 mt-auto"
+        currentPage={currentPage}
+        totalPages={Math.ceil(totalItems / 10)}
+        searchParams={searchParams}
+      />
     </div>
   );
 };
