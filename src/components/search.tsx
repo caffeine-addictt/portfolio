@@ -4,6 +4,9 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+import { cn } from '@utils/tailwind';
+import { useMediaQuery } from './hooks';
+
 import {
   DropdownMenu,
   DropdownMenuLabel,
@@ -12,10 +15,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuCheckboxItem,
 } from '@components/ui/dropdown-menu';
+
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@components/ui/drawer';
+
 import { Input } from '@components/ui/input';
 import { Button } from '@components/ui/button';
 import { ScrollArea } from '@components/ui/scroll-area';
 import { CaretDownIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { Check } from 'lucide-react';
 
 interface PageParamProps {
   uri: string;
@@ -108,11 +121,92 @@ const TechStackCheckbox = ({
   setTech,
   runSearch,
 }: TechStackCheckboxProps) => {
+  const isDesktop = useMediaQuery('(min-width: 768px)');
+
+  const [open, setOpen] = useState<boolean>(false);
   const [filter, setFilter] = useState<string>('');
   const filtered = skills.filter((skill) =>
     skill.toLowerCase().startsWith(filter.toLowerCase()),
   );
 
+  // Mobile
+  if (!isDesktop) {
+    return (
+      <Drawer
+        open={open}
+        onOpenChange={(isOpen) => {
+          setOpen(isOpen);
+          if (isOpen) setFilter('');
+          runSearch(undefined, techList);
+        }}
+      >
+        <DrawerTrigger
+          onClick={() => setOpen((prev) => !prev)}
+          className="group flex flex-row"
+        >
+          <CaretDownIcon className="mr-1 size-6 transition-all group-data-[state=open]:rotate-180" />
+          Filter
+        </DrawerTrigger>
+
+        <DrawerContent className="pb-4">
+          <DrawerTitle className="mb-4 mt-2 w-full text-center text-xl">
+            Filter skills
+          </DrawerTitle>
+
+          {/* Filter */}
+          <Input
+            onChange={(e) => setFilter(e.target.value)}
+            value={filter}
+            className="mx-auto w-10/12 rounded-md"
+            placeholder="Search..."
+          />
+
+          {/* Render items */}
+          <ScrollArea className="h-fit">
+            <div className="mx-auto mt-4 flex h-[30rem] w-10/12 flex-col gap-1">
+              {filtered.length ? (
+                <>
+                  {filtered.map((skill, key) => {
+                    const isSelected = techList.includes(skill);
+                    return (
+                      <Button
+                        onClick={() =>
+                          setTech((prev) =>
+                            isSelected
+                              ? prev.filter((t) => t !== skill)
+                              : prev.concat(skill),
+                          )
+                        }
+                        className={cn('flex w-full flex-row justify-start', {
+                          'bg-neutral-300/40': isSelected,
+                          'dark:bg-neutral-700/30': isSelected,
+                        })}
+                        key={key}
+                        variant="outline"
+                      >
+                        {isSelected ? (
+                          <Check className="size-4" />
+                        ) : (
+                          <div className="size-4" />
+                        )}
+                        <span className="ml-5">{skill}</span>
+                      </Button>
+                    );
+                  })}
+                </>
+              ) : (
+                <DrawerDescription className="text-center">
+                  No skills found
+                </DrawerDescription>
+              )}
+            </div>
+          </ScrollArea>
+        </DrawerContent>
+      </Drawer>
+    );
+  }
+
+  // Desktop
   return (
     <DropdownMenu
       open={open}
