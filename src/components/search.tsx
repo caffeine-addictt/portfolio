@@ -109,6 +109,9 @@ const TechStackCheckbox = ({
   runSearch,
 }: TechStackCheckboxProps) => {
   const [filter, setFilter] = useState<string>('');
+  const filtered = skills.filter((skill) =>
+    skill.toLowerCase().startsWith(filter.toLowerCase()),
+  );
 
   return (
     <DropdownMenu
@@ -129,7 +132,7 @@ const TechStackCheckbox = ({
 
       {/* Options */}
       <DropdownMenuContent align="center">
-        <DropdownMenuLabel className="flex flex-row justify-between">
+        <DropdownMenuLabel className="flex flex-row items-center justify-between">
           <Input
             onChange={(e) => setFilter(e.target.value)}
             value={filter}
@@ -140,15 +143,23 @@ const TechStackCheckbox = ({
         <DropdownMenuSeparator />
 
         <ScrollArea className="h-fit pb-1">
-          <div className="flex w-fit min-w-64 max-w-96 flex-wrap pr-2 max-sm:max-w-[80vw]">
-            {skills.map((skill, key) => (
-              <DropdownItem
-                key={key}
-                techList={techList}
-                setTech={setTech}
-                name={skill}
-              />
-            ))}
+          <div className="flex w-full max-w-96 flex-wrap pr-2 max-sm:max-w-[80vw] sm:w-fit sm:min-w-64">
+            {filtered.length ? (
+              <>
+                {filtered.map((skill, key) => (
+                  <DropdownItem
+                    key={key}
+                    techList={techList}
+                    setTech={setTech}
+                    name={skill}
+                  />
+                ))}
+              </>
+            ) : (
+              <p className="w-full text-center text-sm font-thin">
+                No skills found
+              </p>
+            )}
           </div>
         </ScrollArea>
       </DropdownMenuContent>
