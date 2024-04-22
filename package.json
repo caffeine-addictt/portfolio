@@ -50,7 +50,7 @@
     "zod": "^3.23.0"
   },
   "devDependencies": {
-    "@sanity/eslint-config-studio": "^3.0.1",
+    "@sanity/eslint-config-studio": "^4.0.0",
     "@types/jest": "^29.5.12",
     "@types/node": "^20",
     "@types/react": "^18",
