@@ -112,12 +112,17 @@ const TechStackCheckbox = ({
 
   return (
     <DropdownMenu
+      open={open}
       onOpenChange={(isOpen) => {
-        if (isOpen) return;
+        setOpen(isOpen);
+        if (isOpen) return setFilter('');
         runSearch(undefined, techList);
       }}
     >
-      <DropdownMenuTrigger className="group flex flex-row">
+      <DropdownMenuTrigger
+        onClick={() => setOpen((prev) => !prev)}
+        className="group flex flex-row"
+      >
         <CaretDownIcon className="mr-1 size-6 transition-all group-data-[state=open]:rotate-180" />
         Filter
       </DropdownMenuTrigger>
