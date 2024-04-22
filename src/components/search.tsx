@@ -59,22 +59,16 @@ const SearchUI = ({
     setQuery(e.target.value);
   };
 
-  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      runSearch(query);
-    }
-  };
-
-  const handleClick = () => {
-    runSearch(query);
-  };
-
   return (
     <div className="my-8 max-w-2xl max-md:max-w-xl max-sm:max-w-[90%]">
       <div className="flex flex-row gap-2 max-sm:justify-center">
         <Input
           value={query}
-          onKeyUp={handleEnter}
+          onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === 'Enter') {
+              runSearch(query);
+            }
+          }}
           type="search"
           placeholder={placeholder}
           className="w-screen"
@@ -82,7 +76,7 @@ const SearchUI = ({
         />
         <Button
           type="button"
-          onClick={handleClick}
+          onClick={() => runSearch(query)}
           variant="outline"
           size="icon"
           className="px-2"
