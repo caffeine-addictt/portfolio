@@ -11,6 +11,8 @@ import { Separator } from '@components/ui/separator';
 import { TooltipWrapper } from '@components/ui/tooltip';
 import { ExternalLink, InternalLink } from '@components/ui/button';
 import { EnforceTypographyStyling } from '@components/typography';
+import { DotFilledIcon } from '@radix-ui/react-icons';
+import { BookOpen } from 'lucide-react';
 
 // SEO
 export const generateStaticParams = async () => {
@@ -116,6 +118,9 @@ const BlogPage = async ({ params: { slug } }: { params: { slug: string } }) => {
           {newUpdated
             ? `Updated: ${newUpdated.getUTCMonth() + 1}/${newUpdated.getUTCFullYear()}`
             : `Published: ${newPublished.getUTCMonth() + 1}/${newPublished.getUTCFullYear()}`}
+          <DotFilledIcon className="mx-2" />
+          <BookOpen className="mr-1 size-4" />~{data.estimatedReadingTime}min
+          {data.estimatedReadingTime > 1 && 's'}
         </div>
 
         {/* Separator */}
