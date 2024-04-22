@@ -15,14 +15,12 @@ import {
 import { Input } from '@components/ui/input';
 import { Button } from '@components/ui/button';
 import { ScrollArea } from '@components/ui/scroll-area';
-
 import { CaretDownIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { SkillsItem } from '@lib/sanity/schema';
 
 interface PageParamProps {
   uri: string;
   placeholder: string;
-  skills: SkillsItem[];
+  skills: string[];
   searchParams?: { query?: string; page?: string; tech?: string[] };
 }
 const SearchUI = ({
@@ -87,7 +85,7 @@ const SearchUI = ({
 
       <div className="mt-2 flex justify-center">
         <TechStackCheckbox
-          skills={skills.sort((a, b) => a.name.localeCompare(b.name))}
+          skills={skills.sort((a, b) => a.localeCompare(b))}
           techList={techList}
           setTech={setTechList}
           runSearch={runSearch}
@@ -99,7 +97,7 @@ const SearchUI = ({
 export default SearchUI;
 
 interface TechStackCheckboxProps {
-  skills: SkillsItem[];
+  skills: string[];
   techList: string[];
   setTech: (tech: string[] | ((tech: string[]) => string[])) => void;
   runSearch: (q?: string, t?: string[]) => void;
@@ -109,57 +107,49 @@ const TechStackCheckbox = ({
   techList,
   setTech,
   runSearch,
-}: TechStackCheckboxProps) => (
-  <DropdownMenu
-    onOpenChange={(isOpen) => {
-      if (isOpen) return;
-      runSearch(undefined, techList);
-    }}
-  >
-    <DropdownMenuTrigger className="group flex flex-row">
-      <CaretDownIcon className="mr-1 size-6 transition-all group-data-[state=open]:rotate-180" />
-      Filter
-    </DropdownMenuTrigger>
+}: TechStackCheckboxProps) => {
+  const [filter, setFilter] = useState<string>('');
 
-    {/* Options */}
-    <DropdownMenuContent align="center">
-      <DropdownMenuLabel className="flex flex-row justify-between">
-        Filter Technologies
-        <span className="text-sm font-light">Press any key</span>
-      </DropdownMenuLabel>
-      <DropdownMenuSeparator />
+  return (
+    <DropdownMenu
+      onOpenChange={(isOpen) => {
+        if (isOpen) return;
+        runSearch(undefined, techList);
+      }}
+    >
+      <DropdownMenuTrigger className="group flex flex-row">
+        <CaretDownIcon className="mr-1 size-6 transition-all group-data-[state=open]:rotate-180" />
+        Filter
+      </DropdownMenuTrigger>
 
-      <ScrollArea className="h-64">
-        <div className="flex w-fit max-w-7xl flex-wrap gap-2 pr-2">
-          {/* Split 4 columns most evenly possible */}
-          {[...Array(3)].map((_, key) => {
-            const totalOverflow = skills.length % 3;
-            const itemsPerColum =
-              Math.floor(skills.length / 3) + Math.max(totalOverflow - key, 0);
-            const iterationOverflow = key >= totalOverflow ? totalOverflow : 0;
+      {/* Options */}
+      <DropdownMenuContent align="center">
+        <DropdownMenuLabel className="flex flex-row justify-between">
+          <Input
+            onChange={(e) => setFilter(e.target.value)}
+            value={filter}
+            className="w-3/5"
+          />
+          <span className="text-sm font-light">Press any key</span>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
 
-            const beginSlice = key * itemsPerColum + iterationOverflow;
-            const endSlice =
-              key * itemsPerColum + itemsPerColum + iterationOverflow;
-
-            return (
-              <div key={key} className="flex flex-initial flex-col">
-                {skills.slice(beginSlice, endSlice).map((skill, key) => (
-                  <DropdownItem
-                    key={key}
-                    techList={techList}
-                    setTech={setTech}
-                    name={skill.name}
-                  />
-                ))}
-              </div>
-            );
-          })}
-        </div>
-      </ScrollArea>
-    </DropdownMenuContent>
-  </DropdownMenu>
-);
+        <ScrollArea className="h-fit pb-1">
+          <div className="flex w-fit min-w-64 max-w-96 flex-wrap pr-2 max-sm:max-w-[80vw]">
+            {skills.map((skill, key) => (
+              <DropdownItem
+                key={key}
+                techList={techList}
+                setTech={setTech}
+                name={skill}
+              />
+            ))}
+          </div>
+        </ScrollArea>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 interface DropdownItemProps
   extends Omit<

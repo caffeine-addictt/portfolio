@@ -30,6 +30,13 @@ const BlogsListPage = async ({ searchParams }: PageParamProps) => {
     }),
   ]);
 
+  const skills = new Set<string>();
+  data.forEach((tech) => {
+    tech.technologies.forEach((skill) => {
+      skills.add(skill.name);
+    });
+  });
+
   return (
     <div
       className="mt-16 flex min-h-screen min-w-full max-w-full flex-col items-center"
@@ -38,7 +45,7 @@ const BlogsListPage = async ({ searchParams }: PageParamProps) => {
       {/* Filtering */}
       <SearchUI
         uri="/blog"
-        skills={skills}
+        skills={Array.from(skills)}
         placeholder="Search blogs"
         searchParams={{
           ...searchParams,
