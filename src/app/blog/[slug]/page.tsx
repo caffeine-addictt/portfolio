@@ -111,19 +111,12 @@ const BlogPage = async ({ params: { slug } }: { params: { slug: string } }) => {
           </span>
         </h1>
 
-        {/* Time */}
-        <p className="mt-2 text-base font-light">
-          Published: {newPublished.getUTCMonth() + 1}/
-          {newPublished.getUTCFullYear()}
-          {newUpdated ? (
-            <>
-              &nbsp;&nbsp;
-              {`Updated: ${newUpdated.getUTCMonth() + 1}/${newUpdated.getUTCFullYear()}`}
-            </>
-          ) : (
-            ''
-          )}
-        </p>
+        {/* Extra */}
+        <div className="mt-2 flex flex-row items-center text-base font-light">
+          {newUpdated
+            ? `Updated: ${newUpdated.getUTCMonth() + 1}/${newUpdated.getUTCFullYear()}`
+            : `Published: ${newPublished.getUTCMonth() + 1}/${newPublished.getUTCFullYear()}`}
+        </div>
 
         {/* Separator */}
         <Separator className="my-4 w-[30%]" />
