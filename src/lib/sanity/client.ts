@@ -41,6 +41,14 @@ const generateTechQuery = (
   return `(${tech.map((q) => `"${escapeQueryString(q)}" in technologies[]->name`).join(` ${andOr} `)})`;
 };
 
+export const countProjects = cache(
+  async (): Promise<number> =>
+    await client.fetch(`count(*[_type == "projects"])`),
+);
+export const countBlogs = cache(
+  async (): Promise<number> => await client.fetch(`count(*[_type == "blogs"])`),
+);
+
 export interface ProjectQuery {
   offset?: number;
   queryLength?: number;
