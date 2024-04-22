@@ -231,6 +231,7 @@ const TechStackCheckbox = ({
             onChange={(e) => setFilter(e.target.value)}
             value={filter}
             className="w-3/5"
+            placeholder="Search..."
           />
           <span className="text-sm font-light">Press any key</span>
         </DropdownMenuLabel>
