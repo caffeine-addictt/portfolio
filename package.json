@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --cache && prettier --cache --cache-strategy=metadata --check .",
-    "lint:fix": "next lint --fix --cache && prettier --cache --cache-strategy=metadata --write .",
+    "lint": "next lint && prettier --cache --cache-strategy=metadata --check .",
+    "lint:fix": "next lint --fix && prettier --cache --cache-strategy=metadata --write .",
     "test": "jest --passWithNoTests",
     "sanity": "sanity dev"
   },
