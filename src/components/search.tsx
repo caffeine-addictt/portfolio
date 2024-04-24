@@ -148,7 +148,7 @@ const TechStackCheckbox = ({
           Filter
         </DrawerTrigger>
 
-        <DrawerContent className="pb-4">
+        <DrawerContent className="h-4/5 pb-4">
           <DrawerTitle className="mb-4 mt-2 w-full text-center text-xl">
             Filter skills
           </DrawerTitle>
@@ -163,7 +163,7 @@ const TechStackCheckbox = ({
 
           {/* Render items */}
           <ScrollArea className="h-fit">
-            <div className="mx-auto mt-4 flex h-[30rem] w-10/12 flex-col gap-1">
+            <div className="mx-auto mt-4 flex h-2/5 w-10/12 flex-col gap-1">
               {filtered.length ? (
                 <>
                   {filtered.map((skill, key) => {
