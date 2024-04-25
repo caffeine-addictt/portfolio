@@ -28,7 +28,7 @@
     "@sanity/code-input": "^4.1.2",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.24.1",
-    "@tailwindcss/typography": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.12",
     "@types/react-syntax-highlighter": "^15.5.11",
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
