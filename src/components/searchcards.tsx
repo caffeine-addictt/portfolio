@@ -142,7 +142,12 @@ const RenderCard = React.forwardRef<HTMLDivElement, RenderCardProps>(
 
       {/* Desc */}
       <CardContent>
-        <CardDescription>{cardData.shortDescription}</CardDescription>
+        <CardDescription className="max-h-16">
+          {/* Cut off at 88 characters */}
+          {cardData.shortDescription.length > 88
+            ? cardData.shortDescription.substring(0, 85) + '...'
+            : cardData.shortDescription}
+        </CardDescription>
       </CardContent>
 
       <CardFooter className="mb-0 mt-auto flex flex-row items-center gap-1">

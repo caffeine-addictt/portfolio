@@ -3,7 +3,14 @@ import { createClient } from 'next-sanity';
 import imageUrlBuilder from '@sanity/image-url';
 
 import { escapeQueryString } from '@utils/strings';
-import { ProjectItem, BlogItem, SkillsItem } from './schema';
+import {
+  ProjectItem,
+  BlogItem,
+  SkillsItem,
+  ensureBlogItem,
+  ensureProjectItem,
+  ensureSkillsItem,
+} from './schema';
 
 /** Sanity client */
 const client = createClient({
@@ -94,7 +101,10 @@ export const queryProjects = cache(
     const fetched = await client.fetch(`
     *[${req.join(' && ')}]${orderingConditions}{${params.join(',')}}${splicing}
   `);
-    return Array.isArray(fetched) ? fetched : [fetched];
+
+    return (Array.isArray(fetched) ? fetched : [fetched]).map((f) =>
+      ensureProjectItem(f),
+    );
   },
 );
 
@@ -134,7 +144,10 @@ export const queryBlogs = cache(
     const fetched = await client.fetch(`
     *[${req.join(' && ')}]${orderingConditions}{${params.join(',')}}${splicing}
   `);
-    return Array.isArray(fetched) ? fetched : [fetched];
+
+    return (Array.isArray(fetched) ? fetched : [fetched]).map((f) =>
+      ensureBlogItem(f),
+    );
   },
 );
 
@@ -144,5 +157,7 @@ export const getAllSkills = cache(async (): Promise<SkillsItem[]> => {
       ...
     }
   `);
-  return Array.isArray(fetched) ? fetched : [fetched];
+  return (Array.isArray(fetched) ? fetched : [fetched]).map((f) =>
+    ensureSkillsItem(f),
+  );
 });

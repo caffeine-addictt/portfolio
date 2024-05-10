@@ -40,7 +40,7 @@ export const ProjectsSchema = {
           description: 'Rendered as preview text',
           validation: (e: Rule) => [
             e.required().error('Short description is required'),
-            e.max(60).warning('Best to keep the title under 60 characters'),
+            e.max(88).warning('Short description is cut off at 88 characters'),
           ],
         },
         {
