@@ -21,8 +21,8 @@ const OGImage = () => {
       <div
         style={{
           background: '#020104',
-          width: '100%',
-          height: '100%',
+          width: `${size.width}px`,
+          height: `${size.height}px`,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
