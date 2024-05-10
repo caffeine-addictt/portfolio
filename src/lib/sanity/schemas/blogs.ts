@@ -35,8 +35,10 @@ export const BlogsSchema = {
           type: 'string',
           title: 'Short',
           description: 'Short description of the blog post',
-          validation: (e: Rule) =>
+          validation: (e: Rule) => [
             e.required().error('Short description is required'),
+            e.max(88).warning('Short description is cut off at 88 characters'),
+          ],
         },
         {
           name: 'long',
