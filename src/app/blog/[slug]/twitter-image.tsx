@@ -28,8 +28,8 @@ const og = async ({ params: { slug } }: { params: { slug: string } }) => {
       <div
         style={{
           position: 'relative',
-          width: '100%',
-          height: '100%',
+          width: `${size.width}px`,
+          height: `${size.height}px`,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -49,11 +49,15 @@ const og = async ({ params: { slug } }: { params: { slug: string } }) => {
             <img
               src={urlFor(fetched.images?.image).url()}
               alt={fetched.title}
+              width={size.width}
+              height={size.height}
             />
           ) : (
             <img
               src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/siteImage.png`}
               alt={fetched.title}
+              width={size.width}
+              height={size.height}
             />
           )}
         </div>
