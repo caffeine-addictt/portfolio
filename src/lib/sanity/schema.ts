@@ -39,8 +39,8 @@ export const ensureProjectItem = (proj: ProjectItem): ProjectItem =>
       ? proj.technologies.map((skill) => ensureSkillsItem(skill))
       : [],
     timeframe: {
-      ...proj.timeframe,
-      start: proj.timeframe.start || '',
+      start: proj.timeframe?.start || '',
+      end: proj.timeframe?.end || '',
     },
   }) satisfies ProjectItem;
 
@@ -72,15 +72,17 @@ export const ensureBlogItem = (blog: BlogItem): BlogItem =>
       short: blog.description?.short || '',
       long: blog.description?.long || [],
     },
-    images: blog.images || {},
+    images: {
+      image: blog.images?.image,
+      icon: blog.images?.icon,
+    },
     estimatedReadingTime: blog.estimatedReadingTime || 0,
     technologies: blog.technologies
       ? blog.technologies.map((skill) => ensureSkillsItem(skill))
       : [],
     timeframe: {
-      ...blog.timeframe,
-      published: blog.timeframe.published || '',
-      updated: blog.timeframe.updated || '',
+      published: blog.timeframe?.published || '',
+      updated: blog.timeframe?.updated || '',
     },
   }) satisfies BlogItem;
 
@@ -100,5 +102,8 @@ export const ensureSkillsItem = (skill: SkillsItem): SkillsItem =>
     name: skill.name || '',
     href: skill.href || '',
     start_time: skill.start_time || '',
-    icon: skill.icon || {},
+    icon: {
+      dark: skill.icon?.dark,
+      light: skill.icon?.light,
+    },
   }) satisfies SkillsItem;
