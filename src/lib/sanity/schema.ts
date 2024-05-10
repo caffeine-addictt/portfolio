@@ -1,3 +1,4 @@
+// Projectitems
 export interface ProjectItem {
   slug: string;
   title: string;
@@ -24,6 +25,26 @@ export interface ProjectItem {
   };
 }
 
+export const ensureProjectItem = (proj: ProjectItem): ProjectItem =>
+  ({
+    slug: proj.slug || '',
+    title: proj.title || '',
+    description: {
+      short: proj.description?.short || '',
+      long: proj.description?.long || [],
+    },
+    images: proj.images || {},
+    links: proj.links || {},
+    technologies: proj.technologies
+      ? proj.technologies.map((skill) => ensureSkillsItem(skill))
+      : [],
+    timeframe: {
+      ...proj.timeframe,
+      start: proj.timeframe.start || '',
+    },
+  }) satisfies ProjectItem;
+
+// Blogs
 export interface BlogItem {
   slug: string;
   title: string;
@@ -43,6 +64,27 @@ export interface BlogItem {
   };
 }
 
+export const ensureBlogItem = (blog: BlogItem): BlogItem =>
+  ({
+    slug: blog.slug || '',
+    title: blog.title || '',
+    description: {
+      short: blog.description?.short || '',
+      long: blog.description?.long || [],
+    },
+    images: blog.images || {},
+    estimatedReadingTime: blog.estimatedReadingTime || 0,
+    technologies: blog.technologies
+      ? blog.technologies.map((skill) => ensureSkillsItem(skill))
+      : [],
+    timeframe: {
+      ...blog.timeframe,
+      published: blog.timeframe.published || '',
+      updated: blog.timeframe.updated || '',
+    },
+  }) satisfies BlogItem;
+
+// SkillsItems
 export interface SkillsItem {
   name: string;
   href: string;
@@ -52,3 +94,11 @@ export interface SkillsItem {
     light: any;
   };
 }
+
+export const ensureSkillsItem = (skill: SkillsItem): SkillsItem =>
+  ({
+    name: skill.name || '',
+    href: skill.href || '',
+    start_time: skill.start_time || '',
+    icon: skill.icon || {},
+  }) satisfies SkillsItem;
