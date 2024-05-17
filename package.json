@@ -33,7 +33,7 @@
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
     "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.0",
+    "clsx": "^2.1.1",
     "lucide-react": "^0.378.0",
     "next": "14.2.3",
     "next-sanity": "^7.0.10",
