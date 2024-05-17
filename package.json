@@ -45,7 +45,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "resend": "^2.1.0",
     "sanity": "^3.24.1",
-    "styled-components": "^6.1.8",
+    "styled-components": "^6.1.11",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.0",
