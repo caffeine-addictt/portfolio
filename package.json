@@ -27,7 +27,7 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@sanity/code-input": "^4.1.2",
     "@sanity/image-url": "^1.0.2",
-    "@sanity/vision": "^3.24.1",
+    "@sanity/vision": "^3.47.1",
     "@tailwindcss/typography": "^0.5.13",
     "@types/react-syntax-highlighter": "^15.5.11",
     "@vercel/analytics": "^1.2.2",
