@@ -49,11 +49,16 @@ const generateTechQuery = (
 };
 
 export const countProjects = cache(
-  async (): Promise<number> =>
-    await client.fetch(`count(*[_type == "projects"])`),
+  (): Promise<number> =>
+    client
+      .fetch(`{ 'count': count(*[_type == "projects"]) }`)
+      .then((res: { count: number }) => res.count),
 );
 export const countBlogs = cache(
-  async (): Promise<number> => await client.fetch(`count(*[_type == "blogs"])`),
+  (): Promise<number> =>
+    client
+      .fetch(`{ 'count': count(*[_type == "blogs"]) }`)
+      .then((res: { count: number }) => res.count),
 );
 
 export interface ProjectQuery {
