@@ -33,7 +33,7 @@ const HomePage = () => {
         <p className="break-normal text-lg max-sm:max-w-xs">
           I&apos;m a{' '}
           <span className="text-xl font-medium text-black dark:text-white">
-            full-stack developer
+            back-end developer
           </span>{' '}
           and hobbist hacker based in Singapore.
         </p>
@@ -74,32 +74,26 @@ const HomePage = () => {
             </span>
           </h1>
 
-          <p className="mb-2 max-sm:max-w-[70%]">
+          <p className="mb-8 w-4/5 text-balance max-sm:max-w-[70%]">
             I started my journey creating games
             <span className="font-bold text-accent-light dark:text-accent-dark">
               {' '}
               {new Date().getUTCFullYear() - 2017}+ years ago
             </span>
-            .
-          </p>
-          <p className="mb-8 max-w-2xl">
-            Now I create software like{' '}
+            . Now I create software like{' '}
             <span className="font-bold text-accent-light dark:text-accent-dark">
               this website
             </span>{' '}
-            and web applications using
+            and tooling with{' '}
             <span className="font-bold text-accent-light dark:text-accent-dark">
-              {' '}
-              React
-            </span>{' '}
-            and
+              Rust
+            </span>
+            ,{' '}
             <span className="font-bold text-accent-light dark:text-accent-dark">
-              {' '}
-              NextJS
-            </span>{' '}
-            and libraries in
+              Go
+            </span>
+            {' and '}
             <span className="font-bold text-accent-light dark:text-accent-dark">
-              {' '}
               Python
             </span>
             .
