@@ -1,0 +1,13 @@
+services:
+  portfolio:
+    image: portfolio:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    develop:
+      watch:
+        - path: src
+          action: rebuild
+    ports:
+      - "3000:3000"
+    env_file: .env
