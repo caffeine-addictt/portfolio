@@ -1,68 +1,71 @@
-<a name="readme-top"></a>
+###### _<div align="right"><sub>// made with &lt;3</sub></div>_
 
-<!-- PROJECT SHIELDS -->
 <div align="center">
 
-<a href="[contributors-url]">[![Contributors][contributors-shield]][contributors-url]</a>
-<a href="[forks-url]">[![Forks][forks-shield]][forks-url]</a>
-<a href="[stars-url]">[![Stargazers][stars-shield]][stars-url]</a>
-<a href="[issues-url]">[![Issues][issues-shield]][issues-url]</a>
-<a href="[license-url]">[![BSD-3-Clause License][license-shield]][license-url]</a>
+# Portfolio
+
+![badge-workflow]
+[![badge-license]][license]
+![badge-language]
+[![badge-pr]][prs]
+[![badge-issues]][issues]
+
+<br><br>
+
+My portfolio website project
+
+<br><br>
+
+---
+
+**[<kbd> <br> Quick Start <br> </kbd>](#quick-start)**
+**[<kbd> <br> Thanks <br> </kbd>](#special-thanks)**
+
+---
+
+<br>
 
 </div>
 
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <h3 align="center">ngjx.org</h3>
+# Quick Start
 
-  <p align="center">
-    My portfolio and blog website
-    <br />
-    <a href="https://github.com/caffeine-addictt/portfolio/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/caffeine-addictt/portfolio/issues">Request Feature</a>
-  </p>
+_This is an example of how you can set up your project locally.
+To get a local copy up and running, follow these simple steps._
+
+## Prerequisites
+
+- Rust
+
+## Installation
+
+1. Run `cargo run`
+
+<div align="right">
+  <br>
+  <a href="#-made-with-3"><kbd> <br> 🡅 <br> </kbd></a>
 </div>
 
-<!-- ABOUT THE PROJECT -->
+## Special Thanks
 
-## About The Project
+- **[Caffeine-addictt][template-repo]** - _For the repository template_
+- **[Img Shields][img-shields]** - _For the awesome README badges_
+- **[Hyprland][hyprland]** - _For showing how to make beautiful READMEs_
+- **[Hyprdots][hyprdots]** - _For showing how to make beautiful READMEs_
 
-This is the source code for my portfolio and blog website!
+---
 
-View the [Live Demo](https://ngjx.org)
+![stars-graph]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LICENSE -->
-
-## License
-
-Distributed under the BSD-3-Clause License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTACT -->
-
-## Contact
-
-Alex - [contact@ngjx.org](mailto:contact@ngjx.org)
-
-Form - [ngjx.org/contact](https://ngjx.org/contact)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
-[contributors-shield]: https://img.shields.io/github/contributors/caffeine-addictt/portfolio.svg?style=for-the-badge
-[contributors-url]: https://github.com/caffeine-addictt/portfolio/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/caffeine-addictt/portfolio.svg?style=for-the-badge
-[forks-url]: https://github.com/caffeine-addictt/portfolio/network/members
-[stars-shield]: https://img.shields.io/github/stars/caffeine-addictt/portfolio.svg?style=for-the-badge
-[stars-url]: https://github.com/caffeine-addictt/portfolio/stargazers
-[issues-shield]: https://img.shields.io/github/issues/caffeine-addictt/portfolio.svg?style=for-the-badge
-[issues-url]: https://github.com/caffeine-addictt/portfolio/issues
-[license-shield]: https://img.shields.io/github/license/caffeine-addictt/portfolio.svg?style=for-the-badge
-[license-url]: https://github.com/caffeine-addictt/portfolio/blob/master/LICENSE.txt
+[stars-graph]: https://starchart.cc/caffeine-addictt/portfolio.svg?variant=adaptive
+[prs]: https://github.com/caffeine-addictt/portfolio/pulls
+[issues]: https://github.com/caffeine-addictt/portfolio/issues
+[license]: https://github.com/caffeine-addictt/portfolio/blob/main/LICENSE
+[template-repo]: https://github.com/caffeine-addictt/waku
+[hyprland]: https://github.com/hyprwm/Hyprland
+[hyprdots]: https://github.com/prasanthrangan/hyprdots
+[img-shields]: https://shields.io
+[badge-workflow]: https://github.com/caffeine-addictt/portfolio/actions/workflows/test.yml/badge.svg
+[badge-issues]: https://img.shields.io/github/issues/caffeine-addictt/portfolio
+[badge-pr]: https://img.shields.io/github/issues-pr/caffeine-addictt/portfolio
+[badge-language]: https://img.shields.io/github/languages/top/caffeine-addictt/portfolio
+[badge-license]: https://img.shields.io/github/license/caffeine-addictt/portfolio
