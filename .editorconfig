@@ -15,3 +15,6 @@ quote_type = single
 
 [Makefile]
 indent_style = tab
+
+[*.rs]
+indent_size = 4
