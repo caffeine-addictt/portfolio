@@ -54,6 +54,11 @@ down:
 	${DOCKER} compose down 2> ${NULL}
 
 
+## gen: Generates css styles
+gen:
+	npx tailwindcss -i ./public/globals.css -o ./public/css/main.css -m
+
+
 ## install: Install dependencies
 .PHONY: install
 install: install/npm install/cargo
