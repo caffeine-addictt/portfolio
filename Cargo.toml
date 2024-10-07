@@ -6,4 +6,5 @@ edition = "2021"
 [dependencies]
 anyhow = "1.0.89"
 axum = "0.7.7"
+tera = { version = "1.20.0", features = ["builtins"] }
 tokio = { version = "1.40.0", features = ["full"] }
