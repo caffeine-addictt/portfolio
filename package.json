@@ -43,7 +43,7 @@
     "react-hook-form": "^7.51.4",
     "react-is": "^18.3.1",
     "react-syntax-highlighter": "^15.5.0",
-    "resend": "^3.4.0",
+    "resend": "^4.0.0",
     "sanity": "^3.49.0",
     "styled-components": "^6.1.11",
     "tailwind-merge": "^2.5.2",
