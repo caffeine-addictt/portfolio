@@ -8,6 +8,10 @@ services:
       watch:
         - path: src
           action: rebuild
+        - path: templates
+          action: rebuild
+        - path: public
+          action: rebuild
     ports:
       - "3000:3000"
     env_file: .env
