@@ -36,6 +36,7 @@ COPY --from=builder /portfolio /usr/local/bin
 RUN chown appuser /usr/local/bin/portfolio && chown -R appuser /opt/app
 
 COPY templates ./templates/
+COPY public ./public/
 
 USER appuser
 ENV RUST_LOG="portfolio=debug,info"
