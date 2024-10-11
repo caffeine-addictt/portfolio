@@ -57,7 +57,7 @@ down:
 
 ## gen: Generates css styles
 gen:
-	npx tailwindcss -i ./public/globals.css -o ./public/css/main.css -m $(filter-out $@,$(MAKECMDGOALS))
+	npx tailwindcss -i ./public/globals.css -o ./public/css/main.css -c tailwind.config.ts -m $(filter-out $@,$(MAKECMDGOALS))
 
 
 ## install: Install dependencies
