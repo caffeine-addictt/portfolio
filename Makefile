@@ -39,12 +39,13 @@ help:
 ## dev: Start client and server in development mode
 .PHONY: dev
 dev:
+	$(MAKE) gen -- --watch & \
 	${DOCKER} compose up --watch --build
 
 
 ## prod: Run client server in production mode
 .PHONY: prod
-prod:
+prod: gen
 	${DOCKER} compose up --build
 
 
@@ -56,7 +57,7 @@ down:
 
 ## gen: Generates css styles
 gen:
-	npx tailwindcss -i ./public/globals.css -o ./public/css/main.css -m
+	npx tailwindcss -i ./public/globals.css -o ./public/css/main.css -m $(filter-out $@,$(MAKECMDGOALS))
 
 
 ## install: Install dependencies
