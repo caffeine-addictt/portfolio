@@ -11,6 +11,7 @@ use tower::{buffer::BufferLayer, limit::RateLimitLayer, ServiceBuilder};
 use tower_http::{classify::ServerErrorsFailureClass, trace::TraceLayer};
 use tracing::{debug, error, info, info_span, Span};
 
+mod config;
 mod routes;
 
 #[tokio::main]
@@ -72,5 +73,6 @@ async fn main() -> Result<(), std::io::Error> {
                     .layer(RateLimitLayer::new(5, Duration::from_secs(1))),
             ),
     )
+    .with_graceful_shutdown(config::shutdown_signal())
     .await
 }
