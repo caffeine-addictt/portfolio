@@ -1,28 +1,44 @@
-FROM rust:1.81.0-slim AS builder
+FROM rust:1.81.0-slim-bookworm AS builder
 WORKDIR /app
 
-# use musl
-# RUN \
-#   rustup target add x86_64-unknown-linux-musl \
-#   && rustup default x86_64-unknown-linux-musl
-
-# cache deps
-COPY Cargo.toml Cargo.lock ./
+# cache
+COPY Cargo.lock Cargo.toml ./
 RUN \
+  --mount=type=cache,target=/app/target/ \
+  --mount=type=cache,target=/usr/local/cargo/registry/ \
   mkdir src \
   && echo "fn main() {}" > src/main.rs \
-  && RUSTFLAGS='-C target-feature=+crt-static' cargo build --release --target x86_64-unknown-linux-gnu \
+  && cargo fetch \
   && rm -rf src
 
+# build
 COPY src ./src
-RUN RUSTFLAGS='-C target-feature=+crt-static' cargo build --release --target x86_64-unknown-linux-gnu \
-  && strip target/x86_64-unknown-linux-gnu/release/portfolio
+RUN \
+  --mount=type=cache,target=/app/target/ \
+  --mount=type=cache,target=/usr/local/cargo/registry/ \
+  cargo build --release \
+  && cp ./target/release/portfolio /
 
-FROM gcr.io/distroless/base-debian12:nonroot AS deploy
-WORKDIR /
 
-COPY --from=builder /app/target/x86_64-unknown-linux-gnu/release/portfolio /portfolio
+FROM debian:bookworm-slim AS deploy
+WORKDIR /opt/app
+
+RUN adduser \
+  --disabled-password \
+  --gecos "" \
+  --home "/nonexistent" \
+  --shell "/sbin/nologin" \
+  --no-create-home \
+  --uid "10001" \
+  appuser
+
+COPY --from=builder /portfolio /usr/local/bin
+RUN chown appuser /usr/local/bin/portfolio && chown -R appuser /opt/app
+
+COPY templates ./templates/
+
+USER appuser
+ENV RUST_LOG="portfolio=debug,info"
 
 EXPOSE 3000
-
-ENTRYPOINT [ "./portfolio" ]
+ENTRYPOINT ["portfolio"]
