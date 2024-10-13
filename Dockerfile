@@ -40,6 +40,7 @@ COPY public ./public/
 
 USER appuser
 ENV RUST_LOG="portfolio=debug,info"
+ENV RUST_BACKTRACE=1
 
 EXPOSE 3000
 ENTRYPOINT ["portfolio"]
