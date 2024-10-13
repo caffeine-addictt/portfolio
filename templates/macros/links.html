@@ -1,0 +1,8 @@
+{% macro internal_link(url, content, props="") %}
+  <a href="{{ url }}" {{ props }}>{{ content }}</a>
+{% endmacro internal_link %}
+
+{% macro external_link(url, content, props="") %}
+  <a href="{{ url }}" target="_blank" rel="noopener noreferrer" {{ props }}>{{ content }}</a>
+{% endmacro external_link %}
+
