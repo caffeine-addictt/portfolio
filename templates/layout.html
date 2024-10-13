@@ -12,10 +12,12 @@
   <link href="/static/css/main.css" rel="stylesheet">
 </head>
 
-<body class="bg-black">
-  <main>
+<body class="scroll-smooth flex min-w-full max-w-full flex-col text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark">
+  {% block nav %}{% include "components/nav.html" %}{% endblock %}
+  <main class="flex min-h-screen flex-col w-full max-w-full grow">
     {% block content %}{% endblock %}
   </main>
+  {% block footer %}{% include "components/footer.html" %}{% endblock %}
 </body>
 
 </html>
