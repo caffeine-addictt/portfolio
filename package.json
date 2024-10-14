@@ -48,7 +48,7 @@
     "styled-components": "^6.1.11",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
-    "vaul": "^0.9.0",
+    "vaul": "^1.1.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
