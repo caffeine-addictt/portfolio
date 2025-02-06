@@ -1,0 +1,187 @@
+<nav class="fixed z-50 flex h-16 w-full justify-center bg-white/60 shadow-sm backdrop-blur-sm transition-all will-change-scroll dark:bg-black/60">
+  <div class="mb-2 mt-4 flex h-full w-[95%] flex-row justify-between gap-1 self-center">
+    {{ links::internal_link(url="/", content="Portfolio") }}
+
+
+
+
+    <!-- Left -->
+    <div class="flex flex-row gap-1 self-center">
+      <TooltipWrapper text="Home page" asChild>
+        <InternalLink
+          href="/"
+          variant="link"
+          class="my-auto text-lg font-bold"
+        >
+          <CodeIcon class="mr-2 size-6 rotate-0 scale-100" />
+          Portfolio
+        </InternalLink>
+      </TooltipWrapper>
+
+      <TooltipWrapper text="View my projects!" asChild>
+        <InternalLink
+          href="/projects"
+          variant="link"
+          class="my-auto text-sm font-normal max-sm:hidden"
+        >
+          Projects
+        </InternalLink>
+      </TooltipWrapper>
+
+      <TooltipWrapper text="View my blog!" asChild>
+        <InternalLink
+          href="/blog"
+          variant="link"
+          class="my-auto text-sm font-normal max-sm:hidden"
+        >
+          Blog
+        </InternalLink>
+      </TooltipWrapper>
+    </div>
+
+    <!-- Right -->
+    <div class="flex flex-row gap-1 self-center">
+      <TooltipWrapper text="View my blog!" asChild>
+        <InternalLink
+          href="/contact"
+          variant="outline"
+          class="my-auto max-md:hidden"
+        >
+          <EnvelopeOpenIcon class="mr-2 size-4 rotate-0 scale-100" />
+          Contact Me
+        </InternalLink>
+      </TooltipWrapper>
+
+      <TooltipWrapper text="My Resume" asChild>
+        <Button
+          variant="outline"
+          class="my-auto max-md:hidden"
+          onClick={() =>
+            toast({
+              title: 'Coming soon!',
+              description: 'My Resume will be available soon.',
+              variant: 'destructive',
+            })
+          }
+        >
+          <FileTextIcon class="mr-2 size-4 rotate-0 scale-100" />
+          My Resume
+        </Button>
+      </TooltipWrapper>
+
+      <TooltipWrapper text="LinkedIn" asChild>
+        <ExternalLink
+          href="https://www.linkedin.com/in/ngjx/"
+          variant="outline"
+          size="icon"
+          class="my-auto max-sm:hidden"
+        >
+          <LinkedInLogoIcon class="size-[1.2rem] rotate-0 scale-100" />
+        </ExternalLink>
+      </TooltipWrapper>
+
+      <TooltipWrapper text="Github" asChild>
+        <ExternalLink
+          href="https://github.com/caffeine-addictt"
+          variant="outline"
+          size="icon"
+          class="my-auto max-sm:hidden"
+        >
+          <GitHubLogoIcon class="size-[1.2rem] rotate-0 scale-100" />
+        </ExternalLink>
+      </TooltipWrapper>
+
+      <ModeToggle class="my-auto" />
+
+      {/* Mobile dropdown */}
+      <MobileDropdown toast={toast} />
+    </div>
+  </div>
+</nav>
+);
+};
+export default Navbar;
+
+const MobileDropdown = ({
+toast,
+}: {
+toast: ReturnType<typeof useToast>['toast'];
+}) => (
+<DropdownMenu>
+<DropdownMenuTrigger class="group" asChild>
+  <Button
+    variant="outline"
+    size="icon"
+    class="relative flex items-center justify-center md:hidden"
+  >
+    <HamburgerMenuIcon class="absolute size-6 rotate-0 scale-100 transition-all group-data-[state=open]:-rotate-180 group-data-[state=open]:scale-0" />
+    <Cross2Icon class="absolute size-6 rotate-0 scale-0 transition-all group-data-[state=open]:-rotate-180 group-data-[state=open]:scale-100" />
+    <span class="sr-only">Toggle menu</span>
+  </Button>
+</DropdownMenuTrigger>
+
+{/* Options */}
+<DropdownMenuContent align="end">
+  <DropdownMenuLabel class="text-center text-base">
+    Important Links
+  </DropdownMenuLabel>
+  <DropdownMenuSeparator />
+
+  <DropdownMenuItem>
+    <InternalLink href="/blog" variant="link" class="w-full">
+      <FileTextIcon class="mr-2 size-4" />
+      My Blog
+    </InternalLink>
+  </DropdownMenuItem>
+  <DropdownMenuItem>
+    <InternalLink href="/projects" variant="link" class="w-full">
+      <CodeIcon class="mr-2 size-6" />
+      My Projects
+    </InternalLink>
+  </DropdownMenuItem>
+  <DropdownMenuItem>
+    <Button
+      variant="link"
+      class="w-full"
+      onClick={() =>
+        toast({
+          title: 'Coming soon!',
+          description: 'My Resume will be available soon.',
+          variant: 'destructive',
+        })
+      }
+    >
+      <FileTextIcon class="mr-2 size-4 rotate-0 scale-100" />
+      My Resume
+    </Button>
+  </DropdownMenuItem>
+
+  <DropdownMenuItem>
+    <ExternalLink
+      href="https://github.com/caffeine-addictt"
+      variant="link"
+      class="w-full"
+    >
+      <GitHubLogoIcon class="mr-2 size-4" />
+      My Github
+    </ExternalLink>
+  </DropdownMenuItem>
+  <DropdownMenuItem>
+    <ExternalLink
+      href="https://www.linkedin.com/in/ngjx/"
+      variant="link"
+      class="w-full"
+    >
+      <LinkedInLogoIcon class="mr-2 size-4" />
+      My LinkedIn
+    </ExternalLink>
+  </DropdownMenuItem>
+
+  <DropdownMenuItem>
+    <InternalLink href="/contact" variant="link" class="w-full">
+      <EnvelopeOpenIcon class="mr-2 size-4" />
+      Contact Me
+    </InternalLink>
+  </DropdownMenuItem>
+</DropdownMenuContent>
+</DropdownMenu>
