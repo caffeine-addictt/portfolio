@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 
-import { useToast } from '@components/ui/use-toast';
 import { TooltipWrapper } from '@components/ui/tooltip';
 import { ModeToggle } from '@components/theme-provider';
 import { InternalLink, ExternalLink, Button } from '@components/ui/button';
@@ -25,114 +24,100 @@ import {
   EnvelopeOpenIcon,
 } from '@radix-ui/react-icons';
 
-const Navbar = () => {
-  const { toast } = useToast();
+const Navbar = () => (
+  <nav className="fixed z-50 flex h-16 w-full justify-center bg-white/60 shadow-sm backdrop-blur-sm transition-all will-change-scroll dark:bg-black/60">
+    <div className="mb-2 mt-4 flex h-full w-[95%] flex-row justify-between gap-1 self-center">
+      {/* Left */}
+      <div className="flex flex-row gap-1 self-center">
+        <TooltipWrapper text="Home page" asChild>
+          <InternalLink
+            href="/"
+            variant="link"
+            className="my-auto text-lg font-bold"
+          >
+            <CodeIcon className="mr-2 size-6 rotate-0 scale-100" />
+            Portfolio
+          </InternalLink>
+        </TooltipWrapper>
 
-  return (
-    <nav className="fixed z-50 flex h-16 w-full justify-center bg-white/60 shadow-sm backdrop-blur-sm transition-all will-change-scroll dark:bg-black/60">
-      <div className="mb-2 mt-4 flex h-full w-[95%] flex-row justify-between gap-1 self-center">
-        {/* Left */}
-        <div className="flex flex-row gap-1 self-center">
-          <TooltipWrapper text="Home page" asChild>
-            <InternalLink
-              href="/"
-              variant="link"
-              className="my-auto text-lg font-bold"
-            >
-              <CodeIcon className="mr-2 size-6 rotate-0 scale-100" />
-              Portfolio
-            </InternalLink>
-          </TooltipWrapper>
+        <TooltipWrapper text="View my projects!" asChild>
+          <InternalLink
+            href="/projects"
+            variant="link"
+            className="my-auto text-sm font-normal max-sm:hidden"
+          >
+            Projects
+          </InternalLink>
+        </TooltipWrapper>
 
-          <TooltipWrapper text="View my projects!" asChild>
-            <InternalLink
-              href="/projects"
-              variant="link"
-              className="my-auto text-sm font-normal max-sm:hidden"
-            >
-              Projects
-            </InternalLink>
-          </TooltipWrapper>
-
-          <TooltipWrapper text="View my blog!" asChild>
-            <InternalLink
-              href="/blog"
-              variant="link"
-              className="my-auto text-sm font-normal max-sm:hidden"
-            >
-              Blog
-            </InternalLink>
-          </TooltipWrapper>
-        </div>
-
-        {/* Right */}
-        <div className="flex flex-row gap-1 self-center">
-          <TooltipWrapper text="View my blog!" asChild>
-            <InternalLink
-              href="/contact"
-              variant="outline"
-              className="my-auto max-md:hidden"
-            >
-              <EnvelopeOpenIcon className="mr-2 size-4 rotate-0 scale-100" />
-              Contact Me
-            </InternalLink>
-          </TooltipWrapper>
-
-          <TooltipWrapper text="My Resume" asChild>
-            <Button
-              variant="outline"
-              className="my-auto max-md:hidden"
-              onClick={() =>
-                toast({
-                  title: 'Coming soon!',
-                  description: 'My Resume will be available soon.',
-                  variant: 'destructive',
-                })
-              }
-            >
-              <FileTextIcon className="mr-2 size-4 rotate-0 scale-100" />
-              My Resume
-            </Button>
-          </TooltipWrapper>
-
-          <TooltipWrapper text="LinkedIn" asChild>
-            <ExternalLink
-              href="https://www.linkedin.com/in/ngjx/"
-              variant="outline"
-              size="icon"
-              className="my-auto max-sm:hidden"
-            >
-              <LinkedInLogoIcon className="size-[1.2rem] rotate-0 scale-100" />
-            </ExternalLink>
-          </TooltipWrapper>
-
-          <TooltipWrapper text="Github" asChild>
-            <ExternalLink
-              href="https://github.com/caffeine-addictt"
-              variant="outline"
-              size="icon"
-              className="my-auto max-sm:hidden"
-            >
-              <GitHubLogoIcon className="size-[1.2rem] rotate-0 scale-100" />
-            </ExternalLink>
-          </TooltipWrapper>
-
-          <ModeToggle className="my-auto" />
-
-          {/* Mobile dropdown */}
-          <MobileDropdown toast={toast} />
-        </div>
+        <TooltipWrapper text="View my blog!" asChild>
+          <InternalLink
+            href="/blog"
+            variant="link"
+            className="my-auto text-sm font-normal max-sm:hidden"
+          >
+            Blog
+          </InternalLink>
+        </TooltipWrapper>
       </div>
-    </nav>
-  );
-};
+
+      {/* Right */}
+      <div className="flex flex-row gap-1 self-center">
+        <TooltipWrapper text="View my blog!" asChild>
+          <InternalLink
+            href="/contact"
+            variant="outline"
+            className="my-auto max-md:hidden"
+          >
+            <EnvelopeOpenIcon className="mr-2 size-4 rotate-0 scale-100" />
+            Contact Me
+          </InternalLink>
+        </TooltipWrapper>
+
+        <TooltipWrapper text="My Resume" asChild>
+          <ExternalLink
+            href="https://github.com/caffeine-addictt/caffeine-addictt/blob/main/media/ng_jun_xiang_resume.pdf"
+            variant="outline"
+            className="my-auto max-md:hidden"
+          >
+            <FileTextIcon className="mr-2 size-4 rotate-0 scale-100" />
+            My Resume
+          </ExternalLink>
+        </TooltipWrapper>
+
+        <TooltipWrapper text="LinkedIn" asChild>
+          <ExternalLink
+            href="https://www.linkedin.com/in/ngjx/"
+            variant="outline"
+            size="icon"
+            className="my-auto max-sm:hidden"
+          >
+            <LinkedInLogoIcon className="size-[1.2rem] rotate-0 scale-100" />
+          </ExternalLink>
+        </TooltipWrapper>
+
+        <TooltipWrapper text="Github" asChild>
+          <ExternalLink
+            href="https://github.com/caffeine-addictt"
+            variant="outline"
+            size="icon"
+            className="my-auto max-sm:hidden"
+          >
+            <GitHubLogoIcon className="size-[1.2rem] rotate-0 scale-100" />
+          </ExternalLink>
+        </TooltipWrapper>
+
+        <ModeToggle className="my-auto" />
+
+        {/* Mobile dropdown */}
+        <MobileDropdown />
+      </div>
+    </div>
+  </nav>
+);
 export default Navbar;
 
-const MobileDropdown = ({
-  toast,
-}: {
-  toast: ReturnType<typeof useToast>['toast'];
-}) => (
+const MobileDropdown = () => (
   <DropdownMenu>
     <DropdownMenuTrigger className="group" asChild>
       <Button
@@ -166,20 +151,14 @@ const MobileDropdown = ({
         </InternalLink>
       </DropdownMenuItem>
       <DropdownMenuItem>
-        <Button
+        <ExternalLink
+          href="https://github.com/caffeine-addictt/caffeine-addictt/blob/main/media/ng_jun_xiang_resume.pdf"
           variant="link"
           className="w-full"
-          onClick={() =>
-            toast({
-              title: 'Coming soon!',
-              description: 'My Resume will be available soon.',
-              variant: 'destructive',
-            })
-          }
         >
           <FileTextIcon className="mr-2 size-4 rotate-0 scale-100" />
           My Resume
-        </Button>
+        </ExternalLink>
       </DropdownMenuItem>
 
       <DropdownMenuItem>
