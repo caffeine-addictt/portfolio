@@ -1,9 +1,13 @@
 {
   "private": true,
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/cli": "^4.3.3",
+    "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^22.7.4",
-    "tailwindcss": "^3.4.13",
+    "daisyui": "^5.7.17",
+    "tailwindcss": "^4.3.3",
     "tailwindcss-animate": "^1.0.7"
   }
 }
