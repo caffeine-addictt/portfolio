@@ -1,3 +1,15 @@
+FROM node:26-alpine AS tw
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
+COPY public/globals.css style.css
+COPY public/tailwind.config.js tailwind.config.js
+COPY templates/ templates/
+RUN npx @tailwindcss/cli -i style.css -o main.css --minify
+
+
 FROM rust:1.81.0-slim-bookworm AS builder
 WORKDIR /app
 
@@ -37,10 +49,11 @@ RUN chown appuser /usr/local/bin/portfolio && chown -R appuser /opt/app
 
 COPY templates ./templates/
 COPY public ./public/
+COPY --from=tw /app/main.css ./public/css/main.css
 
 USER appuser
 ENV RUST_LOG="portfolio=debug,info"
 ENV RUST_BACKTRACE=1
 
 EXPOSE 3000
-ENTRYPOINT ["portfolio"]
+ENTRYPOINT ["/usr/local/bin/portfolio"]
