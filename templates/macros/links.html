@@ -1,8 +1,12 @@
-{% macro internal_link(url, content, props="") %}
-  <a href="{{ url }}" {{ props }}>{{ content }}</a>
-{% endmacro internal_link %}
-
-{% macro external_link(url, content, props="") %}
-  <a href="{{ url }}" target="_blank" rel="noopener noreferrer" {{ props }}>{{ content }}</a>
-{% endmacro external_link %}
-
+{# variant = internal|external #}
+{% component link(url, content, classname="", props="", variant="internal") %}
+  <a
+    href="{{ url }}"
+    class="link {{ classname }}"
+    {% if variant == "external" %}
+      rel="noopener noreferrer"
+      target="_blank"
+    {% endif %}
+    {{ props }}
+  >{{ content }}</a>
+{% endcomponent link %}
