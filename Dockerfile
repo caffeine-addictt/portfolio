@@ -10,7 +10,7 @@ COPY templates/ templates/
 RUN npx @tailwindcss/cli -i style.css -o main.css --minify
 
 
-FROM rust:1.81.0-slim-bookworm AS builder
+FROM rust:1.95-slim-bookworm AS builder
 WORKDIR /app
 
 # cache
