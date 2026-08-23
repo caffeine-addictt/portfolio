@@ -6,6 +6,7 @@ edition = "2021"
 [dependencies]
 anyhow = "1.0.89"
 axum = "0.8.9"
+chrono = "0.4.45"
 tera = { version = "2.2.0", features = [
   "fast",
   "glob_fs",
