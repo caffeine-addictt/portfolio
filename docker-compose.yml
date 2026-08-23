@@ -3,7 +3,7 @@ services:
     image: portfolio:latest
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.vercel
     develop:
       watch:
         - path: src
@@ -13,5 +13,5 @@ services:
         - path: public
           action: rebuild
     ports:
-      - "3000:3000"
+      - "3000:80"
     env_file: .env

@@ -55,5 +55,5 @@ USER appuser
 ENV RUST_LOG="portfolio=debug,info"
 ENV RUST_BACKTRACE=1
 
-EXPOSE 3000
+EXPOSE 80
 ENTRYPOINT ["/usr/local/bin/portfolio"]

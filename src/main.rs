@@ -22,7 +22,7 @@ async fn main() -> Result<(), std::io::Error> {
     tera.load_from_glob("templates/**/*")
         .expect("creating tera templates to not error");
 
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await?;
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:80").await?;
     axum::serve(
         listener,
         routes::get_routes()
