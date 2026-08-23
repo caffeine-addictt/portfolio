@@ -23,6 +23,7 @@ async fn main() -> Result<(), std::io::Error> {
         .expect("creating tera templates to not error");
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:80").await?;
+    tracing::info!("listening on {}", listener.local_addr().unwrap());
     axum::serve(
         listener,
         routes::get_routes()
