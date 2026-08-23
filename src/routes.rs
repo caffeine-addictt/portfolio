@@ -20,6 +20,7 @@ pub fn get_routes() -> Router {
         .route("/resume", get(async || Redirect::permanent("https://raw.githubusercontent.com/caffeine-addictt/caffeine-addictt/refs/heads/main/media/ng_jun_xiang_resume.pdf")))
         .nest_service("/img", ServeDir::new("public/images"))
         .nest_service("/css", ServeDir::new("public/css"))
+        .fallback_service(ServeDir::new("public/root"))
 }
 
 #[instrument]
