@@ -7,6 +7,13 @@ use chrono::{Datelike, Local, NaiveDate};
 use tower_http::services::ServeDir;
 use tracing::instrument;
 
+pub fn get_tera_ctx() -> tera::Context {
+    let mut ctx = tera::Context::new();
+    ctx.insert("year", &Local::now().year());
+    ctx.insert("site_name", "ngjx.org");
+    ctx
+}
+
 pub fn get_routes() -> Router {
     Router::new()
         .route("/", get(root_path))
@@ -16,7 +23,7 @@ pub fn get_routes() -> Router {
 
 #[instrument]
 async fn root_path(Extension(tera): Extension<tera::Tera>) -> Html<String> {
-    let mut ctx = tera::Context::new();
+    let mut ctx = get_tera_ctx();
 
     let today = Local::now().date_naive();
     let birth = NaiveDate::from_ymd_opt(2006, 9, 30).unwrap();
