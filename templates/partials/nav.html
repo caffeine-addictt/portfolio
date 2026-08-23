@@ -1,7 +1,24 @@
-<nav class="flex h-16 w-full justify-center bg-white/60 shadow-sm backdrop-blur-sm transition-all will-change-scroll dark:bg-black/60">
-  <div class="mb-2 mt-4 flex h-full w-[95%] flex-row justify-between gap-1 self-center">
-    {{ <link url="/" content="Portfolio" /> }}
+<nav class="flex sticky top-0 z-50 h-16 w-full backdrop-blur-sm will-change-scroll">
+  <div class="mx-auto mb-2 mt-4 flex size-full sm:max-w-3xl max-sm:px-6 flex-row justify-between gap-1 self-center">
 
+    {# left #}
+    <div class="flex flex-row self-center gap-10 transition-color">
+      {% <link url="/" class="link-hover text-xl text-current/70 hover:text-current"> %}home{% </link> %}
+      {% <link url="/projects" class="link-hover text-xl text-current/70 hover:text-current"> %}projects{% </link> %}
+      {% <link url="/blog" class="link-hover text-xl text-current/70 hover:text-current"> %}blog{% </link> %}
+      {% <link url="/contact" class="link-hover text-xl text-current/70 hover:text-current"> %}contact{% </link> %}
+    </div>
+
+    {# right #}
+    <div class="self-center">
+      <label class="swap swap-rotate">
+        <input type="checkbox" class="theme-controller" value="light" />
+        {{ <icon.sun class="size-[2em] swap-off fill-current"/> }}
+        {{ <icon.moon class="size-[2em] swap-on fill-current"/> }}
+      </label>
+    </div>
 
   </div>
 </nav>
+
+
