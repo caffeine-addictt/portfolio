@@ -16,5 +16,14 @@ pub fn get_routes() -> Router {
 
 #[instrument]
 async fn root_path(Extension(tera): Extension<tera::Tera>) -> Html<String> {
-    Html(tera.render("index.html", &tera::Context::new()).unwrap())
+    let mut ctx = tera::Context::new();
+
+    let today = Local::now().date_naive();
+    let birth = NaiveDate::from_ymd_opt(2006, 9, 30).unwrap();
+    let age = today.year()
+        - birth.year()
+        - ((today.month(), today.day()) < (birth.month(), birth.day())) as i32;
+
+    ctx.insert("age", &age);
+    Html(tera.render("index.html", &ctx).unwrap())
 }

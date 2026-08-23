@@ -1,7 +1,60 @@
 {% extends "layout.html"  %}
 
+
 {% block content %}
-  <span class="text-white">
-    test
-  </span>
+<div class="mx-auto w-full sm:max-w-3xl px-6">
+
+  {# Hero #}
+  <section class="py-16 sm:py-24">
+    <div class="flex flex-col gap-6 sm:flex-row-reverse sm:justify-between sm:items-center">
+
+      <img
+        src="/static/images/me.jpg"
+        alt="Alex Ng"
+        width="250"
+        height="250"
+        fetchpriority="high"
+        class="rounded-xl object-cover"
+      >
+
+      <div class="max-w-xl flex flex-col space-y-5">
+        <h1 class="text-5xl font-bold tracking-tight">
+          hi, alex here. 👋
+        </h1>
+
+        <p class="font-bold text-base-content">
+          {{ age }}yo
+          HPC software engineer from Singapore 🇸🇬
+        </p>
+
+        <p class="leading-7 text-balance">
+          I play with supercomputers, homelabbing and Linux.
+          I also maintain OSS projects on the side.
+        </p>
+
+        <div class="flex flex-wrap gap-6 text-base items-center">
+          <a href="/resume" target="_blank" class="btn btn-outline">
+            Resume
+            {{ <icon.download /> }}
+          </a>
+
+          {% <link.icon url="https://github.com/caffeine-addictt" external={true}> %}
+            {{<icon.github class="size-[1.5em]" />}}
+          {% </link.icon> %}
+          {% <link.icon url="https://www.linkedin.com/in/ngjx/" external={true}> %}
+            {{<icon.linkedin class="size-[1.5em]" />}}
+          {% </link.icon> %}
+          {% <link.icon url="/contact"> %}
+            {{<icon.mail class="size-[1.5em]" />}}
+          {% </link.icon> %}
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+</div>
 {% endblock %}
