@@ -1,3 +1,21 @@
-<footer>
+<footer class="flex pt-5 pb-10 size-full text-sm text-current/70">
+  <div class="flex sm:max-w-3xl mx-auto w-full max-sm:flex-col-reverse max-sm:gap-5 items-center flex-row justify-between self-center">
 
+    {# copyright #}
+    <span>© {{ year }} {{ site_name }} | <a href="/privacy" class="link font-bold">privacy</a></span>
+
+    {# socials #}
+    <div class="flex flex-row gap-4 items-center">
+      {% <link.icon url="https://github.com/caffeine-addictt" external={true}> %}
+        {{<icon.github class="size-[1.5em]" />}}
+      {% </link.icon> %}
+      {% <link.icon url="https://www.linkedin.com/in/ngjx/" external={true}> %}
+        {{<icon.linkedin class="size-[1.5em]" />}}
+      {% </link.icon> %}
+      {% <link.icon url="/contact"> %}
+        {{<icon.mail class="size-[1.5em]" />}}
+      {% </link.icon> %}
+    </div>
+
+  </div>
 </footer>
