@@ -4,6 +4,7 @@ use axum::{
     Extension, Router,
 };
 use chrono::{Datelike, Local, NaiveDate};
+use serde::{Deserialize, Serialize};
 use tower_http::services::ServeDir;
 use tracing::instrument;
 
@@ -34,5 +35,31 @@ async fn root_path(Extension(tera): Extension<tera::Tera>) -> Html<String> {
         - ((today.month(), today.day()) < (birth.month(), birth.day())) as i32;
 
     ctx.insert("age", &age);
+
+    // work / experience
+    let experiences: Vec<Experience> = vec![Experience {
+        logo: String::from("img/vercel.svg"),
+        company: String::from("Vercel"),
+        url: String::from("https://vercel.com"),
+        period: String::from("2022 - now"),
+        role: String::from("Software Engineer"),
+        description: Some(vec!["test1".to_string(), "test2".to_string()]),
+        tags: Some(vec!["test1".to_string(), "test2".to_string()]),
+    }];
+    ctx.insert("experiences", &experiences);
+
     Html(tera.render("index.html", &ctx).unwrap())
 }
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+struct Experience {
+    logo: String,
+    company: String,
+    url: String,
+    period: String,
+    role: String,
+    description: Option<Vec<String>>,
+    tags: Option<Vec<String>>,
+}
+
+// type Experience struct {}
