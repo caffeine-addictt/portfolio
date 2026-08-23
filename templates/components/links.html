@@ -1,14 +1,14 @@
 {# variant = internal|external #}
-{% component link(url, content, classname="", props="", variant="internal") %}
+{% component link(url, class="", props="", variant="internal") %}
 <a
   href="{{ url }}"
-  class="link {{ classname }}"
+  class="link {{ class }}"
   {% if variant == "external" %}
     rel="noopener noreferrer"
     target="_blank"
   {% endif %}
   {{ props }}
->{{ content }}</a>
+>{{ body }}</a>
 {% endcomponent link %}
 
 {% component link.icon(url, class="", external: bool = false) %}
