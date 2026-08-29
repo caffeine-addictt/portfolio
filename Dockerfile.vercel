@@ -37,6 +37,10 @@ RUN \
 FROM debian:bookworm-slim AS deploy
 WORKDIR /opt/app
 
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends ca-certificates \
+  && rm -rf /var/lib/apt/lists/*
+
 RUN adduser \
   --disabled-password \
   --gecos "" \
