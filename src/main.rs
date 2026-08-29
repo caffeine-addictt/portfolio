@@ -19,6 +19,7 @@ async fn main() -> Result<(), std::io::Error> {
     tracing_subscriber::fmt::init();
     dotenvy::dotenv().ok();
 
+    let dev = std::env::var("DEV").is_ok_and(|s| s.to_lowercase() == "true");
     let mut tera = tera::Tera::new();
     tera.load_from_glob("templates/**/*")
         .expect("creating tera templates to not error");
@@ -27,7 +28,7 @@ async fn main() -> Result<(), std::io::Error> {
     tracing::info!("listening on {}", listener.local_addr().unwrap());
     axum::serve(
         listener,
-        routes::get_routes()
+        routes::get_routes(dev)
             .layer(Extension(tera))
             .layer(
                 TraceLayer::new_for_http()

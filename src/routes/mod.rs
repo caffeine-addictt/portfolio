@@ -12,7 +12,7 @@ pub fn get_tera_ctx() -> tera::Context {
     ctx
 }
 
-pub fn get_routes() -> Router {
+pub fn get_routes(_dev: bool) -> Router {
     Router::new()
         .route("/", get(index::root_path))
         .route("/resume", get(async || Redirect::permanent("https://raw.githubusercontent.com/caffeine-addictt/caffeine-addictt/refs/heads/main/media/ng_jun_xiang_resume.pdf")))
