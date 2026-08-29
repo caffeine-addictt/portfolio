@@ -12,11 +12,30 @@
     {# right #}
     <div class="self-center">
       <label class="swap swap-rotate">
-        <input type="checkbox" class="theme-controller" value="light" />
+        <input type="checkbox" id="theme-toggle" />
         {{ <icon.sun class="swap-off fill-current"/> }}
         {{ <icon.moon class="swap-on fill-current"/> }}
       </label>
     </div>
+
+    <script>
+      const toggle = document.getElementById("theme-toggle");
+
+      const theme =
+        localStorage.getItem("theme") ??
+        (window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light");
+      document.documentElement.dataset.theme = theme;
+      toggle.checked = theme === "dark";
+
+      toggle.addEventListener("change", () => {
+        const theme = toggle.checked ? "dark" : "light";
+
+        document.documentElement.dataset.theme = theme;
+        localStorage.setItem("theme", theme);
+      });
+    </script>
 
   </div>
 </nav>

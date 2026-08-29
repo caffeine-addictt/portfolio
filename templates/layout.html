@@ -25,6 +25,15 @@
     integrity="sha384-H5SrcfygHmAuTDZphMHqBJLc3FhssKjG7w/CeCpFReSfwBWDTKpkzPP8c+cLsK+V"
     crossorigin="anonymous"
   ></script>
+  <script>
+    (() => {
+      const theme = localStorage.getItem("theme");
+
+      if (theme) {
+        document.documentElement.dataset.theme = theme;
+      }
+    })();
+  </script>
 </head>
 
 <body class="scroll-smooth transition-color flex min-w-full max-w-full flex-col text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark">
