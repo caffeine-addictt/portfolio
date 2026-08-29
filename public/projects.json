@@ -26,6 +26,21 @@
     ]
   },
   {
+    "img_url": "/img/projects/ctfjx.png",
+    "name": "CTFjx",
+    "description": "CTF Platform built with Rust",
+    "source_url": "https://github.com/ctfjx/ctfjx",
+    "website_url": "https://ctfjx.ngjx.org",
+    "technologies": [
+      "Rust",
+      "Git",
+      "Ctf",
+      "CyberSec",
+      "OSS",
+      "Cli"
+    ]
+  },
+  {
     "img_url": "/img/projects/video_manager.webp",
     "name": "Video Manager CLI",
     "description": "CLI for downloading and managing video files locally",
