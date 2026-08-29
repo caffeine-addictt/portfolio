@@ -2,19 +2,19 @@
   <div class="mx-auto mb-2 mt-4 flex size-full sm:max-w-3xl px-6 flex-row justify-between gap-5 self-center">
 
     {# left #}
-    <div class="flex flex-row self-center gap-10 transition-color">
-      {% <link url="/" class="link-hover text-xl text-current/70 hover:text-current"> %}home{% </link> %}
-      {% <link url="/projects" class="link-hover text-xl text-current/70 hover:text-current"> %}projects{% </link> %}
-      {% <link url="/blog" class="link-hover text-xl text-current/70 hover:text-current"> %}blog{% </link> %}
-      {% <link url="/contact" class="link-hover text-xl text-current/70 hover:text-current"> %}contact{% </link> %}
+    <div class="flex flex-row self-center gap-5 transition-color">
+      {% <link url="/" class="link-hover text-current/70 hover:text-current"> %}home{% </link> %}
+      {% <link url="/projects" class="link-hover text-current/70 hover:text-current"> %}projects{% </link> %}
+      {% <link url="/blog" class="link-hover text-current/70 hover:text-current"> %}blog{% </link> %}
+      {% <link url="/contact" class="link-hover text-current/70 hover:text-current"> %}contact{% </link> %}
     </div>
 
     {# right #}
     <div class="self-center">
       <label class="swap swap-rotate">
         <input type="checkbox" class="theme-controller" value="light" />
-        {{ <icon.sun class="size-[2em] swap-off fill-current"/> }}
-        {{ <icon.moon class="size-[2em] swap-on fill-current"/> }}
+        {{ <icon.sun class="swap-off fill-current"/> }}
+        {{ <icon.moon class="swap-on fill-current"/> }}
       </label>
     </div>
 
