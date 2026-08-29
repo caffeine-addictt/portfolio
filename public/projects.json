@@ -1,0 +1,40 @@
+[
+  {
+    "img_url": "/img/projects/waku.webp",
+    "name": "Waku",
+    "description": "OSS Project Templating Tool",
+    "source_url": "https://github.com/caffeine-addictt/waku",
+    "website_url": "https://waku.ngjx.org",
+    "technologies": [
+      "Go",
+      "Git",
+      "OSS",
+      "Cli"
+    ]
+  },
+  {
+    "img_url": "/img/projects/thread.webp",
+    "name": "Python Thread",
+    "description": "OSS Python Threading Library",
+    "source_url": "https://github.com/python-thread/thread",
+    "website_url": "https://thread.ngjx.org",
+    "technologies": [
+      "Python",
+      "OSS",
+      "PyPI",
+      "Threading"
+    ]
+  },
+  {
+    "img_url": "/img/projects/video_manager.webp",
+    "name": "Video Manager CLI",
+    "description": "CLI for downloading and managing video files locally",
+    "source_url": "https://github.com/caffeine-addictt/video-manager",
+    "website_url": "",
+    "technologies": [
+      "Go",
+      "OSS",
+      "Cli"
+    ]
+  }
+]

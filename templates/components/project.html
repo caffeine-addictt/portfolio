@@ -1,0 +1,75 @@
+{% for proj in projects %}
+{{<project.card project={proj} />}}
+{% endfor %}
+
+{% component project.card(project) %}
+<div class="card bg-base-200 max-sm:w-full sm:w-[47%] shadow-sm">
+  <figure class="h-44 rounded-xl">
+    <img src="{{ project.img_url }}" alt="" class="object-cover skeleton size-full" />
+  </figure>
+
+  <div class="card-body">
+    <h2 class="card-title">
+      {{ project.name }}
+    </h2>
+    <p class="mt-1">{{ project.description }}</p>
+
+    {% if project.technologies %}
+    <div class="flex gap-2 mt-2">
+      {% for tech in project.technologies %}
+      <div class="badge badge-sm">{{ tech }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="card-actions mt-4 justify-start">
+      {% if project.source_url %}
+      <a
+        href="{{ project.source_url }}"
+        class="btn btn-sm btn-soft"
+        aria-label="Source code"
+      >
+        {{<icon.github class="mr-1" />}}
+        source
+      </a>
+      {% endif %}
+
+      {% if project.website_url %}
+      <a
+        href="{{ project.website_url }}"
+        class="btn btn-sm btn-soft"
+        aria-label="Website"
+      >
+        {{<icon.globe class="mr-1" />}}
+        website
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endcomponent project.card %}
+
+{% component project.card.skeleton() %}
+<div class="card bg-base-200 max-sm:w-full sm:w-[47%] shadow-sm">
+  <figure class="h-44 rounded-xl">
+    <div class="object-cover skeleton size-full" />
+  </figure>
+
+  <div class="card-body">
+    <div class="card-title skeleton w-14 h-7"></div>
+    <div class="mt-1 skeleton w-40 h-5"></div>
+
+    <div class="flex gap-2 mt-2">
+      <div class="badge badge-sm w-10 skeleton"></div>
+      <div class="badge badge-sm w-12 skeleton"></div>
+      <div class="badge badge-sm w-6 skeleton"></div>
+    </div>
+
+    <div class="card-actions mt-4">
+      <div class="skeleton w-20 h-8"></div>
+      <div class="skeleton w-24 h-8"></div>
+    </div>
+
+  </div>
+</div>
+{% endcomponent project.card.skeleton %}

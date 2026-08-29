@@ -4,6 +4,7 @@ use tower_http::services::ServeDir;
 
 pub mod error;
 mod index;
+mod projects;
 
 pub fn get_tera_ctx() -> tera::Context {
     let mut ctx = tera::Context::new();
@@ -14,7 +15,12 @@ pub fn get_tera_ctx() -> tera::Context {
 
 pub fn get_routes(_dev: bool) -> Router {
     Router::new()
+        // index
         .route("/", get(index::root_path))
+        .route("/featured-projects", get(projects::featured_projects))
+        // projects
+        // contact
+        //
         .route("/resume", get(async || Redirect::permanent("https://raw.githubusercontent.com/caffeine-addictt/caffeine-addictt/refs/heads/main/media/ng_jun_xiang_resume.pdf")))
         .nest_service("/img", ServeDir::new("public/images"))
         .nest_service("/css", ServeDir::new("public/css"))

@@ -68,6 +68,32 @@
   </section>
 
   {# featured projects #}
+  <section>
+    <div class="mb-8 flex items-baseline justify-between">
+      <h2 class="text-2xl font-semibold">
+        featured projects
+      </h2>
+      <a
+        href="/projects"
+        class="link link-hover text-sm text-base-content/50 hover:text-base-content"
+      >
+        view all →
+      </a>
+    </div>
+
+    <div
+      hx-get="/featured-projects"
+      hx-trigger="load, every 60mins"
+      hx-swap="innerHTML"
+      class="flex flex-col justify-between sm:flex-row max-sm:gap-4"
+    >
+      {{<project.card.skeleton />}}
+      {{<project.card.skeleton />}}
+    </div>
+
+  </section>
+
+
   {# recent posts (blog) #}
 
 
