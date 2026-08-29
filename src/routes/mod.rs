@@ -19,6 +19,7 @@ pub fn get_routes(_dev: bool) -> Router {
         .route("/", get(index::root_path))
         .route("/featured-projects", get(projects::featured_projects))
         // projects
+        .route("/projects", get(projects::projects))
         // contact
         //
         .route("/resume", get(async || Redirect::permanent("https://raw.githubusercontent.com/caffeine-addictt/caffeine-addictt/refs/heads/main/media/ng_jun_xiang_resume.pdf")))

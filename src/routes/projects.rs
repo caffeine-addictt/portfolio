@@ -30,3 +30,10 @@ pub async fn featured_projects(Extension(tera): Extension<tera::Tera>) -> Html<S
     );
     Html(tera.render("components/project.html", &ctx).unwrap())
 }
+
+#[instrument]
+pub async fn projects(Extension(tera): Extension<tera::Tera>) -> Html<String> {
+    let mut ctx = get_tera_ctx();
+    ctx.insert("projects", &*PROJECTS);
+    Html(tera.render("projects.html", &ctx).unwrap())
+}
