@@ -28,11 +28,11 @@
 </head>
 
 <body class="scroll-smooth transition-color flex min-w-full max-w-full flex-col text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark">
-  {% block nav %}{% include "partials/nav.html" %}{% endblock %}
-  <main class="flex min-h-screen flex-col w-full max-w-full grow">
+  <main class="flex min-h-screen flex-col mx-auto space-y-12 max-md:px-6 sm:max-w-3xl grow">
+    {% block nav %}{% include "partials/nav.html" %}{% endblock %}
     {% block content %}{% endblock %}
+    {% block footer %}{% include "partials/footer.html" %}{% endblock %}
   </main>
-  {% block footer %}{% include "partials/footer.html" %}{% endblock %}
 </body>
 
 </html>
