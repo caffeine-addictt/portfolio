@@ -1,4 +1,4 @@
-use axum::{response::Redirect, routing::get, Router};
+use axum::{handler::HandlerWithoutStateExt, response::Redirect, routing::get, Router};
 use chrono::{Datelike, Local};
 use tower_http::services::ServeDir;
 
@@ -18,6 +18,8 @@ pub fn get_routes() -> Router {
         .route("/resume", get(async || Redirect::permanent("https://raw.githubusercontent.com/caffeine-addictt/caffeine-addictt/refs/heads/main/media/ng_jun_xiang_resume.pdf")))
         .nest_service("/img", ServeDir::new("public/images"))
         .nest_service("/css", ServeDir::new("public/css"))
-        .fallback_service(ServeDir::new("public/root"))
-        .fallback(error::handle_lost)
+        .fallback_service(
+            ServeDir::new("public/root")
+                .not_found_service(error::handle_lost.into_service()),
+        )
 }
