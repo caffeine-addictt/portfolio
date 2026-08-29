@@ -1321,6 +1321,7 @@ dependencies = [
  "dotenvy",
  "libsql",
  "serde",
+ "serde_json",
  "tera",
  "tokio",
  "tower 0.5.3",
