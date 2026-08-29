@@ -1,6 +1,6 @@
-use std::time::Duration;
+use std::{sync::Arc, time::Duration};
 
-use anyhow::Result;
+use anyhow::{Error, Result};
 use axum::{
     error_handling::HandleErrorLayer,
     extract::MatchedPath,
@@ -12,24 +12,31 @@ use tower_http::{classify::ServerErrorsFailureClass, trace::TraceLayer};
 use tracing::{debug, error, info, info_span, Span};
 
 mod config;
+mod database;
 mod routes;
 
 #[tokio::main]
-async fn main() -> Result<(), std::io::Error> {
+async fn main() -> Result<(), Error> {
     tracing_subscriber::fmt::init();
     dotenvy::dotenv().ok();
 
     let dev = std::env::var("DEV").is_ok_and(|s| s.to_lowercase() == "true");
+    let url = std::env::var("TURSO_DB_URL").expect("TURSO_DATABASE_URL is not set");
+    let token = std::env::var("TURSO_DB_TOKEN").expect("TURSO_DATABASE_TOKEN is not set");
+
+    let db = Arc::new(database::Database::new(url.as_str(), token.as_str()).await?);
+
     let mut tera = tera::Tera::new();
     tera.load_from_glob("templates/**/*")
         .expect("creating tera templates to not error");
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:80").await?;
     tracing::info!("listening on {}", listener.local_addr().unwrap());
-    axum::serve(
+    Ok(axum::serve(
         listener,
         routes::get_routes(dev)
             .layer(Extension(tera))
+            .layer(Extension(db.clone()))
             .layer(
                 TraceLayer::new_for_http()
                     .make_span_with(|request: &Request<_>| {
@@ -77,5 +84,5 @@ async fn main() -> Result<(), std::io::Error> {
             ),
     )
     .with_graceful_shutdown(config::shutdown_signal())
-    .await
+    .await?)
 }
