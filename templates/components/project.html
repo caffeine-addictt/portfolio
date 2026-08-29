@@ -1,10 +1,10 @@
 {% for proj in projects %}
-{{<project.card project={proj} class="sm:w-[47%]" />}}
+{{<project.card project={proj} />}}
 {% endfor %}
 
 {% component project.card(project, class: string = "") %}
-<div class="card bg-base-200 max-sm:w-full sm:w-[17.5rem] md:w-[21rem] shadow-sm {{ class }}">
-  <figure class="h-64 sm:h-44 rounded-xl">
+<div class="card bg-base-200 w-full shadow-sm {{ class }}">
+  <figure class="h-64 sm:h-56 rounded-xl">
     <img src="{{ project.img_url }}" alt="" class="object-cover skeleton size-full" />
   </figure>
 
@@ -50,9 +50,9 @@
 {% endcomponent project.card %}
 
 {% component project.card.skeleton(class: string = "") %}
-<div class="card bg-base-200 max-sm:w-full sm:w-[18.5rem] md:w-[22.5rem] shadow-sm {{ class }}">
-  <figure class="h-64 sm:h-44 rounded-xl">
-    <div class="object-cover skeleton size-full" />
+<div class="card bg-base-200 w-full shadow-sm {{ class }}">
+  <figure class="h-64 sm:h-56 rounded-xl">
+    <div class="object-cover skeleton size-full"></div>
   </figure>
 
   <div class="card-body">
