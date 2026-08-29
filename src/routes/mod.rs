@@ -2,6 +2,7 @@ use axum::{response::Redirect, routing::get, Router};
 use chrono::{Datelike, Local};
 use tower_http::services::ServeDir;
 
+pub mod error;
 mod index;
 
 pub fn get_tera_ctx() -> tera::Context {
@@ -18,4 +19,5 @@ pub fn get_routes() -> Router {
         .nest_service("/img", ServeDir::new("public/images"))
         .nest_service("/css", ServeDir::new("public/css"))
         .fallback_service(ServeDir::new("public/root"))
+        .fallback(error::handle_lost)
 }
