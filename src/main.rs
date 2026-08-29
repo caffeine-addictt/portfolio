@@ -17,6 +17,7 @@ mod routes;
 #[tokio::main]
 async fn main() -> Result<(), std::io::Error> {
     tracing_subscriber::fmt::init();
+    dotenvy::dotenv().ok();
 
     let mut tera = tera::Tera::new();
     tera.load_from_glob("templates/**/*")
