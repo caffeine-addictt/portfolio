@@ -5,7 +5,7 @@
 <div class="mx-auto w-full sm:max-w-3xl px-6">
 
   {# Hero #}
-  <section class="py-12">
+  <section class="pt-12">
     <div class="flex flex-col gap-6 sm:flex-row-reverse sm:justify-between items-center">
 
       <img
@@ -54,105 +54,16 @@
   </section>
 
   {# work/education #}
-  <section class="py-12">
-
-    <div class="mb-8 flex items-center gap-2">
-      <button
-        class="btn btn-sm btn-ghost"
-        hx-get="/experience"
-        hx-target="#timeline"
-        hx-swap="innerHTML"
-      >
-        Work
-      </button>
-      <button
-        class="btn btn-sm btn-ghost"
-        hx-get="/education"
-        hx-target="#timeline"
-        hx-swap="innerHTML"
-      >
-        Education
-      </button>
-    </div>
-
-
-    <div id="timeline" class="space-y-10">
-
-      {% for experience in experiences %}
-      <article class="grid grid-cols-[2.5rem_1fr] gap-4">
-
-        <div class="flex justify-center">
-          {% if experience.logo %}
-          <div class="avatar">
-            <div class="w-10 rounded-md">
-              <img
-                src="{{ experience.logo }}"
-                alt="{{ experience.company }}"
-              >
-            </div>
-          </div>
-          {% else %}
-          <div class="flex size-10 items-center justify-center rounded-md bg-base-200">
-            <span class="font-mono text-sm">
-              {{ experience.company | first }}
-            </span>
-          </div>
-          {% endif %}
-        </div>
-
-
-        <div>
-
-          <div class="flex flex-col sm:flex-row sm:items-baseline sm:gap-2">
-
-            {% if experience.url %}
-            <a
-              href="{{ experience.url }}"
-              class="font-semibold hover:underline"
-            >
-              {{ experience.company }}
-            </a>
-            {% else %}
-            <span class="font-semibold">
-              {{ experience.company }}
-            </span>
-            {% endif %}
-
-            <span class="text-base-content/60">
-              {{ experience.role }}
-            </span>
-
-          </div>
-
-          <p class="mt-1 text-sm text-base-content/50">
-            {{ experience.period }}
-          </p>
-
-
-          {% if experience.description %}
-          <ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-6 text-base-content/70">
-            {% for item in experience.description %}
-            <li>{{ item }}</li>
-            {% endfor %}
-          </ul>
-          {% endif %}
-
-
-          {% if experience.tags %}
-          <div class="mt-4 flex flex-wrap gap-2">
-            {% for tag in experience.tags %}
-            <span class="badge badge-ghost badge-sm font-mono">
-              {{ tag }}
-            </span>
-            {% endfor %}
-          </div>
-          {% endif %}
-
-        </div>
-
-      </article>
-      {% endfor %}
-
+  <section class="pt-12">
+    <div class="tabs tabs-box justify-between">
+      <input type="radio" name="work_edu_tab" class="tab w-[49%] ml-0.5" aria-label="Work" checked="checked" />
+      <div class="tab-content bg-base-100 border-base-300 p-6">
+        {{ <index.timeline groups={work} /> }}
+      </div>
+      <input type="radio" name="work_edu_tab" class="tab w-[49%] mr-0.5" aria-label="Education" />
+      <div class="tab-content bg-base-100 border-base-300 p-6">
+        {{ <index.timeline groups={edu} /> }}
+      </div>
     </div>
   </section>
 
@@ -160,6 +71,57 @@
   {# recent posts (blog) #}
 
 
-
 </div>
 {% endblock %}
+
+
+{% component index.timeline(groups: array) %}
+<ul class="timeline timeline-vertical timeline-compact">
+  {% for g in groups %}
+  <li class="[--timeline-row-start:minmax(0,0.05fr)]">
+    {% if loop.index != 1 %}
+    <hr />
+    {% endif %}
+
+    <div class="timeline-middle">
+      <div class="avatar">
+        <div class="size-12 rounded-xs bg-base-200">
+          <img src="{{ g.logo }}" alt="{{ g.name_short }}" class="w-full h-full object-contain" />
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-end flex flex-col w-full mb-4 ml-2 {% if loop.index == 1 %}mt-0{% endif %}">
+      <a class="font-bold text-lg link link-hover" href="{{ g.site_link }}" target="_blank">{{ g.name_long }}</a>
+
+      {% for i in g.items %}
+      <div class="text-sm text-current/70 flex flex-row max-sm:flex-col max-sm:gap-2 w-full sm:justify-between mt-1">
+        <span>{{ i.sub_title }}</span>
+        <span>{{ i.duration_flavor }}</span>
+      </div>
+
+      {% if i.description %}
+      <ul class="list-disc space-y-1 mt-2 text-sm sm:w-[95%]">
+        {% for desc in i.description %}
+        <li> {{ desc }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+      {% if i.links %}
+      <div class="flex flex-row gap-2 mt-2">
+        {% for l in i.links %}
+          <a class="btn btn-xs btn-soft" href="{{ l.link }}" target="_blank">{{ l.name }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% endfor %}
+    </div>
+
+    <hr />
+  </li>
+  {% endfor %}
+</ul>
+{% endcomponent index.timeline %}
+

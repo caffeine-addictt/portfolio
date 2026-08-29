@@ -1,0 +1,67 @@
+[
+  {
+    "logo": "/img/saf_logo.jpg",
+    "site_link": "https://mindef.gov.sg/",
+    "name_short": "SAF",
+    "name_long": "Singapore Armed Forces",
+    "items": [
+      {
+        "sub_title": "NSF (63/26)",
+        "duration_flavor": "July 2026 - now",
+        "description": [],
+        "links": []
+      }
+    ]
+  },
+  {
+    "logo": "/img/nscc_logo.png",
+    "site_link": "https://nscc.sg",
+    "name_short": "NSCC",
+    "name_long": "National Supercomputing Centre (NSCC) Singapore",
+    "items": [
+      {
+        "sub_title": "HPC Performance, Testing & Software Engineer (Intern)",
+        "duration_flavor": "Dec 2025 - May 2026",
+        "description": [
+          "Wrote and improved testing codes & infrastructure for HPC applications (cuda, CFD, etc.)",
+          "Developed systems sampling and profilling tools to aid in performance measuring in Rust",
+          "Designed a custom binary encoding utilizing protobufs for efficient memory usage and speed (~45x faster than JSON)"
+        ],
+        "links": []
+      }
+    ]
+  },
+  {
+    "logo": "/img/nyp_infosec_logo.jpg",
+    "site_link": "https://linkedin.com/company/nyp-infosec",
+    "name_short": "NYP InfoSec",
+    "name_long": "Nanyang Polytechnic Information Security Club",
+    "items": [
+      {
+        "sub_title": "Advisor",
+        "duration_flavor": "Apr 2026 - now",
+        "description": [],
+        "links": []
+      },
+      {
+        "sub_title": "Head Systems Administrator",
+        "duration_flavor": "Apr 2024 - Apr 2026",
+        "description": [
+          "Handled 8 CTFs (NYP bi-annual CTFs & Youth Cyber Exploration Progamme (YCEP) CTFs)",
+          "Managed infrastructure for Lag n Crash (LnC) CTF 2025 that supported 500 players with 0 downtime",
+          "Hosted internal workshops that taught students about containerization, infrastructure as code (IaC), and cloud security"
+        ],
+        "links": [
+          {
+            "link": "https://lagncra.sh/",
+            "name": "Lag n Crash"
+          },
+          {
+            "link": "https://csa.gov.sg/our-programmes/talent-and-skills-development/sg-cyber-talent/sg-cyber-youth/youth-cyber-exploration-programme/",
+            "name": "YCEP"
+          }
+        ]
+      }
+    ]
+  }
+]
