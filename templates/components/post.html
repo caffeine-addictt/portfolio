@@ -1,4 +1,14 @@
-{% component post.card(class: string = "") %}
+{% if posts %}
+  {% for post in posts %}
+    {{ <post.card post={post} /> }}
+  {% endfor %}
+{% else %}
+<div class="w-full py-10">
+  <h2 class="text-center text-base-content/70 text-sm">{{ not_found_msg }}</h2>
+</div>
+{% endif %}
+
+{% component post.card(post, class: string = "") %}
 <article
   class="
     card w-full bg-base-200 shadow-sm
@@ -12,15 +22,15 @@
 
     <div class="flex flex-col gap-4 w-full md:w-[70%]">
       <h2 class="card-title text-lg font-bold transition-colors duration-200">
-        This is The Title
+        {{ post.title }}
       </h2>
 
       <p class="text-base text-base-content/70 transition-colors duration-200">
-        description<br />
-        next line
+        {{ post.description }}
       </p>
 
       <div class="flex flex-wrap gap-2">
+        {% for tag in post.tags[:2] %}
         <span
           class="
             badge badge-lg
@@ -29,31 +39,24 @@
             text-base-content/80
           "
         >
-          tag
+          {{ tag }}
         </span>
+        {% endfor %}
 
-        <span
-          class="
-            badge badge-lg
-            bg-base-100
-            border border-base-300
-            text-base-content/80
-          "
-        >
-          tag
-        </span>
-
-        <span
-          class="
-            badge badge-lg
-            bg-transparent
-            border border-base-content/20
-            text-base-content/60
-            px-1
-          "
-        >
-          +2
-        </span>
+        {% set remaining = tags[2:] | length %}
+        {% if remaining > 0 %}
+          <span
+            class="
+              badge badge-lg
+              bg-transparent
+              border border-base-content/20
+              text-base-content/60
+              px-1
+            "
+          >
+            +{{ remaining }}
+          </span>
+        {% endif %}
       </div>
 
     </div>
@@ -72,17 +75,17 @@
     >
       <span>
         {{<icon.calendar class="size-[1rem]"/>}}
-        date
+        {{ post.published_at if post.published_at else "??" }}
       </span>
 
       <span>
         {{<icon.clock class="size-[1rem]"/>}}
-        x min read
+        {{ post.body | reading_time }} min read
       </span>
 
       <span>
         {{<icon.eye class="size-[1rem]"/>}}
-        x views
+        {{ post.view_count }} views
       </span>
     </div>
 
