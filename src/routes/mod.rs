@@ -2,6 +2,7 @@ use axum::{handler::HandlerWithoutStateExt, response::Redirect, routing::get, Ro
 use chrono::{Datelike, Local};
 use tower_http::services::ServeDir;
 
+mod blog;
 mod error;
 mod index;
 mod projects;
@@ -23,6 +24,7 @@ where
         // index
         .route("/", get(index::root_path))
         .route("/featured-projects", get(projects::featured_projects))
+        .route("/recent-posts", get(blog::recent_posts))
         // projects
         .route("/projects", get(projects::projects))
         // contact
