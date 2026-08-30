@@ -2,9 +2,11 @@ use axum::{handler::HandlerWithoutStateExt, response::Redirect, routing::get, Ro
 use chrono::{Datelike, Local};
 use tower_http::services::ServeDir;
 
-pub mod error;
+mod error;
 mod index;
 mod projects;
+
+pub(crate) use error::{handle_error, AppError, Result};
 
 pub fn get_tera_ctx() -> tera::Context {
     let mut ctx = tera::Context::new();

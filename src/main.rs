@@ -1,11 +1,10 @@
 use std::{sync::Arc, time::Duration};
 
-use anyhow::{Error, Result};
 use axum::{
     error_handling::HandleErrorLayer,
     extract::MatchedPath,
-    http::{HeaderMap, Request, Response, StatusCode},
-    BoxError, Extension,
+    http::{HeaderMap, Request, Response},
+    Extension,
 };
 use tower::{buffer::BufferLayer, limit::RateLimitLayer, ServiceBuilder};
 use tower_http::{classify::ServerErrorsFailureClass, trace::TraceLayer};
@@ -16,7 +15,7 @@ mod database;
 mod routes;
 
 #[tokio::main]
-async fn main() -> Result<(), Error> {
+async fn main() -> anyhow::Result<(), anyhow::Error> {
     tracing_subscriber::fmt::init();
     dotenvy::dotenv().ok();
 
@@ -35,6 +34,12 @@ async fn main() -> Result<(), Error> {
     Ok(axum::serve(
         listener,
         routes::get_routes(dev)
+            .layer(
+                ServiceBuilder::new()
+                    .layer(HandleErrorLayer::new(routes::handle_error))
+                    .layer(BufferLayer::new(1024))
+                    .layer(RateLimitLayer::new(5, Duration::from_secs(1))),
+            )
             .layer(Extension(tera))
             .layer(Extension(db.clone()))
             .layer(
@@ -71,17 +76,7 @@ async fn main() -> Result<(), Error> {
                         },
                     ),
             )
-            .layer(
-                ServiceBuilder::new()
-                    .layer(HandleErrorLayer::new(|err: BoxError| async move {
-                        (
-                            StatusCode::INTERNAL_SERVER_ERROR,
-                            format!("Unhandled error: {}", err),
-                        )
-                    }))
-                    .layer(BufferLayer::new(1024))
-                    .layer(RateLimitLayer::new(5, Duration::from_secs(1))),
-            ),
+            .with_state(app_cfg),
     )
     .with_graceful_shutdown(config::shutdown_signal())
     .await?)
