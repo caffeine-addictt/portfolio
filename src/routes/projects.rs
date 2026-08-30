@@ -7,8 +7,8 @@ use tracing::instrument;
 use crate::routes::get_tera_ctx;
 
 static PROJECTS: LazyLock<Vec<Project>> = LazyLock::new(|| {
-    serde_json::from_str(include_str!("../../public/projects.json"))
-        .expect("failed to parse public/projects.json")
+    serde_json::from_str(include_str!("../../data/projects.json"))
+        .expect("failed to parse data/projects.json")
 });
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

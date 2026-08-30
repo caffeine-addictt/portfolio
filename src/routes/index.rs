@@ -7,12 +7,12 @@ use tracing::instrument;
 use crate::routes::get_tera_ctx;
 
 static WORK: LazyLock<Vec<TimelineGroup>> = LazyLock::new(|| {
-    serde_json::from_str(include_str!("../../public/work.json"))
-        .expect("failed to parse public/work.json")
+    serde_json::from_str(include_str!("../../data/work.json"))
+        .expect("failed to parse data/work.json")
 });
 static EDU: LazyLock<Vec<TimelineGroup>> = LazyLock::new(|| {
-    serde_json::from_str(include_str!("../../public/education.json"))
-        .expect("failed to parse public/education.json")
+    serde_json::from_str(include_str!("../../data/education.json"))
+        .expect("failed to parse data/education.json")
 });
 
 #[instrument]
