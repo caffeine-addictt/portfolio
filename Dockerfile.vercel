@@ -58,7 +58,7 @@ COPY public ./public/
 COPY --from=tw /app/main.css ./public/css/main.css
 
 USER appuser
-ENV RUST_LOG="portfolio=debug,info"
+ENV RUST_LOG="warn,portfolio=debug"
 ENV RUST_BACKTRACE=1
 
 EXPOSE 80
