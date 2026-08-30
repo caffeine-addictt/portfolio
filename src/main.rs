@@ -21,8 +21,8 @@ async fn main() -> Result<(), Error> {
     dotenvy::dotenv().ok();
 
     let dev = std::env::var("DEV").is_ok_and(|s| s.to_lowercase() == "true");
-    let url = std::env::var("TURSO_DB_URL").expect("TURSO_DATABASE_URL is not set");
-    let token = std::env::var("TURSO_DB_TOKEN").expect("TURSO_DATABASE_TOKEN is not set");
+    let url = std::env::var("TURSO_DB_URL").expect("TURSO_DB_URL is not set");
+    let token = std::env::var("TURSO_DB_TOKEN").expect("TURSO_DB_TOKEN is not set");
 
     let db = Arc::new(database::Database::new(url.as_str(), token.as_str()).await?);
 
