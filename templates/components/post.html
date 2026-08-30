@@ -1,0 +1,134 @@
+{% component post.card(class: string = "") %}
+<article
+  class="
+    card w-full bg-base-200 shadow-sm
+    border border-base-300/60
+    transition-colors duration-200
+    hover:bg-base-300/70 hover:border-base-300
+    {{ class }}
+  "
+>
+  <div class="card-body flex flex-col md:flex-row justify-between items-start">
+
+    <div class="flex flex-col gap-4 w-full md:w-[70%]">
+      <h2 class="card-title text-lg font-bold transition-colors duration-200">
+        This is The Title
+      </h2>
+
+      <p class="text-base text-base-content/70 transition-colors duration-200">
+        description<br />
+        next line
+      </p>
+
+      <div class="flex flex-wrap gap-2">
+        <span
+          class="
+            badge badge-lg
+            bg-base-100
+            border border-base-300
+            text-base-content/80
+          "
+        >
+          tag
+        </span>
+
+        <span
+          class="
+            badge badge-lg
+            bg-base-100
+            border border-base-300
+            text-base-content/80
+          "
+        >
+          tag
+        </span>
+
+        <span
+          class="
+            badge badge-lg
+            bg-transparent
+            border border-base-content/20
+            text-base-content/60
+            px-1
+          "
+        >
+          +2
+        </span>
+      </div>
+
+    </div>
+
+    <div
+      class="
+        flex flex-row max-md:mt-4
+        md:flex-col
+        text-xs text-base-content/60
+        gap-2
+        w-full md:w-[30%]
+        items-start md:items-end
+        transition-colors duration-200
+        *:flex *:items-center *:flex-row *:gap-1
+      "
+    >
+      <span>
+        {{<icon.calendar class="size-[1rem]"/>}}
+        date
+      </span>
+
+      <span>
+        {{<icon.clock class="size-[1rem]"/>}}
+        x min read
+      </span>
+
+      <span>
+        {{<icon.eye class="size-[1rem]"/>}}
+        x views
+      </span>
+    </div>
+
+  </div>
+</article>
+{% endcomponent post.card %}
+
+
+{% component post.card.skeleton(class: string = "") %}
+<article
+  class="
+    card w-full bg-base-200 shadow-sm
+    border border-base-300/60
+    {{ class }}
+  "
+>
+  <div class="card-body flex flex-col md:flex-row justify-between items-start">
+    <div class="flex flex-col gap-4 w-full md:w-[70%]">
+      <div class="card-title skeleton w-48 h-6 mb-2"></div>
+
+      <div class="flex flex-col gap-1">
+        <div class="skeleton w-full max-w-md h-5"></div>
+        <div class="skeleton w-3/4 max-w-sm h-5"></div>
+      </div>
+
+      <div class="flex flex-wrap gap-2">
+        <div class="badge badge-lg skeleton w-12"></div>
+        <div class="badge badge-lg skeleton w-16"></div>
+        <div class="badge badge-lg skeleton w-10"></div>
+      </div>
+    </div>
+
+    <div
+      class="
+        flex flex-row max-md:mt-4
+        md:flex-col
+        gap-2
+        w-full md:w-[30%]
+        items-start md:items-end
+      "
+    >
+      <div class="skeleton w-20 h-4"></div>
+      <div class="skeleton w-24 h-4"></div>
+      <div class="skeleton w-16 h-4"></div>
+    </div>
+
+  </div>
+</article>
+{% endcomponent post.card.skeleton %}

@@ -83,18 +83,40 @@
 
     <div
       hx-get="/featured-projects"
-      hx-trigger="load, every 60mins"
+      hx-trigger="load"
       hx-swap="innerHTML"
       class="flex flex-col justify-between sm:flex-row gap-4"
     >
       {{<project.card.skeleton />}}
       {{<project.card.skeleton />}}
     </div>
-
   </section>
 
 
   {# recent posts (blog) #}
+  <section>
+    <div class="mb-8 flex items-baseline justify-between">
+      <h2 class="text-2xl font-semibold">
+        recent posts
+      </h2>
+      <a
+        href="/blog"
+        class="link link-hover text-sm text-base-content/50 hover:text-base-content"
+      >
+        view all →
+      </a>
+    </div>
+
+    <div
+      hx-get="/recent-posts"
+      hx-trigger="load, every 60mins"
+      hx-swap="innerHTML"
+      class="flex flex-col justify-between gap-2"
+    >
+      {{<post.card.skeleton />}}
+      {{<post.card.skeleton />}}
+    </div>
+  </section>
 
 
 </div>
