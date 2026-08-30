@@ -8,7 +8,7 @@ use axum::{
 };
 use tracing::instrument;
 
-use crate::routes;
+use crate::{config, routes};
 
 pub(crate) type Result<T, E = AppError> = std::result::Result<T, E>;
 
@@ -17,12 +17,8 @@ pub async fn handle_lost(Extension(tera): Extension<tera::Tera>) -> Html<String>
     Html(tera.render("404.html", &routes::get_tera_ctx()).unwrap())
 }
 
-static TERA: LazyLock<tera::Tera> = LazyLock::new(|| {
-    let mut tera = tera::Tera::default();
-    tera.load_from_glob("templates/**/*")
-        .expect("failed to load error templates");
-    tera
-});
+static TERA: LazyLock<tera::Tera> =
+    LazyLock::new(|| config::gen_tera().expect("failed to init Tera"));
 
 pub(crate) async fn handle_error(err: BoxError) -> impl IntoResponse {
     tracing::error!("middleware error: {err:#}");

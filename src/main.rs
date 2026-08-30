@@ -30,10 +30,7 @@ async fn main() -> anyhow::Result<(), anyhow::Error> {
     let token = std::env::var("TURSO_DB_TOKEN").expect("TURSO_DB_TOKEN is not set");
 
     let db = Arc::new(database::Database::new(url.as_str(), token.as_str()).await?);
-
-    let mut tera = tera::Tera::new();
-    tera.load_from_glob("templates/**/*")
-        .expect("creating tera templates to not error");
+    let tera = config::gen_tera()?;
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:80").await?;
     tracing::info!("listening on {}", listener.local_addr().unwrap());
