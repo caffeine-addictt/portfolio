@@ -14,12 +14,18 @@ mod config;
 mod database;
 mod routes;
 
+pub(crate) struct AppConfig {
+    pub dev: bool,
+}
+
 #[tokio::main]
 async fn main() -> anyhow::Result<(), anyhow::Error> {
     tracing_subscriber::fmt::init();
     dotenvy::dotenv().ok();
 
-    let dev = std::env::var("DEV").is_ok_and(|s| s.to_lowercase() == "true");
+    let app_cfg = Arc::new(AppConfig {
+        dev: std::env::var("DEV").is_ok_and(|s| s.to_lowercase() == "true"),
+    });
     let url = std::env::var("TURSO_DB_URL").expect("TURSO_DB_URL is not set");
     let token = std::env::var("TURSO_DB_TOKEN").expect("TURSO_DB_TOKEN is not set");
 
@@ -33,7 +39,7 @@ async fn main() -> anyhow::Result<(), anyhow::Error> {
     tracing::info!("listening on {}", listener.local_addr().unwrap());
     Ok(axum::serve(
         listener,
-        routes::get_routes(dev)
+        routes::get_routes(app_cfg.dev)
             .layer(
                 ServiceBuilder::new()
                     .layer(HandleErrorLayer::new(routes::handle_error))

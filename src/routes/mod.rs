@@ -15,7 +15,10 @@ pub fn get_tera_ctx() -> tera::Context {
     ctx
 }
 
-pub fn get_routes(_dev: bool) -> Router {
+pub fn get_routes<T>(_dev: bool) -> Router<T>
+where
+    T: Clone + Send + Sync + 'static,
+{
     Router::new()
         // index
         .route("/", get(index::root_path))
