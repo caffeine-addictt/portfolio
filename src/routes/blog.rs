@@ -79,3 +79,60 @@ pub async fn recent_posts(
     ctx.insert("not_found_msg", "Stay tuned for some posts! :p");
     Ok(Html(tera.render("components/post.html", &ctx)?))
 }
+
+pub async fn blog_page(Extension(tera): Extension<tera::Tera>) -> Result<Html<String>> {
+    Ok(Html(tera.render("blog.html", &get_tera_ctx())?))
+}
+
+pub async fn get_blog_posts(
+    Extension(tera): Extension<tera::Tera>,
+    Extension(db): Extension<Arc<crate::database::Database>>,
+    Extension(_cfg): Extension<Arc<crate::AppConfig>>,
+) -> Result<Html<String>> {
+    // TODO: allow search of non-published if [cfg.dev == true]
+    // TODO: have post templ indicate non-published posts properly
+
+    let conn = db.connection().await?;
+    let mut rows = conn
+        .query(
+            r#"
+        SELECT
+            title,
+            sub_title,
+            body,
+            tags,
+            published_at,
+            view_count
+        FROM blog_posts
+        WHERE status = 'published'
+        ORDER BY published_at DESC
+        "#,
+            (),
+        )
+        .await?;
+
+    let mut posts = Vec::new();
+    while let Some(row) = rows.next().await? {
+        posts.push(BlogPost {
+            title: row.get::<String>(0)?,
+            sub_title: row.get::<String>(1)?,
+            body: row.get::<String>(2)?,
+            lcp_img_url: None,
+            tags: serde_json::from_str(&row.get::<String>(3)?)?,
+            published_at: row
+                .get::<Option<String>>(4)?
+                .map(|s| {
+                    chrono::NaiveDate::parse_from_str(&s, "%Y-%m-%d")
+                        .map(|date| date.format("%b %Y").to_string())
+                })
+                .transpose()?,
+            status: "published".into(),
+            view_count: row.get::<i64>(5)?,
+        });
+    }
+
+    let mut ctx = get_tera_ctx();
+    ctx.insert("posts", &posts);
+    ctx.insert("not_found_msg", "Stay tuned for some posts! :p");
+    Ok(Html(tera.render("components/post.html", &ctx)?))
+}

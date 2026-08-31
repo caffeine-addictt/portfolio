@@ -7,7 +7,7 @@ mod error;
 mod index;
 mod projects;
 
-pub(crate) use error::{handle_error, AppError, Result};
+pub(crate) use error::{handle_error, Result};
 
 pub fn get_tera_ctx() -> tera::Context {
     let mut ctx = tera::Context::new();
@@ -27,6 +27,9 @@ where
         .route("/recent-posts", get(blog::recent_posts))
         // projects
         .route("/projects", get(projects::projects))
+        // blog
+        .route("/blog", get(blog::blog_page))
+        .route("/blog/list", get(blog::get_blog_posts))
         // contact
         //
         .route("/resume", get(async || Redirect::permanent("https://raw.githubusercontent.com/caffeine-addictt/caffeine-addictt/refs/heads/main/media/ng_jun_xiang_resume.pdf")))

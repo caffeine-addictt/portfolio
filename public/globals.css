@@ -77,3 +77,15 @@
   --depth: 1;
   --noise: 0;
 }
+
+
+.htmx-indicator{
+  display: none;
+  transition: opacity 500ms ease-in;
+}
+.htmx-request .htmx-indicator{
+  display: flex;
+}
+.htmx-request.htmx-indicator{
+  display: flex;
+}

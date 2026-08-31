@@ -45,6 +45,7 @@ async fn main() -> anyhow::Result<(), anyhow::Error> {
             )
             .layer(Extension(tera))
             .layer(Extension(db.clone()))
+            .layer(Extension(app_cfg.clone()))
             .layer(
                 TraceLayer::new_for_http()
                     .make_span_with(|request: &Request<_>| {
