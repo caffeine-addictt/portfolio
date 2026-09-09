@@ -9,18 +9,12 @@
     <div
       hx-get="/blog/list"
       hx-trigger="load, every 60mins"
-      hx-target="#content"
       hx-swap="innerHTML"
-      hx-indicator="#htmx-indicator"
       class="w-full *:flex *:flex-col *:w-full *:gap-2 mt-10"
     >
-      <div id="content"></div>
-
-      <div id="htmx-indicator" class="htmx-indicator">
-        {% for i in [1,2,3] %}
-        {{<post.card.skeleton />}}
-        {% endfor %}
-      </div>
+      {% for i in [1,2,3] %}
+      {{<post.card.skeleton />}}
+      {% endfor %}
     </div>
   </section>
 </div>
