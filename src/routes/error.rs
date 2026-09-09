@@ -29,7 +29,7 @@ pub struct AppError(anyhow::Error);
 
 impl<E> From<E> for AppError
 where
-    E: Into<Error>,
+    E: Into<Error> + Send + Sync + 'static,
 {
     fn from(err: E) -> Self {
         Self(err.into())
