@@ -1,4 +1,4 @@
-use std::{sync::Arc, time::Duration};
+use std::{net::SocketAddr, sync::Arc, time::Duration};
 
 use axum::{
     error_handling::HandleErrorLayer,
@@ -7,6 +7,7 @@ use axum::{
     Extension,
 };
 use tower::{buffer::BufferLayer, limit::RateLimitLayer, ServiceBuilder};
+use tower_governor::{governor::GovernorConfigBuilder, GovernorLayer};
 use tower_http::{classify::ServerErrorsFailureClass, trace::TraceLayer};
 use tracing::{debug, error, info, info_span, Span};
 
@@ -41,7 +42,14 @@ async fn main() -> anyhow::Result<(), anyhow::Error> {
                 ServiceBuilder::new()
                     .layer(HandleErrorLayer::new(routes::handle_error))
                     .layer(BufferLayer::new(1024))
-                    .layer(RateLimitLayer::new(5, Duration::from_secs(1))),
+                    .layer(GovernorLayer::new(
+                        GovernorConfigBuilder::default()
+                            .per_second(1)
+                            .burst_size(200)
+                            .use_headers()
+                            .finish()
+                            .unwrap(),
+                    )),
             )
             .layer(Extension(tera))
             .layer(Extension(db.clone()))
@@ -80,7 +88,8 @@ async fn main() -> anyhow::Result<(), anyhow::Error> {
                         },
                     ),
             )
-            .with_state(app_cfg),
+            .with_state(app_cfg)
+            .into_make_service_with_connect_info::<SocketAddr>(),
     )
     .with_graceful_shutdown(config::shutdown_signal())
     .await?)
