@@ -1,6 +1,4 @@
-use std::sync::Arc;
-
-use axum::{response::Html, Extension};
+use axum::{extract::State, response::Html};
 use serde::{Deserialize, Serialize};
 
 use crate::routes::{get_tera_ctx, Result};
@@ -29,11 +27,8 @@ enum PostStatus {
     Hidden,
 }
 
-pub async fn recent_posts(
-    Extension(tera): Extension<tera::Tera>,
-    Extension(db): Extension<Arc<crate::database::Database>>,
-) -> Result<Html<String>> {
-    let conn = db.connection().await?;
+pub async fn recent_posts(State(cfg): State<crate::AppConfig>) -> Result<Html<String>> {
+    let conn = cfg.db.connection().await?;
 
     let mut rows = conn
         .query(
@@ -77,22 +72,18 @@ pub async fn recent_posts(
     let mut ctx = get_tera_ctx();
     ctx.insert("posts", &posts);
     ctx.insert("not_found_msg", "Stay tuned for some posts! :p");
-    Ok(Html(tera.render("components/post.html", &ctx)?))
+    Ok(Html(cfg.tera.render("components/post.html", &ctx)?))
 }
 
-pub async fn blog_page(Extension(tera): Extension<tera::Tera>) -> Result<Html<String>> {
-    Ok(Html(tera.render("blog.html", &get_tera_ctx())?))
+pub async fn blog_page(State(cfg): State<crate::AppConfig>) -> Result<Html<String>> {
+    Ok(Html(cfg.tera.render("blog.html", &get_tera_ctx())?))
 }
 
-pub async fn get_blog_posts(
-    Extension(tera): Extension<tera::Tera>,
-    Extension(db): Extension<Arc<crate::database::Database>>,
-    Extension(_cfg): Extension<Arc<crate::AppConfig>>,
-) -> Result<Html<String>> {
+pub async fn get_blog_posts(State(cfg): State<crate::AppConfig>) -> Result<Html<String>> {
     // TODO: allow search of non-published if [cfg.dev == true]
     // TODO: have post templ indicate non-published posts properly
 
-    let conn = db.connection().await?;
+    let conn = cfg.db.connection().await?;
     let mut rows = conn
         .query(
             r#"
@@ -134,5 +125,5 @@ pub async fn get_blog_posts(
     let mut ctx = get_tera_ctx();
     ctx.insert("posts", &posts);
     ctx.insert("not_found_msg", "Stay tuned for some posts! :p");
-    Ok(Html(tera.render("components/post.html", &ctx)?))
+    Ok(Html(cfg.tera.render("components/post.html", &ctx)?))
 }

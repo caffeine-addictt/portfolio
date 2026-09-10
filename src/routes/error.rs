@@ -4,22 +4,19 @@ use anyhow::Error;
 use axum::{
     http::StatusCode,
     response::{Html, IntoResponse, Response},
-    BoxError, Extension,
+    BoxError,
 };
-use tracing::instrument;
 
 use crate::{config, routes};
 
 pub(crate) type Result<T, E = AppError> = std::result::Result<T, E>;
 
-#[instrument]
-pub async fn handle_lost(Extension(tera): Extension<tera::Tera>) -> Html<String> {
-    Html(tera.render("404.html", &routes::get_tera_ctx()).unwrap())
-}
-
 static TERA: LazyLock<tera::Tera> =
     LazyLock::new(|| config::gen_tera().expect("failed to init Tera"));
 
+pub async fn handle_lost() -> Html<String> {
+    Html(TERA.render("404.html", &routes::get_tera_ctx()).unwrap())
+}
 pub(crate) async fn handle_error(err: BoxError) -> impl IntoResponse {
     tracing::error!("middleware error: {err:#}");
     render_500()

@@ -4,7 +4,6 @@ use axum::{
     error_handling::HandleErrorLayer,
     extract::MatchedPath,
     http::{HeaderMap, Request, Response},
-    Extension,
 };
 use tower::{buffer::BufferLayer, ServiceBuilder};
 use tower_governor::{governor::GovernorConfigBuilder, GovernorLayer};
@@ -15,8 +14,10 @@ mod config;
 mod database;
 mod routes;
 
+#[derive(Clone)]
 pub(crate) struct AppConfig {
-    pub dev: bool,
+    db: Arc<database::Database>,
+    tera: tera::Tera,
 }
 
 #[tokio::main]
@@ -24,20 +25,23 @@ async fn main() -> anyhow::Result<(), anyhow::Error> {
     tracing_subscriber::fmt::init();
     dotenvy::dotenv().ok();
 
-    let app_cfg = Arc::new(AppConfig {
-        dev: cfg!(debug_assertions),
-    });
-    let url = std::env::var("TURSO_DB_URL").expect("TURSO_DB_URL is not set");
-    let token = std::env::var("TURSO_DB_TOKEN").expect("TURSO_DB_TOKEN is not set");
+    let app_cfg = AppConfig {
+        db: Arc::new(
+            database::Database::new(
+                std::env::var("TURSO_DB_URL").expect("TURSO_DB_URL is not set"),
+                std::env::var("TURSO_DB_TOKEN").expect("TURSO_DB_TOKEN is not set"),
+            )
+            .await?,
+        ),
+        tera: config::gen_tera()?,
+    };
 
-    let db = Arc::new(database::Database::new(url.as_str(), token.as_str()).await?);
-    let tera = config::gen_tera()?;
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:80").await?;
     tracing::info!("listening on {}", listener.local_addr().unwrap());
     Ok(axum::serve(
         listener,
-        routes::get_routes(app_cfg.dev)
+        routes::get_routes()
             .layer(
                 ServiceBuilder::new()
                     .layer(HandleErrorLayer::new(routes::handle_error))
@@ -51,9 +55,6 @@ async fn main() -> anyhow::Result<(), anyhow::Error> {
                             .unwrap(),
                     )),
             )
-            .layer(Extension(tera))
-            .layer(Extension(db.clone()))
-            .layer(Extension(app_cfg.clone()))
             .layer(
                 TraceLayer::new_for_http()
                     .make_span_with(|request: &Request<_>| {

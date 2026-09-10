@@ -1,8 +1,7 @@
-use axum::{response::Html, Extension};
+use axum::{extract::State, response::Html};
 use chrono::{Datelike, Local, NaiveDate};
 use serde::{Deserialize, Serialize};
 use std::sync::LazyLock;
-use tracing::instrument;
 
 use crate::routes::get_tera_ctx;
 
@@ -15,8 +14,7 @@ static EDU: LazyLock<Vec<TimelineGroup>> = LazyLock::new(|| {
         .expect("failed to parse data/education.json")
 });
 
-#[instrument]
-pub async fn root_path(Extension(tera): Extension<tera::Tera>) -> Html<String> {
+pub async fn root_path(State(cfg): State<crate::AppConfig>) -> Html<String> {
     let mut ctx = get_tera_ctx();
 
     let today = Local::now().date_naive();
@@ -29,7 +27,7 @@ pub async fn root_path(Extension(tera): Extension<tera::Tera>) -> Html<String> {
     ctx.insert("work", &*WORK);
     ctx.insert("edu", &*EDU);
 
-    Html(tera.render("index.html", &ctx).unwrap())
+    Html(cfg.tera.render("index.html", &ctx).unwrap())
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
