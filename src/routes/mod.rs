@@ -1,5 +1,13 @@
-use axum::{handler::HandlerWithoutStateExt, response::Redirect, routing::get, Router};
+use std::time::Duration;
+
+use axum::{
+    handler::HandlerWithoutStateExt,
+    response::Redirect,
+    routing::{get, post},
+    Router,
+};
 use chrono::{Datelike, Local};
+use tower_governor::{governor::GovernorConfigBuilder, GovernorLayer};
 use tower_http::services::ServeDir;
 
 mod blog;
@@ -17,6 +25,13 @@ pub fn get_tera_ctx() -> tera::Context {
 }
 
 pub fn get_routes() -> Router<crate::AppConfig> {
+    let govern = GovernorConfigBuilder::default()
+        .period(Duration::from_mins(1))
+        .burst_size(2)
+        .use_headers()
+        .finish()
+        .unwrap();
+
     Router::new()
         // index
         .route("/", get(index::root_path))
