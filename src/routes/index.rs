@@ -3,7 +3,7 @@ use chrono::{Datelike, Local, NaiveDate};
 use serde::{Deserialize, Serialize};
 use std::sync::LazyLock;
 
-use crate::routes::get_tera_ctx;
+use crate::routes::{get_tera_ctx, Result};
 
 static WORK: LazyLock<Vec<TimelineGroup>> = LazyLock::new(|| {
     serde_json::from_str(include_str!("../../data/work.json"))
@@ -14,7 +14,11 @@ static EDU: LazyLock<Vec<TimelineGroup>> = LazyLock::new(|| {
         .expect("failed to parse data/education.json")
 });
 
-pub async fn root_path(State(cfg): State<crate::AppConfig>) -> Html<String> {
+pub async fn privacy_policy(State(cfg): State<crate::AppConfig>) -> Result<Html<String>> {
+    Ok(Html(cfg.tera.render("privacy.html", &get_tera_ctx())?))
+}
+
+pub async fn root_path(State(cfg): State<crate::AppConfig>) -> Result<Html<String>> {
     let mut ctx = get_tera_ctx();
 
     let today = Local::now().date_naive();
@@ -27,7 +31,7 @@ pub async fn root_path(State(cfg): State<crate::AppConfig>) -> Html<String> {
     ctx.insert("work", &*WORK);
     ctx.insert("edu", &*EDU);
 
-    Html(cfg.tera.render("index.html", &ctx).unwrap())
+    Ok(Html(cfg.tera.render("index.html", &ctx)?))
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

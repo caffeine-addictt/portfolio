@@ -46,6 +46,7 @@ pub fn get_routes() -> Router<crate::AppConfig> {
         // contact
         .route("/contact", get(contact::contact_page).merge(post(contact::contact_submit_handler).layer(GovernorLayer::new(govern))))
         //
+        .route("/privacy", get(index::privacy_policy))
         .route("/resume", get(async || Redirect::permanent("https://raw.githubusercontent.com/caffeine-addictt/caffeine-addictt/refs/heads/main/media/ng_jun_xiang_resume.pdf")))
         .nest_service("/img", ServeDir::new("public/images"))
         .nest_service("/css", ServeDir::new("public/css"))
