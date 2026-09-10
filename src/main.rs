@@ -13,11 +13,13 @@ use tracing::{debug, error, info, info_span, Span};
 mod config;
 mod database;
 mod routes;
+mod services;
 
 #[derive(Clone)]
 pub(crate) struct AppConfig {
     db: Arc<database::Database>,
     tera: tera::Tera,
+    webhook: services::WebhookService,
 }
 
 #[tokio::main]
@@ -34,8 +36,10 @@ async fn main() -> anyhow::Result<(), anyhow::Error> {
             .await?,
         ),
         tera: config::gen_tera()?,
+        webhook: services::WebhookService::new(
+            std::env::var("DISCORD_WEBHOOK_URL").expect("DISCORD_WEBHOOK_URL is not set"),
+        ),
     };
-
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:80").await?;
     tracing::info!("listening on {}", listener.local_addr().unwrap());
