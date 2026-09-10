@@ -31,8 +31,12 @@ COPY src ./src
 RUN \
   --mount=type=cache,target=/app/target/ \
   --mount=type=cache,target=/usr/local/cargo/registry/ \
-  cargo build --profile="${PROFILE}" \
-  && cp ./target/release/portfolio /
+  cargo build --profile "$PROFILE" \
+  && if [ "$PROFILE" = "release" ]; then \
+  cp target/release/portfolio /app/portfolio; \
+  else \
+  cp target/debug/portfolio /app/portfolio; \
+  fi
 
 
 FROM debian:bookworm-slim AS deploy
@@ -51,7 +55,7 @@ RUN adduser \
   --uid "10001" \
   appuser
 
-COPY --from=builder /portfolio /usr/local/bin
+COPY --from=builder /app/portfolio /usr/local/bin
 RUN chown appuser /usr/local/bin/portfolio && chown -R appuser /opt/app
 
 COPY templates ./templates/
