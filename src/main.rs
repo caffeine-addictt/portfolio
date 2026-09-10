@@ -6,7 +6,7 @@ use axum::{
     http::{HeaderMap, Request, Response},
     Extension,
 };
-use tower::{buffer::BufferLayer, limit::RateLimitLayer, ServiceBuilder};
+use tower::{buffer::BufferLayer, ServiceBuilder};
 use tower_governor::{governor::GovernorConfigBuilder, GovernorLayer};
 use tower_http::{classify::ServerErrorsFailureClass, trace::TraceLayer};
 use tracing::{debug, error, info, info_span, Span};
@@ -25,7 +25,7 @@ async fn main() -> anyhow::Result<(), anyhow::Error> {
     dotenvy::dotenv().ok();
 
     let app_cfg = Arc::new(AppConfig {
-        dev: std::env::var("DEV").is_ok_and(|s| s.to_lowercase() == "true"),
+        dev: cfg!(debug_assertions),
     });
     let url = std::env::var("TURSO_DB_URL").expect("TURSO_DB_URL is not set");
     let token = std::env::var("TURSO_DB_TOKEN").expect("TURSO_DB_TOKEN is not set");

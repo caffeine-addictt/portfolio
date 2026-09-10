@@ -12,6 +12,7 @@ RUN npx @tailwindcss/cli -i style.css -o main.css --minify
 
 FROM rust:1.95-slim-bookworm AS builder
 WORKDIR /app
+ARG PROFILE=release
 
 # cache
 COPY Cargo.lock Cargo.toml ./
@@ -30,7 +31,7 @@ COPY src ./src
 RUN \
   --mount=type=cache,target=/app/target/ \
   --mount=type=cache,target=/usr/local/cargo/registry/ \
-  cargo build --release \
+  cargo build --profile="${PROFILE}" \
   && cp ./target/release/portfolio /
 
 

@@ -4,6 +4,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.vercel
+      args:
+        PROFILE: dev
     develop:
       watch:
         - path: src
