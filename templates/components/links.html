@@ -1,0 +1,18 @@
+{# variant = internal|external #}
+{% component link(url, class="", props="", variant="internal") %}
+<a
+  href="{{ url }}"
+  class="link {{ class }}"
+  {% if variant == "external" %}
+    rel="noopener noreferrer"
+    target="_blank"
+  {% endif %}
+  {{ props }}
+>{{ body }}</a>
+{% endcomponent link %}
+
+{% component link.icon(url, class="", external: bool = false) %}
+<a href="{{ url }}" {% if external %} target="_blank" {% endif %} class="transition-color text-current/70 hover:text-current {{ class }}">
+  {{ body }}
+</a>
+{% endcomponent link.icon %}

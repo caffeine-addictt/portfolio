@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Alex{% endblock %}</title>
+  <meta name="description" content="Alex Ng — software developer, HPC systems programmer and open-source enthusiast.">
+
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+
+  {% block seo %}{% endblock %}
+
+  {% block head %}{% endblock %}
+
+  <link href="/css/main.css" rel="stylesheet">
+  <script
+    src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.min.js"
+    integrity="sha384-H5SrcfygHmAuTDZphMHqBJLc3FhssKjG7w/CeCpFReSfwBWDTKpkzPP8c+cLsK+V"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    (() => {
+      const theme = localStorage.getItem("theme");
+
+      if (theme) {
+        document.documentElement.dataset.theme = theme;
+      }
+    })();
+  </script>
+</head>
+
+<body class="scroll-smooth transition-color flex min-w-full max-w-full flex-col text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark">
+  <main class="flex min-h-screen flex-col w-screen mx-auto space-y-12 px-6 md:px-2 sm:max-w-3xl grow">
+    {% block nav %}{% include "partials/nav.html" %}{% endblock %}
+    {% block content %}{% endblock %}
+    {% block footer %}{% include "partials/footer.html" %}{% endblock %}
+  </main>
+</body>
+
+</html>

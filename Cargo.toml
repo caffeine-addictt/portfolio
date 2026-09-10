@@ -1,0 +1,28 @@
+[package]
+name = "portfolio"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.89"
+axum = { version = "0.8.9", features = ["form", "macros"] }
+chrono = { version = "0.4.45", features = ["serde"] }
+tera = { version = "2.2.0", features = [
+  "fast",
+  "glob_fs",
+  "unicode",
+  "preserve_order",
+] }
+tokio = { version = "1.40.0", features = ["full"] }
+tower = { version = "0.5.1", features = ["buffer", "limit"] }
+tower-http = { version = "0.7.0", features = ["fs", "trace"] }
+tower_governor = "0.8.0"
+tracing = "0.1.40"
+tracing-subscriber = "0.3.18"
+reqwest = { version = "0.13.5", features = ["json"] }
+validator = { version = "0.21.0", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+dotenvy = "0.15.7"
+serde_json = "1.0.151"
+turso = { version = "0.7.2", features = ["sync"] }
+include_dir = "0.7.4"

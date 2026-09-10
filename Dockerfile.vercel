@@ -1,0 +1,70 @@
+FROM node:26-alpine AS tw
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
+COPY public/globals.css style.css
+COPY public/tailwind.config.js tailwind.config.js
+COPY templates/ templates/
+RUN npx @tailwindcss/cli -i style.css -o main.css --minify
+
+
+FROM rust:1.95-slim-bookworm AS builder
+WORKDIR /app
+ARG PROFILE=release
+
+# cache
+COPY Cargo.lock Cargo.toml ./
+RUN \
+  --mount=type=cache,target=/app/target/ \
+  --mount=type=cache,target=/usr/local/cargo/registry/ \
+  mkdir src \
+  && echo "fn main() {}" > src/main.rs \
+  && cargo fetch \
+  && rm -rf src
+
+# build
+COPY migrations ./migrations
+COPY data ./data
+COPY src ./src
+RUN \
+  --mount=type=cache,target=/app/target/ \
+  --mount=type=cache,target=/usr/local/cargo/registry/ \
+  cargo build --profile "$PROFILE" \
+  && if [ "$PROFILE" = "release" ]; then \
+  cp target/release/portfolio /app/portfolio; \
+  else \
+  cp target/debug/portfolio /app/portfolio; \
+  fi
+
+
+FROM debian:bookworm-slim AS deploy
+WORKDIR /opt/app
+
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends ca-certificates \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN adduser \
+  --disabled-password \
+  --gecos "" \
+  --home "/nonexistent" \
+  --shell "/sbin/nologin" \
+  --no-create-home \
+  --uid "10001" \
+  appuser
+
+COPY --from=builder /app/portfolio /usr/local/bin
+RUN chown appuser /usr/local/bin/portfolio && chown -R appuser /opt/app
+
+COPY templates ./templates/
+COPY public ./public/
+COPY --from=tw /app/main.css ./public/css/main.css
+
+USER appuser
+ENV RUST_LOG="warn,portfolio=debug"
+ENV RUST_BACKTRACE=1
+
+EXPOSE 80
+ENTRYPOINT ["/usr/local/bin/portfolio"]

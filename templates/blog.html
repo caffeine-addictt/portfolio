@@ -1,0 +1,21 @@
+{% extends "layout.html"  %}
+
+
+{% block content %}
+<div class="w-full">
+  <section class="pt-12">
+    <h1 class="text-5xl font-bold tracking-tight">my blog</h1>
+
+    <div
+      hx-get="/blog/list"
+      hx-trigger="load, every 60mins"
+      hx-swap="innerHTML"
+      class="w-full *:flex *:flex-col *:w-full *:gap-2 mt-10"
+    >
+      {% for i in [1,2,3] %}
+      {{<post.card.skeleton />}}
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock content %}

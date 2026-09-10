@@ -1,0 +1,19 @@
+services:
+  portfolio:
+    image: portfolio:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.vercel
+      args:
+        PROFILE: dev
+    develop:
+      watch:
+        - path: src
+          action: rebuild
+        - path: templates
+          action: rebuild
+        - path: public
+          action: rebuild
+    ports:
+      - "3000:80"
+    env_file: .env
