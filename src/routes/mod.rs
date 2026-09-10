@@ -11,6 +11,7 @@ use tower_governor::{governor::GovernorConfigBuilder, GovernorLayer};
 use tower_http::services::ServeDir;
 
 mod blog;
+mod contact;
 mod error;
 mod index;
 mod projects;
@@ -43,6 +44,7 @@ pub fn get_routes() -> Router<crate::AppConfig> {
         .route("/blog", get(blog::blog_page))
         .route("/blog/list", get(blog::get_blog_posts))
         // contact
+        .route("/contact", get(contact::contact_page).merge(post(contact::contact_submit_handler).layer(GovernorLayer::new(govern))))
         //
         .route("/resume", get(async || Redirect::permanent("https://raw.githubusercontent.com/caffeine-addictt/caffeine-addictt/refs/heads/main/media/ng_jun_xiang_resume.pdf")))
         .nest_service("/img", ServeDir::new("public/images"))

@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="w-full">
+  <section class="pt-12 pb-20">
+    <h1 class="text-5xl font-bold tracking-tight">contact me</h1>
+
+    <form
+      hx-post="/contact"
+      hx-swap="outerHTML"
+      class="mt-10 flex max-w-2xl flex-col gap-6"
+    >
+      <label class="flex flex-col gap-2">
+        <span class="text-sm font-medium">name</span>
+        <input
+          type="text"
+          name="name"
+          required
+          autocomplete="name"
+          placeholder="your name"
+          class="input input-bordered w-full"
+        />
+      </label>
+
+      <label class="flex flex-col gap-2">
+        <span class="text-sm font-medium">email</span>
+        <input
+          type="email"
+          name="email"
+          required
+          autocomplete="email"
+          placeholder="you@example.com"
+          class="input input-bordered w-full"
+        />
+      </label>
+
+      <label class="flex flex-col gap-2">
+        <span class="text-sm font-medium">message</span>
+        <textarea
+          name="message"
+          required
+          rows="7"
+          minlength="20"
+          placeholder="what's on your mind?"
+          class="textarea textarea-bordered w-full resize-y"
+        ></textarea>
+      </label>
+
+      <div class="flex max-sm:flex-col-reverse items-center justify-between gap-4 pt-2">
+        <span class="text-sm text-base-content/50">
+          I'll get back to you as soon as I can.
+        </span>
+
+        <button type="submit" class="btn btn-primary">
+          send message
+        </button>
+      </div>
+    </form>
+  </section>
+</div>
+{% endblock content %}

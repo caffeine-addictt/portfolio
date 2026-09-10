@@ -19,14 +19,6 @@ struct BlogPost {
     view_count: i64,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "lowercase")]
-enum PostStatus {
-    Draft,
-    Published,
-    Hidden,
-}
-
 pub async fn recent_posts(State(cfg): State<crate::AppConfig>) -> Result<Html<String>> {
     let conn = cfg.db.connection().await?;
 
