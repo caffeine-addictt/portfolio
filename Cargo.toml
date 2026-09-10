@@ -20,6 +20,7 @@ tower_governor = "0.8.0"
 tracing = "0.1.40"
 tracing-subscriber = "0.3.18"
 reqwest = { version = "0.13.5", features = ["json"] }
+validator = { version = "0.21.0", features = ["derive"] }
 serde = { version = "1", features = ["derive"] }
 dotenvy = "0.15.7"
 serde_json = "1.0.151"
