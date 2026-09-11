@@ -6,7 +6,7 @@
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^26.5.0",
-    "daisyui": "^5.7.17",
+    "daisyui": "^5.7.28",
     "tailwindcss": "^4.3.3",
     "tailwindcss-animate": "^1.0.7"
   }
